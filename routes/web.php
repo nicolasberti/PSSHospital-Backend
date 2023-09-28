@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PacienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/admin', AdminController::class . '@index');
+
+Route::get('/paciente', PacienteController::class . '@index');
 
 Route::get('/', function () {
     return view('welcome');

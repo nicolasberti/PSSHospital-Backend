@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paciente', function (Blueprint $table) {
-            $table->string("id");
+            $table->integer("id_paciente")->autoIncrement();
             $table->string('DNI')->unique();
-            $table->string("username", 55)->unique(); //ver si tiene un usuario o entra con dni
             $table->string("password", 55);
             $table->string("email");
             $table->integer("phone");
@@ -26,7 +25,6 @@ return new class extends Migration
             $table->integer("solicitud");
             $table->integer("obra_social");
             $table->timestamps();
-            $table->primary('DNI');
             $table->foreign('solicitud')->references('id_solicitud')->on('solicitud_edicion');
             $table->foreign('obra_social')->references('id_obrasocial')->on('obra_social');
         });

@@ -19,11 +19,11 @@ return new class extends Migration
             $table->time("duracion");
             $table->string("state");
             $table->string("diagnostico");
-            $table->string("dni_paciente");
-            $table->string("dni_medico");
+            $table->integer("id_paciente");
+            $table->integer("id_medico");
             $table->timestamps();
-            $table->foreign('dni_paciente')->references('DNI')->on('paciente');
-            //$table->foreign('dni_medico')->references('DNI')->on('medico');
+            $table->foreign('id_paciente')->references('id_paciente')->on('paciente');
+            //$table->foreign('id_medico')->references('id_medico')->on('medico'); -> descomentar cuando este hecha la parte del medico
 
         });
     }
