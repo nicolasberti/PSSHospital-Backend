@@ -22,8 +22,8 @@ return new class extends Migration
             $table->integer("id_paciente");
             $table->integer("id_medico");
             $table->timestamps();
-            $table->foreign('id_paciente')->references('id_paciente')->on('paciente');
-            //$table->foreign('id_medico')->references('id_medico')->on('medico'); -> descomentar cuando este hecha la parte del medico
+            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes');
+            $table->foreign('id_medico')->references('id')->on('medicos');
 
         });
     }
@@ -35,4 +35,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('paciente_medico');
     }
+    
 };
