@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\SecretarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::get('/admin', AdminController::class . '@index');
 Route::get('/medico', MedicosController::class . '@index');
 
 Route::get('/paciente', PacienteController::class . '@index');
+
+Route::get('/secretario', SecretarioController::class . '@index');
 
 Route::get('/', function () {
     return view('welcome');
