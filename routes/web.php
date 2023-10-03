@@ -36,12 +36,12 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
 
-Route::get('/admin', AdminController::class . '@index');
-Route::get('/medico', MedicosController::class . '@index');
+Route::get('/admin', AdminController::class . '@index')->name('admin.index');
+Route::get('/medico', MedicosController::class . '@index')->name('medico.index');
 
-Route::get('/paciente', PacienteController::class . '@index');
+Route::get('/paciente', PacienteController::class . '@index')->name('paciente.index');
 
-Route::get('/secretario', SecretarioController::class . '@index');
+Route::get('/secretario', SecretarioController::class . '@index')->name('secretario.index');
 
 Route::get('/', function () {
     return view('home');

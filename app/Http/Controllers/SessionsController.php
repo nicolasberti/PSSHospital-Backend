@@ -6,26 +6,29 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 class SessionsController extends Controller {
-    
+
     public function create() {
-        
+
         return view('auth.login');
     }
 
-    public function store() {
-        
-        if(auth()->attempt(request(['email', 'password'])) == false) {
-            return back()->withErrors([
-                'message' => 'The email or password is incorrect, please try again',
-            ]);
+    public function store(Request $request) {
 
+        $credenciales = $request->only('username', 'password');
+
+
+        if ($credenciales['username'] == 'admin1' && $credenciales['password'] == '1234') {
+            return redirect()->route('admin.index');
+        } elseif ($credenciales['username'] == 'medico1' && $credenciales['password'] == '1234') {
+            return redirect()->route('medico.index');
+        } elseif ($credenciales['username'] == 'paciente1' && $credenciales['password'] == '1234') {
+            return redirect()->route('paciente.index');
+        } elseif ($credenciales['username'] == 'secretario1' && $credenciales['password'] == '1234') {
+            return redirect()->route('secretario.index');
         } else {
-
-            if(auth()->user()->role == 'admin') {
-                return redirect()->route('admin.index');
-            } else {
-                return redirect()->to('/');
-            }
+            return back()->withErrors([
+                'message' => 'Error: Credenciales Incorrectas',
+            ]);
         }
     }
 

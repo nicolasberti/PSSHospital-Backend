@@ -40,6 +40,26 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'medicos' => [
+            'driver' => 'session',
+            'provider' => 'medicos',
+        ],
+
+        'pacientes' => [
+            'driver' => 'session',
+            'provider' => 'pacientes',
+        ],
+
+        'secretarios' => [
+            'driver' => 'session',
+            'provider' => 'secretarios',
+        ],
     ],
 
     /*
@@ -63,6 +83,26 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'database',
+            'table' => 'admins',
+        ],
+
+        'medicos' => [
+            'driver' => 'database',
+            'table' => 'medicos',
+        ],
+
+        'pacientes' => [
+            'driver' => 'database',
+            'table' => 'pacientes',
+        ],
+
+        'secretarios' => [
+            'driver' => 'database',
+            'table' => 'secretarios',
         ],
 
         // 'users' => [
