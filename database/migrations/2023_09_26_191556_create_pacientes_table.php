@@ -26,8 +26,8 @@ return new class extends Migration
             //$table->integer("obra_social");
             $table->timestamps();
 
-            $table->foreignId('solicitud_edicion_id')->constrained();
-            $table->foreignId('obra_social_id')->constrained();
+            //$table->foreignId('solicitud_edicion_id')->constrained();
+            //$table->foreignId('obra_social_id')->constrained();
             //$table->foreign('solicitud')->references('id_solicitud')->on('solicitud_edicion');
             //$table->foreign('obra_social')->references('id_obrasocial')->on('obra_social');
         });

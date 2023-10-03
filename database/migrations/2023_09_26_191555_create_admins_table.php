@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("username", 55)->unique();
-            $table->foreignId('user_id')->constrained('users'); // herencia de users a admin para el login
+            // $table->foreignId('user_id')->constrained('users'); // herencia de users a admin para el login
             $table->string("password", 55);
         });
     }
