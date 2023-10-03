@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
             $table->string('DNI')->unique();
+            $table->string("username")->unique();
             $table->string("password", 55);
             $table->string("email");
             $table->integer("phone");

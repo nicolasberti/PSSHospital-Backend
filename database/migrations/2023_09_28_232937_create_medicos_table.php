@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("username", 55)->unique();
+            $table->string("password", 55);
             $table->unsignedInteger("DNI")->unique();
             $table->string("name", 55);
             $table->string("phone", 55);
