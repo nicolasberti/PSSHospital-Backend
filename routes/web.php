@@ -6,6 +6,9 @@ use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretarioController;
 
+use App\Http\Controllers\SessionsController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +20,22 @@ use App\Http\Controllers\SecretarioController;
 |
 */
 
+Route::get('/', function () {
+    return view('home');
+})->middleware('auth');
+
+
+Route::get('/login', [SessionsController::class, 'create'])
+    ->middleware('guest')
+    ->name('login.index');
+
+Route::post('/login', [SessionsController::class, 'store'])
+    ->name('login.store');
+
+Route::get('/logout', [SessionsController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('login.destroy');
+
 Route::get('/admin', AdminController::class . '@index');
 Route::get('/medico', MedicosController::class . '@index');
 
@@ -25,5 +44,5 @@ Route::get('/paciente', PacienteController::class . '@index');
 Route::get('/secretario', SecretarioController::class . '@index');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
