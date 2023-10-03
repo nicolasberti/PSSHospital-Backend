@@ -15,6 +15,7 @@ class MedicoSeeder extends Seeder
     {
         DB::table('medicos')->insert([
             'username' => 'medico1',
+            'password' => '1234',
             'DNI' => 123456789,
             'name' => 'Dr. Juan Perez',
             'phone' => '1234567890',

@@ -15,6 +15,7 @@ class PacienteSeeder extends Seeder
     {
         DB::table('pacientes')->insert([
             'DNI' => '123456789',
+            'username' => 'paciente1',
             'password' => '1234',
             'email' => 'paciente@example.com',
             'phone' => 1234567890,
