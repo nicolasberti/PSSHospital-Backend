@@ -12,18 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paciente_medico', function (Blueprint $table) {
-            $table->integer("id_paciente_medico")->autoIncrement();
+            $table->id();
             $table->date('fecha');
             $table->time("horarioInicio");
             $table->time("horarioFin");
             $table->time("duracion");
             $table->string("state");
             $table->string("diagnostico");
-            $table->integer("id_paciente");
-            $table->integer("id_medico");
             $table->timestamps();
-            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes');
-            $table->foreign('id_medico')->references('id_medico')->on('medicos');
+
+
+            $table->foreignId('paciente_id')->constrained();
+            $table->foreignId('medico_id')->constrained();
+
+            //$table->foreign('id_paciente')->references('id_paciente')->on('pacientes');
+            //$table->foreign('id_medico')->references('id_medico')->on('medicos');
 
         });
     }

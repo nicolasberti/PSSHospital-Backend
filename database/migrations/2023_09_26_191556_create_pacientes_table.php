@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->integer("id_paciente")->autoIncrement();
+            $table->id();
             $table->string('DNI')->unique();
             $table->string("password", 55);
             $table->string("email");
@@ -22,11 +22,14 @@ return new class extends Migration
             $table->date("DOB");
             $table->string("city");
             $table->string("state"); 
-            $table->integer("solicitud");
-            $table->integer("obra_social");
+            //$table->integer("solicitud");
+            //$table->integer("obra_social");
             $table->timestamps();
-            $table->foreign('solicitud')->references('id_solicitud')->on('solicitud_edicion');
-            $table->foreign('obra_social')->references('id_obrasocial')->on('obra_social');
+
+            $table->foreignId('solicitud_edicion_id')->constrained();
+            $table->foreignId('obra_social_id')->constrained();
+            //$table->foreign('solicitud')->references('id_solicitud')->on('solicitud_edicion');
+            //$table->foreign('obra_social')->references('id_obrasocial')->on('obra_social');
         });
     }
 
