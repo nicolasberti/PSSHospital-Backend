@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer("id_medico");
             $table->timestamps();
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes');
-            $table->foreign('id_medico')->references('id')->on('medicos');
+            $table->foreign('id_medico')->references('id_medico')->on('medicos');
 
         });
     }
