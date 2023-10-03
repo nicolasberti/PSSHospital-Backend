@@ -13,11 +13,11 @@ rounded-lg shadow-lg">
     @csrf
 
     <input type="user" class="border border-gray-200 rounded-md bg-gray-200 w-full
-    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="user"
-    id="user" name="user">
+    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Nombre de Usuario"
+    id="username" name="username">
 
     <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full
-    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Password"
+    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Contraseña"
     id="password" name="password">
     
     @error('message')        
