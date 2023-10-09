@@ -42,6 +42,9 @@ Route::get('/medico', MedicosController::class . '@index')->name('medico.index')
 Route::get('/paciente', PacienteController::class . '@index')->name('paciente.index');
 
 Route::get('/secretario', SecretarioController::class . '@index')->name('secretario.index');
+Route::get('/admin/secretarios', AdminController::class .'@show_secretarios')->name('admin.show_secretarios');
+Route::get('/admin/secretarios/create', AdminController::class .'@create_secretarios')->name('admin.create_secretarios');
+
 
 Route::get('/', function () {
     return view('home');

@@ -27,8 +27,14 @@
             <h1>SECRETARIOS</h1>
             <div class="container">
             <div class="row">
-                <div class="col"><button type="button" class="btn btn-primary">Registrar nuevo secretario</button></div>
-                <div class="col"><button type="button" class="btn btn-primary">Editar secretario</button></div>
+                <div class="col"><form method="GET" action="{{route('admin.create_secretarios')}}">
+                    <button type="submit" class="btn btn-primary">Registrar nuevo secretario</button>
+                    </form>
+                </div>
+                <div class="col"><form method="GET" action="{{route('admin.show_secretarios')}}">
+                    <button type="submit" class="btn btn-primary">Editar secretario</button>
+                    </form>
+                </div>
                 <div class="col"><button type="button" class="btn btn-primary">Dar de baja secretario</button></div>
             </div>
             </div>
