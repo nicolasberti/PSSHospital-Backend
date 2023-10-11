@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paciente extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    //use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'pacientes';
 

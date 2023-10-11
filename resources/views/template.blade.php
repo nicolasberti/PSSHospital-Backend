@@ -29,6 +29,14 @@
             color: #fff;
         }
 
+        .sidebar a {
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            color: #fff;
+        }
+
         .content {
             margin-left: 260px;
             padding: 20px;

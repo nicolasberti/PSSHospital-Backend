@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("lastname");
             $table->date("DOB");
+            $table->string("address");
             $table->string("city");
             $table->string("state"); 
             //$table->integer("solicitud");
