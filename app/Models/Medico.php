@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medico extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasFactory;
     protected $table = 'medicos';
 
     protected $fillable = [

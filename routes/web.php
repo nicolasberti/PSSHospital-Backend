@@ -46,7 +46,7 @@ Route::get('/admin/secretarios', AdminController::class .'@show_secretarios')->n
 Route::get('/admin/secretarios/create', AdminController::class .'@create_secretarios')->name('admin.create_secretarios');
 
 Route::get('/admin/medicos/create', AdminController::class .'@create_medico')->name('admin.create_medico');
-
+Route::post('/admin', [MedicosController::class, 'store']);
 
 Route::get('/', function () {
     return view('home');
