@@ -13,10 +13,18 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string("username", 55)->unique();
-            // $table->foreignId('user_id')->constrained('users'); // herencia de users a admin para el login
             $table->string("password", 55);
+            $table->unsignedInteger("DNI")->unique();
+            $table->string("name", 55);
+            $table->string("lastName", 55);
+            $table->string("email", 55);
+            $table->unsignedInteger("phone");
+            $table->string("state", 55);
+            $table->date("dateOfBirth");
+            $table->string("address");
+            $table->string("city");
+            $table->timestamps();
         });
     }
 
