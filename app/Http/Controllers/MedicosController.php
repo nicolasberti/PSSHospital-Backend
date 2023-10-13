@@ -12,6 +12,12 @@ class MedicosController extends Controller
         return view('medico.index');
     }
 
+    public function list() {
+
+        $medicos = Medico::all();
+        return view('admin.show_medicos', compact('medicos'));
+    }
+
     public function store(Request $request) {
 
         $medico = new Medico();

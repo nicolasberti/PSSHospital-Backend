@@ -19,6 +19,10 @@ class AdminController extends Controller
         return view('admin.create_secretarios');
     }
 
+    public function show_medicos() {
+        return view('admin.show_medicos');
+    }
+
     public function create_medico() {
         return view('admin.create_medico');
     }
