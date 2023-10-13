@@ -47,6 +47,7 @@ Route::get('/admin/secretarios/create', AdminController::class .'@create_secreta
 
 Route::get('/admin/medicos/create', AdminController::class .'@create_medico')->name('admin.create_medico');
 Route::post('/admin', [MedicosController::class, 'store']);
+Route::get('/admin/perfil', [AdminController::class, 'show'])->name('admin.show_admin');
 Route::get('/admin/medicos', MedicosController::class .'@list')->name('admin.show_medicos');
 Route::get('/admin/medicos/{id}/edit', MedicosController::class .'@edit')->name('admin.edit_medico');
 Route::put('/admin/medicos/{id}/', MedicosController::class .'@update')->name('admin.update_medico');

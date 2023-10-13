@@ -11,6 +11,10 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function show() {
+        return view('admin.show_admin');
+    }
+
     public function show_secretarios(){
         return view('admin.show_secretarios');
     }
