@@ -38,4 +38,25 @@ class MedicosController extends Controller
             ->with('success','Médico registrado exitosamente')
             ->with('alert','success');
     }
+
+    public function edit($id) {
+        $medico = Medico::find($id);
+        return view('admin.edit_medico', compact('medico'));
+    }
+
+    public function update(Request $request, $id) {
+        $medico = Medico::find($id);
+
+        $medico->password = $request->input('Password');
+        $medico->name = $request->input('Name');
+        $medico->email = $request->input('Email');
+        $medico->phone = $request->input('Phone');
+        $medico->especialidad = $request->input('Specialty');
+
+        $medico->update();
+
+        return redirect('/admin')
+            ->with('success','Médico editado exitosamente')
+            ->with('alert','success');
+    }
 }
