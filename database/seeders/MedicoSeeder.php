@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class MedicoSeeder extends Seeder
 {
@@ -13,17 +14,20 @@ class MedicoSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         DB::table('medicos')->insert([
             'username' => 'medico1',
             'password' => '1234',
-            'DNI' => 123456789,
-            'name' => 'Dr. Juan Perez',
-            'email' => 'JuanPerez@gmail.com',
-            'phone' => '1234567890',
+            'DNI' => $faker->unique()->randomNumber(8),
+            'name' => $faker->firstName,
+            'email' => $faker->unique()->safeEmail,
+            'phone' => $faker->randomNumber(8),
             'state' => 'Activo',
-            'especialidad' => "[PLACEHOLDER]",
+            'especialidad' => "Pediatra",
             'created_at' => now(),
             'updated_at' => now(),
         ]);
     }
 }
+
