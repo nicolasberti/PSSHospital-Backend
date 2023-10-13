@@ -18,8 +18,10 @@ class MedicoSeeder extends Seeder
             'password' => '1234',
             'DNI' => 123456789,
             'name' => 'Dr. Juan Perez',
+            'email' => 'JuanPerez@gmail.com',
             'phone' => '1234567890',
             'state' => 'Activo',
+            'especialidad' => "[PLACEHOLDER]",
             'created_at' => now(),
             'updated_at' => now(),
         ]);
