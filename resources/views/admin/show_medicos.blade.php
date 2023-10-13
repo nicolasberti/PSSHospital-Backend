@@ -26,7 +26,8 @@
                     <tr>
                         <td>{{ $medico->DNI }}</td>
                         <td>{{ $medico->name }}</td>
-                        <td><a href="medicos/{{$medico->id}}/edit" class="btn btn-info">Editar</a></td>
+                        <td><a href="{{ url('/admin/medicos/'.$medico->id.'/edit') }}" class="btn btn-info">Editar</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
