@@ -13,43 +13,45 @@
 @section ('contenido')
 <h1>Registrar Médico</h1>
 <div class="card shadow">
-    <form class="container px-4 py-3">
+    <form action="/admin" method="POST" class="container px-4 py-3">
+        @csrf
+        <div id="emailHelp" class="form-text">Los campos con (*) son obligatorios.</div>
         <div class="row row-cols-2">
             <div class="col mb-3">
-                <label for="DNIInput" class="form-label">DNI (*)</label>
-                <input type="number" class="form-control" id="DNIInput">
+                <label for="DNI" class="form-label">DNI (*)</label>
+                <input type="number" class="form-control" id="DNIInput" name="DNI" required min="1">
             </div>
             <div class="col mb-3">
-                <label for="NameInput" class="form-label">Nombre (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="Name" class="form-label">Nombre (*)</label>
+                <input type="text" class="form-control" id="NameInput" name="Name" requied>
             </div>
             <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Username (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="Username" class="form-label">Username (*)</label>
+                <input type="text" class="form-control" id="UsernameInput" name="Username" required>
             </div>
             <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Contraseña (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="Password" class="form-label">Contraseña (*)</label>
+                <input type="password" class="form-control" id="PasswordInput" name="Password" required>
             </div>
             <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Email (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-                        <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Telefono (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="Email" class="form-label">Email (*)</label>
+                <input type="text" class="form-control" id="EmailInput" name="Email" required>
             </div>
             <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Estado (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="Phone" class="form-label">Telefono (*)</label>
+                <input type="number" class="form-control" id="PhoneInput" name="Phone" required min="1">
             </div>
             <div class="col mb-3">
-                <label for="exampleInputPassword1" class="form-label">Especialidad (*)</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="State" class="form-label">Estado (*)</label>
+                <input type="text" class="form-control" id="StateInput" name="State" required>
+            </div>
+            <div class="col mb-3">
+                <label for="Specialty" class="form-label">Especialidad (*)</label>
+                <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="submit" class="btn btn-danger">Cancelar</button>
+            <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>
-      </form>
+    </form>
 </div>
 @endsection

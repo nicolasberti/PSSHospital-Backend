@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('sidebar')
-        <div class="card-body">  
+        <div class="card-body">
             <img style="width: 100px; height: 100px;" src="https://cdn-icons-png.flaticon.com/512/560/560199.png" alt="Imagen de perfil" class="img-fluid rounded-circle">
             <p>Nombre administrador</p>
         </div>
@@ -15,7 +15,7 @@
             <h1>MÉDICOS</h1>
             <div class="container">
             <div class="row">
-                <div class="col"><button type="button" class="btn btn-primary">Registrar nuevo médico</button></div>
+                <div class="col"><a class="btn btn-primary" href="/admin/medicos/create" role="button">Registrar nuevo médico</a></div>
                 <div class="col"><button type="button" class="btn btn-primary">Editar médico</button></div>
                 <div class="w-100 mt-2"></div>
                 <div class="col"><button type="button" class="btn btn-primary">Cargar horario de médico</button></div>
@@ -47,4 +47,11 @@
             </div>
             </div>
         </div>
+    @if(session('alert') == 'success')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                alert("{{ session('success') }}");
+            });
+        </script>
+    @endif
 @endsection
