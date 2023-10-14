@@ -11,4 +11,12 @@ class SecretarioController extends Controller
         return view('secretario.index');
     }
 
+    public function show_pacientes(){
+        return view('secretario.show_pacientes');
+    }
+
+    public function create_pacientes(){
+        return view('secretario.create_pacientes');
+    }
+
 }
