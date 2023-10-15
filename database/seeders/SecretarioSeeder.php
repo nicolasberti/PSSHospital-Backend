@@ -16,9 +16,15 @@ class SecretarioSeeder extends Seeder
         DB::table('secretarios')->insert([
             'username' => 'secretario1',
             'password' => '1234',
-            'Name' => 'Nombre del Secretario',
-            'Email' => 'secretario1@example.com',
-            'Phone' => 1234567890,
+            'DNI' => '12345678',
+            'name' => 'Lionel',
+            'lastname' => 'Messi',
+            'email' => 'secretario1@example.com',
+            'phone' => 1234567890,
+            'dateOfBirth' => date('1992-06-24'),
+            'adress' => 'La scaloneta',
+            'city' => 'Rosario',
+            'state' => 'Disponible',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

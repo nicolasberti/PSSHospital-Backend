@@ -35,7 +35,10 @@
                     <button type="submit" class="btn btn-primary">Editar secretario</button>
                     </form>
                 </div>
-                <div class="col"><button type="button" class="btn btn-primary">Dar de baja secretario</button></div>
+                <div class="col"><form method="GET" action="{{route('admin.show_baja_secretarios')}}">
+                    <button type="submit" class="btn btn-primary">Dar de baja secretario</button>
+                    </form>
+                </div>
             </div>
             </div>
         </div>

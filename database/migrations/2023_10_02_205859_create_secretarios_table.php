@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('secretarios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('DNI')->unique();
             $table->string("username")->unique();
             $table->string("password");
-            $table->string("Name");
-            $table->string("Email")->unique();
-            $table->integer("Phone");
+            $table->string("name");
+            $table->string("lastname");
+            $table->string("email")->unique();
+            $table->integer("phone");
+            $table->date('dateOfBirth');
+            $table->string('adress');
+            $table->string('city');
+            $table->string('state');
             $table->timestamps();
         });
     }

@@ -11,66 +11,68 @@
 @endsection
 
 @section ('contenido')
-<h1>Nuevo secretario</h1>
-<div class="card shadow"> 
-    <form method="POST"  action="{{route('admin.create_new_secretario')}}" enctype="multipart/form-data" >
+<h1>Editar secretario</h1>
+    <div class="card shadow">  
+    <form method="POST" action="{{ route('update_secretario', ['secretario' => $secretario->id]) }}" >
        
-        @csrf  
-    <div class="px-4 py-3">  
-            DNI(*)
+        @csrf 
+        
+
+        <div class="px-4 py-3">  
+            Nombre de usuario
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="DNI">
-                <label for="floatingInput">DNI</label>
+                <input class="form-control" id="floatingInput" name="username" disabled>
+                <label for="floatingInput">{{$secretario->username}}</label>
             </div>
-            Nombre de usuario(*)
+            Contraseña
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="username">
-                <label for="floatingInput">Username</label>
+                <input type="password" class="form-control" id="floatingPassword" name="password">
+                <label for="floatingPassword">********</label>
             </div>
-            Contraseña(*)
+            DNI
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" name="password" >
-                <label for="floatingPassword">Password</label>
+                <input class="form-control" id="floatingInput" name="DNI" disabled>
+                <label for="floatingInput">{{$secretario->DNI}}</label>
             </div>
-            Nombre(*)
+            Nombre
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="name" >
-                <label for="floatingInput">Nombre</label>
+                <input class="form-control" id="floatingInput" name="name">
+                <label for="floatingInput">{{$secretario->name}}</label>
             </div>
-            Apellido(*)
+            Apellido
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="lastname" >
-                <label for="floatingInput">Apellido</label>
+                <input class="form-control" id="floatingInput" name="lastname">
+                <label for="floatingInput">{{$secretario->lastname}}</label>
             </div>
-            Email(*)
+            Email
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="email">
-                <label for="floatingInput">Email</label>
+                <label for="floatingInput">{{$secretario->email}}</label>
             </div>
-            Celular(*)
+            Celular
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="phone" >
-                <label for="floatingInput">Celular</label>
-            </div>  
-            Fecha de cumpleaños(*)
+                <input class="form-control" id="floatingInput" name="phone">
+                <label for="floatingInput">{{$secretario->phone}}</label>
+            </div>
+            Fecha de cumpleaños
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="birthday">
-                <label for="floatingInput">Fecha de cumpleaños</label>
+                <label for="floatingInput">{{$secretario->dateOfBirth}}</label>
             </div>
-            Dirección(*)
+            Dirección
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="adress">
-                <label for="floatingInput">Direccion</label>
+                <input class="form-control" id="floatingInput" name="phone">
+                <label for="floatingInput">{{$secretario->adress}}</label>
             </div>
-            Ciudad(*)
+            Ciudad
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="city">
-                <label for="floatingInput">Ciudad</label>
+                <label for="floatingInput">{{$secretario->city}}</label>
             </div>
-            Estado(*)
+            Estado
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="state">
-                <label for="floatingInput">Estado</label>
+                <input class="form-control" id="floatingInput" name="estado">
+                <label for="floatingInput">{{$secretario->state}}</label>
             </div>
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary float-start" value="Guardar">
@@ -83,7 +85,8 @@
                 </script>
 
             </div>
-    </div>
+            <br/>
+        </div>
     </form>
     </div>
 </div>

@@ -44,6 +44,10 @@ Route::get('/paciente', PacienteController::class . '@index')->name('paciente.in
 Route::get('/secretario', SecretarioController::class . '@index')->name('secretario.index');
 Route::get('/admin/secretarios', AdminController::class .'@show_secretarios')->name('admin.show_secretarios');
 Route::get('/admin/secretarios/create', AdminController::class .'@create_secretarios')->name('admin.create_secretarios');
+Route::get('/admin/secretarios/edit/{secretario}', AdminController::class.'@edit_secretario')->name('admin.edit_secretario');
+Route::post('admin/edit/{secretario}', AdminController::class. '@update_secretario')->name('update_secretario');
+Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
+Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja_secretario')->name('admin.baja_secretario');
 
 
 Route::get('/', function () {
