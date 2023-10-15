@@ -17,7 +17,7 @@
             <thead>
             <tr>
                 <th scope="col">DNI</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s) y Nombre(s)</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
@@ -25,7 +25,7 @@
                 @foreach ($medicos as $medico)
                     <tr>
                         <td>{{ $medico->DNI }}</td>
-                        <td>{{ $medico->name }}</td>
+                        <td>{{$medico->lastName}}, {{ $medico->name }}</td>
                         <td><a href="{{ url('/admin/medicos/'.$medico->id.'/edit') }}" class="btn btn-info">Editar</a>
                         </td>
                     </tr>

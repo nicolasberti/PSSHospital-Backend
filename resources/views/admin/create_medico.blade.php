@@ -26,6 +26,10 @@
                 <input type="text" class="form-control" id="NameInput" name="Name" required>
             </div>
             <div class="col mb-3">
+                <label for="LastName" class="form-label">Apellido (*)</label>
+                <input type="text" class="form-control" id="LastNameInput" name="LastName" required>
+            </div>
+            <div class="col mb-3">
                 <label for="Username" class="form-label">Username (*)</label>
                 <input type="text" class="form-control" id="UsernameInput" name="Username" readonly required>
             </div>
@@ -49,6 +53,7 @@
                 <label for="Specialty" class="form-label">Especialidad (*)</label>
                 <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
             </div>
+            <div class="col mb-3"></div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>

@@ -26,6 +26,7 @@ class MedicosController extends Controller
         $medico->password = $request->input('Password');
         $medico->DNI = $request->input('DNI');
         $medico->name = $request->input('Name');
+        $medico->lastName = $request->input('LastName');
         $medico->email = $request->input('Email');
         $medico->phone = $request->input('Phone');
         $medico->state = "Activo";
@@ -49,6 +50,7 @@ class MedicosController extends Controller
 
         $medico->password = $request->input('Password');
         $medico->name = $request->input('Name');
+        $medico->lastName = $request->input('LastName');
         $medico->email = $request->input('Email');
         $medico->phone = $request->input('Phone');
         $medico->especialidad = $request->input('Specialty');

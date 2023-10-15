@@ -27,6 +27,10 @@
                 <input type="text" class="form-control" id="NameInput" name="Name" value="{{$medico->name}}" required>
             </div>
             <div class="col mb-3">
+                <label for="LastName" class="form-label">Apellido (*)</label>
+                <input type="text" class="form-control" id="LastNameInput" name="LastName" value="{{$medico->lastName}}" required>
+            </div>
+            <div class="col mb-3">
                 <label for="Username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="UsernameInput" name="Username" value="{{$medico->username}}" required readonly>
             </div>
@@ -50,6 +54,7 @@
                 <label for="Specialty" class="form-label">Especialidad (*)</label>
                 <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" value="{{$medico->especialidad}}" required>
             </div>
+            <div class="col mb-3"></div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/medicos/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>
