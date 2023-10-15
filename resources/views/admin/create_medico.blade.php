@@ -19,19 +19,19 @@
         <div class="row row-cols-2">
             <div class="col mb-3">
                 <label for="DNI" class="form-label">DNI (*)</label>
-                <input type="number" class="form-control" id="DNIInput" name="DNI" required min="1">
+                <input type="number" class="form-control" id="DNIInput" name="DNI" oninput="actualizarCampo(this.value)" required min="1">
             </div>
             <div class="col mb-3">
                 <label for="Name" class="form-label">Nombre (*)</label>
-                <input type="text" class="form-control" id="NameInput" name="Name" requied>
+                <input type="text" class="form-control" id="NameInput" name="Name" required>
             </div>
             <div class="col mb-3">
                 <label for="Username" class="form-label">Username (*)</label>
-                <input type="text" class="form-control" id="UsernameInput" name="Username" required>
+                <input type="text" class="form-control" id="UsernameInput" name="Username" readonly required>
             </div>
             <div class="col mb-3">
                 <label for="Password" class="form-label">Contraseña (*)</label>
-                <input type="password" class="form-control" id="PasswordInput" name="Password" required>
+                <input type="password" class="form-control" id="PasswordInput" name="Password" readonly required>
             </div>
             <div class="col mb-3">
                 <label for="Email" class="form-label">Email (*)</label>
@@ -54,4 +54,14 @@
         </div>
     </form>
 </div>
+<script>
+
+        function actualizarCampo(valor) {
+            var campoUsername = document.getElementById('UsernameInput');
+            var campoPassword = document.getElementById('PasswordInput');
+
+            campoUsername.value = valor;
+            campoPassword.value = valor;
+        }
+</script>
 @endsection
