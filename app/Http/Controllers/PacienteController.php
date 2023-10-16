@@ -71,4 +71,14 @@ class PacienteController extends Controller
             ->with('success','Paciente editado exitosamente')
             ->with('alert','success');
     }
+
+    public function destroy(string $id){
+        $paciente = Paciente::find($id);
+        $paciente->state = 'Inactivo';
+
+        $paciente->save();
+        return redirect('/secretario/pacientes')
+        ->with('success', 'El paciente se ha dado de baja con éxito')
+        ->with('alert', 'success');
+    }
 }

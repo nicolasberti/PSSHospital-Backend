@@ -45,7 +45,8 @@
                         <td>{{ $paciente->DNI }}</td>
                         <td>{{$paciente->lastName}}, {{ $paciente->name }}</td>
                         <td><a href="{{ url('/secretario/pacientes/'.$paciente->id.'/edit') }}" class="btn btn-info">Editar</a></td>
-                        <td><button type="button" class="btn btn-primary">Dar de baja</button></td>
+                        <td><a href="{{ route('secretario.baja_paciente', ['paciente' => $paciente->id]) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');" class="btn btn-danger mr-2">Dar de Baja</a></td>
+                    </th>
                     </tr>
                 @endforeach
             </tbody>
@@ -69,3 +70,11 @@
             });
         </script>
 @endif
+
+@section('scripts')
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estás seguro de que deseas eliminar este registro?");
+    }
+</script>
+@endsection

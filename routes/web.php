@@ -47,6 +47,8 @@ Route::get('/secretario/pacientes/create', SecretarioController::class .'@create
 Route::post('/secretario/pacientes/create', PacienteController::class . '@store')->name('paciente.store');
 Route::get('/secretario/pacientes/{id}/edit', PacienteController::class .'@edit')->name('secretario.edit_paciente');
 Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')->name('secretario.update_paciente');
+Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
+Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
 
 Route::get('/', function () {
     return view('home');
