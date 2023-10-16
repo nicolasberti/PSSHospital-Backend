@@ -30,9 +30,6 @@
             </div>
 
         </div>
-
-
-
         <table class="table">
             <thead>
             <tr>
@@ -43,60 +40,14 @@
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">156166</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
-            <tr>
-                <th scope="row">156167</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
-            <tr>
-                <th scope="row">156168</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
-            <tr>
-                <th scope="row">156169</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
-            <tr>
-                <th scope="row">156170</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
-            <tr>
-                <th scope="row">156171</th>
-                <th scope="row">Juan</th>
-                <th scope="row">Quintero</th>
-                <th scope="row">
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-primary">Dar de baja</button>
-                </th>
-            </tr>
+                @foreach ($pacientes as $paciente)
+                    <tr>
+                        <td>{{ $paciente->DNI }}</td>
+                        <td>{{$paciente->lastName}}, {{ $paciente->name }}</td>
+                        <td><a href="{{ url('/secretario/pacientes/'.$paciente->id.'/edit') }}" class="btn btn-info">Editar</a></td>
+                        <td><button type="button" class="btn btn-primary">Dar de baja</button></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -111,3 +62,10 @@
 
     </div>
 @endsection
+@if(session('alert') == 'success')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                alert("{{ session('success') }}");
+            });
+        </script>
+@endif

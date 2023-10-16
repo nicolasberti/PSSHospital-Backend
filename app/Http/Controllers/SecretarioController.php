@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class SecretarioController extends Controller
@@ -12,7 +13,8 @@ class SecretarioController extends Controller
     }
 
     public function show_pacientes(){
-        return view('secretario.show_pacientes');
+        $pacientes = Paciente::all();
+        return view('secretario.show_pacientes', compact('pacientes'));
     }
 
     public function create_pacientes(){
