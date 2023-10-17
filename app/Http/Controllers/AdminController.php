@@ -36,6 +36,8 @@ class AdminController extends Controller
         $secretario->state = $request->state;
 
         $secretario->save();
+        $secretarios = Secretario::all();
+        return redirect()->route('admin.show_secretarios', ['secretarios' => $secretarios]);
     }
 
     public function edit_secretario(string $secretario){

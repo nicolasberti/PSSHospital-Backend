@@ -13,7 +13,7 @@
 @section ('contenido')
 <h1>Nuevo secretario</h1>
 <div class="card shadow"> 
-    <form method="POST"  action="{{route('admin.create_new_secretario')}}" enctype="multipart/form-data" >
+    <form method="POST"  action="{{route('create_new_secretario')}}" enctype="multipart/form-data" >
        
         @csrf  
     <div class="px-4 py-3">  
@@ -53,9 +53,8 @@
                 <label for="floatingInput">Celular</label>
             </div>  
             Fecha de cumpleaños(*)
-            <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="birthday">
-                <label for="floatingInput">Fecha de cumpleaños</label>
+            <div class="form-floating mb-3">                
+                <input class="form-date" type="date" id="start" name="birthday" min="1900-01-01" max="2023-10-10">
             </div>
             Dirección(*)
             <div class="form-floating mb-3">
@@ -69,7 +68,10 @@
             </div>
             Estado(*)
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="state">
+                <select class="form-select" id="estado" name="state">
+                    <option value="Habilitado">Habilitado</option>
+                    <option value="Inhabilitado">Inhabilitado</option>
+                </select>
                 <label for="floatingInput">Estado</label>
             </div>
             <div class="mb-3">
