@@ -8,9 +8,9 @@ class PacienteController extends Controller
     public function index($username){
         $paciente = Paciente::where('username', $username)->first();
         if($paciente)
-        return view('paciente.index', ['username' => $username, 'paciente' => $paciente]); 
+            return view('paciente.index', ['username' => $username, 'paciente' => $paciente]); 
         else
-        return view('paciente.404');
+            return view('paciente.404');
     }
 
     public function datos($username){
