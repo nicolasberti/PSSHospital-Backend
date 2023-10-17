@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Secretario;
+use App\Models\SecretarioPaciente;
 
 class AdminController extends Controller
 {
@@ -101,7 +102,7 @@ class AdminController extends Controller
     }
 
     public function show_solicitudes(){
-        $secretarios = Secretario::all();
-        return view('admin.show_solicitudes', ['secretarios' => $secretarios]);
+        $secretario_paciente = SecretarioPaciente::all(); 
+        return view('admin.show_solicitudes', ['secretario_paciente' => $secretario_paciente]);
     }
 }

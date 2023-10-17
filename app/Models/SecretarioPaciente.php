@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecretarioPaciente extends Model
 {
-    protected $table = 'Secretario-Paciente';
+    protected $table = 'secretario_paciente';
 
     public function secretario()
     {
