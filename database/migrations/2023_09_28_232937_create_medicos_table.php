@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('medicos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string("username", 55)->unique();
             $table->string("password", 55);
             $table->unsignedInteger("DNI")->unique();
             $table->string("name", 55);
-            $table->string("phone", 55);
+            $table->string("lastName", 55);
+            $table->string("email", 55);
+            $table->unsignedInteger("phone");
             $table->string("state", 55);
+            $table->string("especialidad", 55);
+            $table->timestamps();
         });
     }
 
