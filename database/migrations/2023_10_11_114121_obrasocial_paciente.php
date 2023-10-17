@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("state");
             $table->timestamps();
-            $table->foreignId('paciente_id')->constrained();
-            $table->foreignId('obrasocial_id')->constrained();
+            // error.
+            //$table->foreignId('paciente_id')->constrained();
+            //$table->foreignId('obrasocial_id')->constrained();
         });
     }
 
