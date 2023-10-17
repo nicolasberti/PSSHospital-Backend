@@ -54,6 +54,13 @@ Route::get('/admin/perfil', [AdminController::class, 'show'])->name('admin.show_
 Route::get('/admin/medicos', MedicosController::class .'@list')->name('admin.show_medicos');
 Route::get('/admin/medicos/{id}/edit', MedicosController::class .'@edit')->name('admin.edit_medico');
 Route::put('/admin/medicos/{id}/', MedicosController::class .'@update')->name('admin.update_medico');
+Route::get('/secretario/pacientes', SecretarioController::class .'@show_pacientes')->name('secretario.show_pacientes');
+Route::get('/secretario/pacientes/create', SecretarioController::class .'@create_pacientes')->name('secretario.create_pacientes');
+Route::post('/secretario/pacientes/create', PacienteController::class . '@store')->name('paciente.store');
+Route::get('/secretario/pacientes/{id}/edit', PacienteController::class .'@edit')->name('secretario.edit_paciente');
+Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')->name('secretario.update_paciente');
+Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
+Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
 
 Route::get('/', function () {
     return view('home');

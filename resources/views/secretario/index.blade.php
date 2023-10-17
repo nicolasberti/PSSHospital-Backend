@@ -17,15 +17,18 @@
 <h1>Pacientes</h1>
 <div class="card shadow">
     <div class="card-body row">
-        <div class="col">
-            <button type="button" class="btn btn-primary">Registrar Paciente</button>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary">Editar Paciente</button>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary">Dar de Baja Paciente</button>
-        </div>
+    <div class="col"><form method="GET" action="{{route('secretario.create_pacientes')}}">
+        <button type="submit" class="btn btn-primary">Registrar Paciente</button>
+        </form>
+    </div>
+    <div class="col"><form method="GET" action="{{route('secretario.show_pacientes')}}">
+        <button type="submit" class="btn btn-primary">Editar Paciente</button>
+        </form>
+    </div>
+    <div class="col"><form method="GET" action="{{route('secretario.show_pacientes')}}">
+        <button type="submit" class="btn btn-primary">Dar de Baja Paciente</button>
+        </form>
+    </div>
         <div class="col">
             <button type="button" class="btn btn-primary">Solicitar Edición</button>
         </div>
