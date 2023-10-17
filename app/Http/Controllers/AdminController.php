@@ -100,4 +100,8 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function show_solicitudes(){
+        $secretarios = Secretario::all();
+        return view('admin.show_solicitudes', ['secretarios' => $secretarios]);
+    }
 }

@@ -46,7 +46,10 @@
             <h1>PACIENTES</h1>
             <div class="container">
             <div class="row">
-                <div class="col"><button type="button" class="btn btn-primary">Editar pacientes</button></div>
+                <div class="col"><form method="GET" action="{{route('admin.show_solicitudes')}}">
+                    <button type="button" class="btn btn-primary">Editar pacientes</button>
+                    </form>
+                </div>
             </div>
             </div>
         </div>

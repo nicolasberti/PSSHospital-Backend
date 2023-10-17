@@ -41,6 +41,10 @@ Route::get('/medico', MedicosController::class . '@index')->name('medico.index')
 
 Route::get('/paciente', PacienteController::class . '@index')->name('paciente.index');
 
+
+Route::get('/admin/pacientes/editar', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
+
+
 Route::get('/secretario', SecretarioController::class . '@index')->name('secretario.index');
 Route::get('/admin/secretarios', AdminController::class .'@show_secretarios')->name('admin.show_secretarios');
 Route::get('/admin/secretarios/create', AdminController::class .'@create_secretarios')->name('admin.create_secretarios');
@@ -49,6 +53,8 @@ Route::post('admin/edit/{secretario}', AdminController::class. '@update_secretar
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja_secretario')->name('admin.baja_secretario');
 Route::post('admin/create/secretario', AdminController::class. '@create_new_secretario')->name('create_new_secretario');
+
+Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
 
 
 Route::get('/', function () {
