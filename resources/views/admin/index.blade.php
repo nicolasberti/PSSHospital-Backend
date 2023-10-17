@@ -38,7 +38,10 @@
                     <button type="submit" class="btn btn-primary">Editar secretario</button>
                     </form>
                 </div>
-                <div class="col"><button type="button" class="btn btn-primary">Dar de baja secretario</button></div>
+                <div class="col"><form method="GET" action="{{route('admin.show_baja_secretarios')}}">
+                    <button type="submit" class="btn btn-primary">Dar de baja secretario</button>
+                    </form>
+                </div>
             </div>
             </div>
         </div>
@@ -46,7 +49,9 @@
             <h1>PACIENTES</h1>
             <div class="container">
             <div class="row">
-                <div class="col"><button type="button" class="btn btn-primary">Editar pacientes</button></div>
+                <div class="col">
+                    <a href="{{ route('admin.show_solicitudes') }}" class="btn btn-primary">Editar pacientes</a>
+                </div>
             </div>
             </div>
         </div>

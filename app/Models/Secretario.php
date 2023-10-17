@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Secretario extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use  HasFactory;
 
     protected $table = 'secretarios';
 

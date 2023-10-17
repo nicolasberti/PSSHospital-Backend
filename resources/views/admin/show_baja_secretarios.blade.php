@@ -46,7 +46,7 @@
                     <th scope="row">{{$secretario->name}}</th>
                     <th scope="row">{{$secretario->lastname}}</th>
                     <th scope="row">
-                        <a href="{{ route('admin.edit_secretario', ['secretario' => $secretario->id]) }}" class="btn btn-success mr-2">Editar</a>
+                    <a href="{{ route('admin.baja_secretario', ['secretario' => $secretario->id]) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');" class="btn btn-success mr-2">Eliminar</a>
                     </th>
                 </tr>
                 @endforeach
@@ -63,4 +63,12 @@
         <br/>
         
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estás seguro de que deseas eliminar este registro?");
+    }
+</script>
 @endsection
