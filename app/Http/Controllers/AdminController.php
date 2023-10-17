@@ -105,4 +105,9 @@ class AdminController extends Controller
         $secretario_paciente = SecretarioPaciente::all(); 
         return view('admin.show_solicitudes', ['secretario_paciente' => $secretario_paciente]);
     }
+
+    public function edit_datos_criticos_paciente(string $solicitud){
+        $solicitud = SecretarioPaciente::find($solicitud);    
+        return view('admin.edit_datos_criticos_paciente', ['solicitud' => $solicitud]);
+    }
 }

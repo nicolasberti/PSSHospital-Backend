@@ -37,7 +37,7 @@
                     <th scope="row">{{ $solicitud->secretario->name }}</th>
                     <th scope="row">{{ $solicitud->secretario->lastname }}</th>
                     <th scope="row">
-                        <a href="{{ route('admin.edit_secretario', ['secretario' => $solicitud->secretario->id]) }}" class="btn btn-success mr-2">Ver</a>
+                        <a href="{{ route('admin.edit_datos_criticos_paciente', ['solicitud' => $solicitud->id]) }}" class="btn btn-success mr-2">Ver</a>
                     </th>
                 </tr>
                 @endforeach

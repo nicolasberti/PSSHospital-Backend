@@ -55,6 +55,7 @@ Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja
 Route::post('admin/create/secretario', AdminController::class. '@create_new_secretario')->name('create_new_secretario');
 
 Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
+Route::get('/admin/editar-datos-criticos-paciente/{solicitud}', AdminController::class.'@edit_datos_criticos_paciente')->name('admin.edit_datos_criticos_paciente');
 
 
 Route::get('/', function () {
