@@ -57,7 +57,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col mb-3"></div>
+            <div class="col mb-3">
+                @error('message')
+                <p style="border: 1px solid #e53e3e;" class="rounded-md bg-red-100 text-red-600 p-2 my-2">
+                    * {{ $message }}
+                </p>
+            @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>

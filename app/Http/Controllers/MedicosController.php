@@ -21,6 +21,13 @@ class MedicosController extends Controller
 
     public function store(Request $request) {
 
+        $medico = Medico::where('DNI', $request->input('DNI'))->first();
+
+        if ($medico != null) {
+            return back()->withErrors([
+                'message' => 'Error: Este médico ya está registrado',
+            ]);
+        }
         $medico = new Medico();
 
         $medico->username = $request->input('Username');
