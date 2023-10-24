@@ -51,8 +51,16 @@
                 <input type="text" class="form-control" id="StateInput" name="State" value="{{$medico->state}}" required readonly>
             </div>
             <div class="col mb-3">
-                <label for="Specialty" class="form-label">Especialidad (*)</label>
-                <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" value="{{$medico->especialidad}}" required>
+                <label class="form-label">Especialidad (*)</label>
+                <select class="form-select" for="Specialty" name='Specialty' required>
+                    @foreach ($especialidades as $especialidad)
+                        @if ($especialidad->nombre == $medico->especialidad)
+                            <option selected value={{ $especialidad->nombre }}>{{ $especialidad->nombre }}</option>
+                        @else
+                            <option value={{ $especialidad->nombre }}>{{ $especialidad->nombre }}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
             <div class="col mb-3"></div>
             <button type="submit" class="btn btn-primary">Guardar</button>
