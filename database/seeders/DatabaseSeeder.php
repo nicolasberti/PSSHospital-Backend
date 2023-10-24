@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
+            EspecialidadSeeder::class,
             MedicoSeeder::class,
             SecretarioSeeder::class,
             PacienteSeeder::class,
