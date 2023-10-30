@@ -34,9 +34,7 @@
                 <div class="mt-4">
                     <div class="container">
                     <div class="row">
-                        <div class="col"><button type="button" class="btn btn-primary">Agregar cita</button></div>
-                        <div class="col"><button type="button" class="btn btn-primary">Cancelar cita</button></div>
-                        <div class="col"><button type="button" class="btn btn-primary">Consultar cita</button></div>
+                        <div class="col"><button type="button" class="btn btn-primary">Gestionar mis citas</button></div>
                     </div>
                     </div>
                 </div>

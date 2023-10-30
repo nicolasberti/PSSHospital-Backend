@@ -14,6 +14,9 @@
         <div class="card-body">  
             <p>Mis citas</p>
         </div>
+        <div class="card-body">  
+            <p>Solicitar cita</p>
+        </div>
         <div class="logout-button">
             <a href="/login" class="btn btn-danger">Salir</a>
         </div>
