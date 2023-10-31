@@ -63,4 +63,11 @@
         <br/>
         
     </div>
+@if(session('alert') == 'success')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                alert("{{ session('success') }}");
+            });
+        </script>
+@endif
 @endsection

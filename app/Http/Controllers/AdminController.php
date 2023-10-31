@@ -34,25 +34,69 @@ class AdminController extends Controller
         return view('admin.create_medico');
     }
 
-        
     public function create_new_secretario(Request $request){
-        $secretario = new Secretario();
-        $secretario->DNI = $request->DNI;
-        $secretario->username = $request->username;
-        $secretario->password = $request->password;
-        $secretario->name = $request->name;
-        $secretario->lastname = $request->lastname;
-        $secretario->email = $request->email;
-        $secretario->phone = $request->phone;
-        $secretario->dateOfBirth = $request->birthday;
-        $secretario->adress = $request->adress;
-        $secretario->city = $request->city;
-        $secretario->state = $request->state;
 
+        $validatedData = $request->validate([
+            'DNI' => 'required|numeric|unique:secretarios,DNI|digits:8',
+            'username' => 'required|string|unique:secretarios,username',
+            'password' => 'required|string',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email', 
+            'phone' => 'required|numeric',
+            'birthday' => 'required|date|before:today',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+        ], [
+            'DNI.required' => 'El campo DNI es obligatorio.',
+            'DNI.numeric' => 'El campo DNI debe ser numérico.',
+            'DNI.unique' => 'Ya existe un usuario con este DNI.',
+            'DNI.digits' => 'El campo DNI debe tener 8 dígitos.',
+            'username.required' => 'El campo Usuario es obligatorio.',
+            'username.string' => 'El campo Usuario debe ser un string.',
+            'username.unique' => 'Ya existe un usuario con este nombre de usuario.',
+            'password.required' => 'El campo Contraseña es obligatorio.',
+            'password.string' => 'El campo Contraseña debe ser un string',
+            'name.required' => 'El campo Nombre es obligatorio.',
+            'name.string' => 'El campo Nombre debe ser un string',
+            'lastname.required' => 'El campo Apellido es obligatorio.',
+            'lastname.string' => 'El campo Apellido debe ser un string',
+            'email.required' => 'El campo Email es obligatorio.',
+            'email.string' => 'El campo Email debe ser un string',
+            'email.email' => 'El campo Email debe contener el simbolo @.',
+            'phone.required' => 'El campo Celular es obligatorio.',
+            'phone.string' => 'El campo Celular debe ser un string',
+            'birthday.required' => 'El campo Fecha de Cumpleaños es obligatorio.',
+            'address.required' => 'El campo Direccion es obligatorio.',
+            'address.string' => 'El campo Direccion debe ser un string',
+            'city.required' => 'El campo Ciudad es obligatorio.',
+            'city.string' => 'El campo Ciudad debe ser un string',
+            'state.required' => 'El campo Estado es obligatorio.',
+            'state.string' => 'El campo Estado debe ser un string',
+        ]);
+    
+        $secretario = new Secretario();
+        $secretario->DNI = $validatedData['DNI'];
+        $secretario->username = $validatedData['username'];
+        $secretario->password = $validatedData['password'];
+        $secretario->name = $validatedData['name'];
+        $secretario->lastname = $validatedData['lastname'];
+        $secretario->email = $validatedData['email'];
+        $secretario->phone = $validatedData['phone'];
+        $secretario->dateOfBirth = $validatedData['birthday'];
+        $secretario->address = $validatedData['address'];
+        $secretario->city = $validatedData['city'];
+        $secretario->state = $validatedData['state'];
+    
         $secretario->save();
+    
         $secretarios = Secretario::all();
-        return redirect()->route('admin.show_secretarios', ['secretarios' => $secretarios]);
-    }
+    
+        return redirect()->route('admin.show_secretarios', ['secretarios' => $secretarios])
+        ->with('success', 'El secretario se ha registrado con éxito')
+        ->with('alert', 'success');
+    }    
 
     public function edit_secretario(string $secretario){
         $secretario = Secretario::find($secretario);    
