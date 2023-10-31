@@ -42,7 +42,8 @@ Route::get('/medico', MedicosController::class . '@index')->name('medico.index')
 
 Route::get('/paciente/{username}', PacienteController::class . '@index')->name('paciente.index');
 Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos')->name('mis-datos-paciente');
-
+Route::get('/paciente/create_cita/{id}', PacienteController::class . '@cita')->name('paciente.newcita');
+Route::post('/paciente/create_cita/{id}/{medico_id}', PacienteController::class . '@cita_medico')->name('paciente.newcita_medico');
 
 
 Route::get('/admin/pacientes/editar', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');

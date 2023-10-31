@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use App\Models\Medico;
 
 class PacienteController extends Controller
 {
@@ -80,6 +81,19 @@ class PacienteController extends Controller
         return redirect('/secretario/pacientes')
             ->with('success','Paciente editado exitosamente')
             ->with('alert','success');
+    }
+
+    public function cita($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $medicos = Medico::orderBy('name', 'asc')->get();
+        return view('paciente.new_cita', ['username' => $paciente, 'paciente' => $paciente, 'medicos' => $medicos]);
+    }
+
+    public function cita_medico(Request $request){
+        $paciente = Paciente::find($request->input('id'));
+        $medico = Medico::find($request->input('medico_id'));
+
+        return view('paciente.new_cita_medico', ['id' => $paciente->id, 'medico_id' => $medico->id]);
     }
 
     public function destroy(string $id){

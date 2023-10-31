@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             MedicoSeeder::class,
             SecretarioSeeder::class,
             PacienteSeeder::class,
+            DiaSemanaSeeder::class,
+            HorarioAtencionSeeder::class,
         ]);
     }
 }
