@@ -13,36 +13,36 @@ class DiaSemanaSeeder extends Seeder
     public function run(): void
     {
         DB::table('diasemanas')->insert([
-            'name' => 'Lunes',
+            'name' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('diasemanas')->insert([
-            'name' => 'Martes',
+            'name' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('diasemanas')->insert([
-            'name' => 'Miercoles',
+            'name' => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('diasemanas')->insert([
-            'name' => 'Jueves',
+            'name' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('diasemanas')->insert([
-            'name' => 'Viernes',
+            'name' => 4,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('diasemanas')->insert([
-            'name' => 'Sabado',
+            'name' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);DB::table('diasemanas')->insert([
-            'name' => 'Domingo',
+            'name' => 6,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

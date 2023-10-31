@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('diasemanas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->integer('name'); //0 domingo, 1 lunes, 2 martes, 3 miercoles, ...
         });
     }
 

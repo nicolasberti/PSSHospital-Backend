@@ -92,8 +92,24 @@ class PacienteController extends Controller
     public function cita_medico(Request $request){
         $paciente = Paciente::find($request->input('id'));
         $medico = Medico::find($request->input('medico_id'));
+        $fechaInicio = now();
+        $fechaFin = now()->addDays(30);
 
-        return view('paciente.new_cita_medico', ['id' => $paciente->id, 'medico_id' => $medico->id]);
+        $diasDeAtencion = $medico->diasDeAtencion->pluck('diaSemana')->toArray();
+
+        $fechasHabilitadas = [];
+        $currentDate = $fechaInicio;
+
+        while ($currentDate <= $fechaFin) {
+            $currentDay = $currentDate->dayOfWeek; // Obtén el número del día de la semana (0 para domingo, 1 para lunes, 2 para martes, etc.)
+
+            if (in_array($currentDay, $diasDeAtencion)) {
+                $fechasHabilitadas[] = $currentDate->toDateString();
+            }
+            $currentDate->addDay();
+        }
+
+        return view('paciente.new_cita_medico', ['paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
     }
 
     public function destroy(string $id){
