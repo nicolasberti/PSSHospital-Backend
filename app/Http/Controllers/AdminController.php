@@ -114,6 +114,14 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function alta_secretario(string $id){
+        $secretario = Secretario::find($id);
+        $secretario->state = 'Disponible';
+
+        $secretario->save();
+        return view('admin.index');
+    }
+
     public function show_solicitudes(){
         $secretario_paciente = SecretarioPaciente::all(); 
         return view('admin.show_solicitudes', ['secretario_paciente' => $secretario_paciente]);

@@ -20,9 +20,7 @@
             <div class="row">
                 <div class="col"><a class="btn btn-primary" href="/admin/medicos/create" role="button">Registrar nuevo médico</a></div>
                 <div class="col"><a type="button" href="/admin/medicos" class="btn btn-primary">Editar médico</a></div>
-                <div class="w-100 mt-2"></div>
-                <div class="col"><button type="button" class="btn btn-primary">Cargar horario de médico</button></div>
-                <div class="col"><button type="button" class="btn btn-primary">Consultar horarios de médico</button></div>
+                <div class="col"><a type="button" class="btn btn-primary">Horarios de médico</a></div>
             </div>
             </div>
         </div>
@@ -55,6 +53,18 @@
             </div>
             </div>
         </div>
+
+        <div class="mt-4">
+            <h1>Citas</h1>
+            <div class="container">
+            <div class="row">
+                <div class="col"><a class="btn btn-primary" href="#" role="button">Agregar cita</a></div>
+                <div class="col"><a type="button" href="#" class="btn btn-primary">Cancelar cita</a></div>
+                <div class="col"><a type="button" class="btn btn-primary">Consultar cita</a></div>
+            </div>
+            </div>
+        </div>
+
     @if(session('alert') == 'success')
         <script>
             document.addEventListener("DOMContentLoaded", function() {

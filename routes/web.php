@@ -55,6 +55,7 @@ Route::get('/admin/secretarios/edit/{secretario}', AdminController::class.'@edit
 Route::post('admin/edit/{secretario}', AdminController::class. '@update_secretario')->name('update_secretario');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja_secretario')->name('admin.baja_secretario');
+Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@alta_secretario')->name('admin.alta_secretario');
 Route::post('admin/create/secretario', AdminController::class. '@create_new_secretario')->name('create_new_secretario');
 
 Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
