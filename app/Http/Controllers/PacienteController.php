@@ -95,8 +95,8 @@ class PacienteController extends Controller
         $fechaInicio = now();
         $fechaFin = now()->addDays(30);
 
-        $diasDeAtencion = $medico->diasDeAtencion->pluck('diaSemana')->toArray();
-
+        //$diasDeAtencion = $medico->diasDeAtencion->pluck('diaSemana')->toArray();
+        /*
         $fechasHabilitadas = [];
         $currentDate = $fechaInicio;
 
@@ -108,8 +108,17 @@ class PacienteController extends Controller
             }
             $currentDate->addDay();
         }
-
+*/
         return view('paciente.new_cita_medico', ['paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
+    }
+
+    
+    public function cita_medico_date(Request $request){
+        $paciente = Paciente::find($request->input('id_paciente'));
+        $medico = Medico::find($request->input('id_medico'));
+        $dia = $request->cita;
+        
+        return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
     }
 
     public function destroy(string $id){

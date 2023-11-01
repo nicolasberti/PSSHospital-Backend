@@ -44,6 +44,7 @@ Route::get('/paciente/{username}', PacienteController::class . '@index')->name('
 Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos')->name('mis-datos-paciente');
 Route::get('/paciente/create_cita/{id}', PacienteController::class . '@cita')->name('paciente.newcita');
 Route::post('/paciente/create_cita/{id}/medico', PacienteController::class . '@cita_medico')->name('paciente.newcita_medico');
+Route::post('/paciente/create_cita/{id}/medico/date', PacienteController::class . '@cita_medico_date')->name('paciente.newcita_medico_date');
 
 
 Route::get('/admin/pacientes/editar', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
