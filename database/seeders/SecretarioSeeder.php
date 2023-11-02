@@ -22,9 +22,9 @@ class SecretarioSeeder extends Seeder
             'email' => 'secretario1@example.com',
             'phone' => 1234567890,
             'dateOfBirth' => date('1992-06-24'),
-            'adress' => 'La scaloneta',
-            'city' => 'Rosario',
-            'state' => 'Disponible',
+            'address' => 'La scaloneta',
+            'ciudad' => 'Rosario',
+            'estado' => 'Disponible',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

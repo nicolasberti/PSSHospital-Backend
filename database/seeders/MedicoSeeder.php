@@ -24,8 +24,10 @@ class MedicoSeeder extends Seeder
             'lastName' => $faker->lastName,
             'email' => $faker->unique()->safeEmail,
             'phone' => $faker->randomNumber(8),
-            'state' => 'Activo',
+            'estado' => 'Activo',
+            'ciudad' => 'ciudad',
             'especialidad' => "Pediatra",
+            'horarios_atencion' => '1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
