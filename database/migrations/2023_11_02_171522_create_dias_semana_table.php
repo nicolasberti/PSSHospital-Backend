@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dias_semana', function (Blueprint $table) {
             $table->id();
-            $table->string('dia');
+            $table->string('dia')->unique();
             $table->timestamps();
         });
     }
