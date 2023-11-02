@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string("email")->unique();
             $table->integer("phone");
             $table->date('dateOfBirth');
-            $table->string('adress');
-            $table->string('city');
-            $table->string('state');
+            $table->string('address');
+            $table->string("ciudad");
+            $table->string("provincia");
+            $table->string("estado");
             $table->timestamps();
         });
     }

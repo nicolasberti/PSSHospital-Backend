@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string("lastname");
             $table->date("DOB");
             $table->string("address");
-            $table->string("city");
+            $table->string("ciudad");
             $table->string("provincia");
-            $table->string("state"); 
+            $table->string("estado");
             //$table->integer("solicitud");
             //$table->integer("obra_social");
             $table->timestamps();

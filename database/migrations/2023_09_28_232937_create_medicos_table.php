@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string("lastName", 55);
             $table->string("email", 55);
             $table->unsignedInteger("phone");
-            $table->string("state", 55);
+            $table->string("estado", 55);
             $table->string("especialidad", 55);
+            $table->string("ciudad", 55);
+            $table->string("provincia", 55);
             $table->timestamps();
         });
     }
