@@ -75,6 +75,9 @@ Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')-
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
 
+Route::get('/admin/medicos/horarios', AdminController::class .'@index_horarios_medicos')->name('admin.index_horarios_medicos');
+Route::get('/admin/medicos/horarios/{medico}/edit', AdminController::class .'@show_horarios_medico')->name('admin.show_horarios_medico');
+
 Route::get('/', function () {
     return view('home');
 });

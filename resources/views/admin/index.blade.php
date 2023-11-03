@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col"><a class="btn btn-primary" href="/admin/medicos/create" role="button">Registrar nuevo médico</a></div>
                 <div class="col"><a type="button" href="/admin/medicos" class="btn btn-primary">Editar médico</a></div>
-                <div class="col"><a type="button" class="btn btn-primary">Horarios de médico</a></div>
+                <div class="col"><a type="button" href="/admin/medicos/horarios" class="btn btn-primary">Horarios de médico</a></div>
             </div>
             </div>
         </div>
