@@ -27,7 +27,8 @@ class AdminSeeder extends Seeder
             'estado' => 'Activo',
             'dateOfBirth' => $faker->date,
             'address' => $faker->address,
-            'ciudad' => $faker->city,
+            'ciudad' => 'BAHIA BLANCA',
+            'provincia' => 'Buenos Aires',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
