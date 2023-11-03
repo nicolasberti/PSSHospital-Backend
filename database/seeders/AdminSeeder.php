@@ -24,10 +24,11 @@ class AdminSeeder extends Seeder
             'lastName' => $faker->lastName,
             'email' => $faker->unique()->safeEmail,
             'phone' => $faker->randomNumber(8),
-            'state' => 'Activo',
+            'estado' => 'Activo',
             'dateOfBirth' => $faker->date,
             'address' => $faker->address,
-            'city' => $faker->city,
+            'ciudad' => 'BAHIA BLANCA',
+            'provincia' => 'Buenos Aires',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
