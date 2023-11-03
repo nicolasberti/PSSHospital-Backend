@@ -38,7 +38,7 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
 
 Route::get('/admin', AdminController::class . '@index')->name('admin.index');
 Route::get('/medico', MedicosController::class . '@index')->name('medico.index');
-
+Route::get('/medico/citas', MedicosController::class . '@index_citas')->name('medico.index_citas');
 
 Route::get('/paciente/{username}', PacienteController::class . '@index')->name('paciente.index');
 Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos')->name('mis-datos-paciente');
