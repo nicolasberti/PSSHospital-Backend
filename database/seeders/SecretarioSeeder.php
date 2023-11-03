@@ -23,8 +23,8 @@ class SecretarioSeeder extends Seeder
             'phone' => 1234567890,
             'dateOfBirth' => date('1992-06-24'),
             'address' => 'La scaloneta',
-            'city' => 'Rosario',
-            'state' => 'Disponible',
+            'ciudad' => 'Rosario',
+            'estado' => 'Disponible',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

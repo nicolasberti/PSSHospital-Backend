@@ -23,9 +23,8 @@ class PacienteSeeder extends Seeder
             'name' => 'Juan',
             'lastname' => 'Pérez',
             'address' => 'Direccion 123',
-            'city' => 'Ciudad Ejemplo',
-            'provincia' => 'Provincia Ejemplo',
-            'state' => 'Activo',
+            'ciudad' => 'Ciudad Ejemplo',
+            'estado' => 'Activo',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
