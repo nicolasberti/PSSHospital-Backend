@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date("dateOfBirth");
             $table->string("address");
             $table->string("ciudad");
+            $table->string("provincia");
             $table->string("estado");
             $table->timestamps();
         });
