@@ -23,7 +23,10 @@ return new class extends Migration
             $table->string("estado", 55);
             $table->string("especialidad", 55);
             $table->string("ciudad", 55);
-            $table->string("provincia", 55);
+
+            $table->bigInteger('horarios_atencion')->unsigned();
+            $table->foreign('horarios_atencion')->references('id')->on('horarios_de_atencion');
+
             $table->timestamps();
         });
     }

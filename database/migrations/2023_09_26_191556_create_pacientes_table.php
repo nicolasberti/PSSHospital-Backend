@@ -23,7 +23,6 @@ return new class extends Migration
             $table->date("DOB");
             $table->string("address");
             $table->string("ciudad");
-            $table->string("provincia");
             $table->string("estado");
             //$table->integer("solicitud");
             //$table->integer("obra_social");
