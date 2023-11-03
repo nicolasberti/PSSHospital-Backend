@@ -18,8 +18,24 @@
         <div id="emailHelp" class="form-text">Los campos con (*) son obligatorios.</div>
         <div class="row row-cols-2">
             <div class="col mb-3">
+                <label for="Username" class="form-label">Username (*)</label>
+                <input type="text" class="form-control" id="UsernameInput" name="Username" readonly required>
+            </div>
+            <div class="col mb-3">
+                <label for="Password" class="form-label">Contraseña (*)</label>
+                <input type="password" class="form-control" id="PasswordInput" name="Password" readonly required>
+            </div>
+            <div class="col mb-3">
                 <label for="DNI" class="form-label">DNI (*)</label>
                 <input type="number" class="form-control" id="DNIInput" name="DNI" oninput="actualizarCampo(this.value)" required min="1">
+            </div>
+            <div class="col mb-3">
+                <label for="Email" class="form-label">Email (*)</label>
+                <input type="email" class="form-control" id="EmailInput" name="Email" required>
+            </div>
+            <div class="col mb-3">
+                <label for="Phone" class="form-label">Telefono (*)</label>
+                <input type="number" class="form-control" id="PhoneInput" name="Phone" required min="1">
             </div>
             <div class="col mb-3">
                 <label for="Name" class="form-label">Nombre (*)</label>
@@ -30,32 +46,20 @@
                 <input type="text" class="form-control" id="LastNameInput" name="LastName" required>
             </div>
             <div class="col mb-3">
-                <label for="Username" class="form-label">Username (*)</label>
-                <input type="text" class="form-control" id="UsernameInput" name="Username" readonly required>
+                <label for="LastName" class="form-label">Fecha de nacimiento (*)</label>
+                <input type="text" class="form-control" id="LastNameInput" name="LastName" required>
             </div>
             <div class="col mb-3">
-                <label for="Password" class="form-label">Contraseña (*)</label>
+                <label for="Specialty" class="form-label">Dirección (*)</label>
+                <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
+            </div>
+            <div class="col mb-3">
+                <label for="State" class="form-label">Ciudad (*)</label>
+                <input type="text" class="form-control" id="StateInput" name="State" required>
+            </div>
+            <div class="col mb-3">
+                <label for="Password" class="form-label">Provincia (*)</label>
                 <input type="password" class="form-control" id="PasswordInput" name="Password" readonly required>
-            </div>
-            <div class="col mb-3">
-                <label for="Email" class="form-label">Email (*)</label>
-                <input type="text" class="form-control" id="EmailInput" name="Email" required>
-            </div>
-            <div class="col mb-3">
-                <label for="Phone" class="form-label">Telefono (*)</label>
-                <input type="number" class="form-control" id="PhoneInput" name="Phone" required min="1">
-            </div>
-            <div class="col mb-3">
-                <label for="State" class="form-label">Estado (*)</label>
-                <input type="text" class="form-control" id="StateInput" name="State" value='Activo' required readonly>
-            </div>
-            <div class="col mb-3">
-                <label class="form-label">Especialidad (*)</label>
-                <select class="form-select" for="Specialty" name='Specialty' required>
-                    @foreach ($especialidades as $especialidad)
-                        <option value={{ $especialidad->nombre }}>{{ $especialidad->nombre }}</option>
-                    @endforeach
-                </select>
             </div>
             <div class="col mb-3">
                 @error('message')
