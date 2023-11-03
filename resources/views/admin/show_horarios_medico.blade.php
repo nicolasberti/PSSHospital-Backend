@@ -22,7 +22,7 @@
         <h3 class="mb-3">Duracion</h3>
         <div class="mb-3">
             <div class="col text-center">
-                <form method="GET" action="{{ route('admin.index') }}" class="d-inline-block">
+                <form method="GET" action="{{ route('admin.edit_horario_medico') }}" class="d-inline-block">
                     <button type="submit" class="btn btn-primary">Editar</button>
                 </form>
                 <form method="GET" action="{{ route('admin.index') }}" class="d-inline-block ml-2">

@@ -41,6 +41,11 @@ class AdminController extends Controller
         return view('admin.show_horarios_medico', compact('medicos'));
     }
 
+    public function edit_horario_medico() {
+        $medicos = Medico::all();
+        return view('admin.edit_horario_medico', compact('medicos'));
+    }
+
     public function create_medico() {
         return view('admin.create_medico');
     }

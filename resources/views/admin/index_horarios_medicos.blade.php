@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $medico->DNI }}</td>
                         <td>{{$medico->lastName}}, {{ $medico->name }}</td>
-                        <td><a href="{{ url('/admin/medicos/horarios/'.$medico->id.'/edit') }}" class="btn btn-info">Consultar</a>
+                        <td><a href="{{ url('/admin/medicos/horarios/'.$medico->id.'/show') }}" class="btn btn-info">Consultar</a>
                         </td>
                     </tr>
                 @endforeach
