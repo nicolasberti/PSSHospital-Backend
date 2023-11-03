@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Secretario;
 use App\Models\SecretarioPaciente;
+use App\Models\Especialidad;
 
 class AdminController extends Controller
 {
@@ -31,7 +32,8 @@ class AdminController extends Controller
     }
 
     public function create_medico() {
-        return view('admin.create_medico');
+        $especialidades = Especialidad::all();
+        return view('admin.create_medico',  compact('especialidades'));
     }
 
     public function create_new_secretario(Request $request){

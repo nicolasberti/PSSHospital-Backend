@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("email", 55);
             $table->unsignedInteger("phone");
             $table->string("state", 55);
-            $table->string("especialidad", 55);
+            $table->enum('especialidad', ['Pediatría', 'Medico clínico', 'Oftalmología'])->default('Médico clínico');
             $table->timestamps();
         });
     }

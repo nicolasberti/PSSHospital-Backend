@@ -47,13 +47,23 @@
             </div>
             <div class="col mb-3">
                 <label for="State" class="form-label">Estado (*)</label>
-                <input type="text" class="form-control" id="StateInput" name="State" required>
+                <input type="text" class="form-control" id="StateInput" name="State" value='Activo' required readonly>
             </div>
             <div class="col mb-3">
-                <label for="Specialty" class="form-label">Especialidad (*)</label>
-                <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
+                <label class="form-label">Especialidad (*)</label>
+                <select class="form-select" for="Specialty" name='Specialty' required>
+                    @foreach ($especialidades as $especialidad)
+                        <option value={{ $especialidad->nombre }}>{{ $especialidad->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="col mb-3"></div>
+            <div class="col mb-3">
+                @error('message')
+                <div class="alert alert-danger" role="alert">
+                    * {{$message}}
+                </div>
+            @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>
