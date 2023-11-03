@@ -17,14 +17,13 @@ return new class extends Migration
             $table->string("username")->unique();
             $table->string("password", 55);
             $table->string("email");
-            $table->integer("phone");
+            $table->string("phone");
             $table->string("name");
             $table->string("lastname");
             $table->date("DOB");
             $table->string("address");
-            $table->string("city");
-            $table->string("provincia");
-            $table->string("state"); 
+            $table->string("ciudad");
+            $table->string("estado");
             //$table->integer("solicitud");
             //$table->integer("obra_social");
             $table->timestamps();

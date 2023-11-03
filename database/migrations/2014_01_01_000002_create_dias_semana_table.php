@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('obrasocial_paciente', function (Blueprint $table) {
+        Schema::create('dias_semana', function (Blueprint $table) {
             $table->id();
-            $table->string("state");
+            $table->string('dia')->unique();
             $table->timestamps();
-            $table->foreignId('paciente_id')->constrained();
-            $table->foreignId('obra_socials_id')->constrained();
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('obrasocial_paciente');
+        Schema::dropIfExists('dias_semana');
     }
 };
