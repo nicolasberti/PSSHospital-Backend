@@ -11,6 +11,7 @@
 @endsection
 
 @section ('contenido')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <h1>Registrar Médico</h1>
 <div class="card shadow">
     <form action="/admin" method="POST" class="container px-4 py-3">
@@ -47,40 +48,67 @@
             </div>
             <div class="col mb-3">
                 <label for="LastName" class="form-label">Fecha de nacimiento (*)</label>
-                <input type="text" class="form-control" id="LastNameInput" name="LastName" required>
+                <input type="text" class="form-control" id="DateOfBirthInput" name="DateOfBirth" required>
             </div>
             <div class="col mb-3">
                 <label for="Specialty" class="form-label">Dirección (*)</label>
                 <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
             </div>
             <div class="col mb-3">
-                <label for="State" class="form-label">Ciudad (*)</label>
-                <input type="text" class="form-control" id="StateInput" name="State" required>
+                <label for="City" class="form-label">Ciudad (*)</label>
+                <select class="form-select" id="CityInput" name='City' required>
+                    @foreach ($localidades as $localidad)
+                        <option value={{ $localidad->localidad }}>{{ $localidad->localidad }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col mb-3">
-                <label for="Password" class="form-label">Provincia (*)</label>
-                <input type="password" class="form-control" id="PasswordInput" name="Password" readonly required>
+                <label for="Province" class="form-label">Provincia (*)</label>
+                <select class="form-select" id="ProvinceInput" name='Province' required>
+                    @foreach ($provincias as $provincia)
+                        <option value={{ $provincia->provincia }} data-name="{{ $provincia->id }}">{{ $provincia->provincia }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="col mb-3">
-                @error('message')
-                <div class="alert alert-danger" role="alert">
-                    * {{$message}}
+            @error('message')
+                <div class="col mb-3">
+                    <div class="alert alert-danger" role="alert">
+                        * {{$message}}
+                    </div>
                 </div>
             @enderror
-            </div>
+            <div class="col mb-3"></div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
 </div>
 <script>
+    function actualizarCampo(valor) {
+        var campoUsername = document.getElementById('UsernameInput');
+        var campoPassword = document.getElementById('PasswordInput');
 
-        function actualizarCampo(valor) {
-            var campoUsername = document.getElementById('UsernameInput');
-            var campoPassword = document.getElementById('PasswordInput');
+        campoUsername.value = valor;
+        campoPassword.value = valor;
+    }
 
-            campoUsername.value = valor;
-            campoPassword.value = valor;
-        }
+    $(document).ready(function() {
+    $('#ProvinceInput').change(function() {
+        var provinciaSeleccionada = $(this).find('option:selected');
+        var idProvincia = provinciaSeleccionada.data('name');
+
+        // Obtener las localidades correspondientes a la provincia seleccionada
+        var localidades = <?php echo json_encode($localidades); ?>;
+        var localidadesProvincia = localidades.filter(function(localidad) {
+            return localidad.provincia_id === idProvincia;
+        });
+
+        // Actualizar el desplegable CityInput con las opciones obtenidas
+        var options = localidadesProvincia.map(function(localidad) {
+            return '<option value="' + localidad.localidad + '">' + localidad.localidad + '</option>';
+        });
+        $('#CityInput').html(options);
+    });
+});
 </script>
 @endsection

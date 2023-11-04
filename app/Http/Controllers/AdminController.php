@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Secretario;
 use App\Models\SecretarioPaciente;
+use App\Models\Medico;
 use App\Models\Especialidad;
+use App\Models\Localidad;
+use App\Models\Provincia;
+
 
 class AdminController extends Controller
 {
@@ -31,20 +35,31 @@ class AdminController extends Controller
         return view('admin.show_medicos');
     }
 
+    public function index_horarios_medicos() {
+        $medicos = Medico::all();
+        return view('admin.index_horarios_medicos', compact('medicos'));
+    }
+
     public function create_medico() {
         $especialidades = Especialidad::all();
-        return view('admin.create_medico',  compact('especialidades'));
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        return view('admin.create_medico',  compact('especialidades', 'localidades', 'provincias'));
+    }
+
+    public function show_horarios_medico() {
+        $medicos = Medico::all();
+        return view('admin.show_horarios_medico', compact('medicos'));
     }
 
     public function create_new_secretario(Request $request){
-
         $validatedData = $request->validate([
             'DNI' => 'required|numeric|unique:secretarios,DNI|digits:8',
             'username' => 'required|string|unique:secretarios,username',
             'password' => 'required|string',
             'name' => 'required|string',
             'lastname' => 'required|string',
-            'email' => 'required|email', 
+            'email' => 'required|email',
             'phone' => 'required|numeric',
             'birthday' => 'required|date|before:today',
             'address' => 'required|string',
@@ -77,7 +92,7 @@ class AdminController extends Controller
             'state.required' => 'El campo Estado es obligatorio.',
             'state.string' => 'El campo Estado debe ser un string',
         ]);
-    
+
         $secretario = new Secretario();
         $secretario->DNI = $validatedData['DNI'];
         $secretario->username = $validatedData['username'];
@@ -90,24 +105,24 @@ class AdminController extends Controller
         $secretario->address = $validatedData['address'];
         $secretario->city = $validatedData['city'];
         $secretario->state = $validatedData['state'];
-    
+
         $secretario->save();
-    
+
         $secretarios = Secretario::all();
-    
+
         return redirect()->route('admin.show_secretarios', ['secretarios' => $secretarios])
         ->with('success', 'El secretario se ha registrado con éxito')
         ->with('alert', 'success');
-    }    
+    }
 
     public function edit_secretario(string $secretario){
-        $secretario = Secretario::find($secretario);    
+        $secretario = Secretario::find($secretario);
         return view('admin.edit_secretario', ['secretario' => $secretario]);
     }
 
     public function update_secretario(Request $request, string $secretarioid) {
         $secretario = Secretario::find($secretarioid);
-    
+
         $passwordAnterior = $secretario->password;
         $dniAnterior = $secretario->DNI;
         $nombreAnterior = $secretario->name;
@@ -119,11 +134,11 @@ class AdminController extends Controller
         $ciudadAnterior = $secretario->city;
         $estadoAnterior = $secretario->state;
 
-        
-    
+
+
         // Actualiza los campos solo si son diferentes a los valores anteriores
         //falta validar bien si los valores corresponden a nombres, emails, numeros, etc.
-        
+
         $secretario->name = $request->filled('name') ? $request->input('name') : $nombreAnterior;
         $secretario->email = $request->filled('email') ? $request->input('email') : $emailAnterior;
         $secretario->phone = $request->filled('phone') ? $request->input('phone') : $telefonoAnterior;
@@ -133,16 +148,16 @@ class AdminController extends Controller
         $secretario->adress = $request->filled('adress') ? $request->input('adress') : $direccionAnterior;
         $secretario->city = $request->filled('city') ? $request->input('city') : $ciudadAnterior;
         $secretario->state = $request->filled('state') ? $request->input('state') : $estadoAnterior;
-        
+
         // Actualiza la contraseña solo si se proporciona una nueva contraseña
         if ($request->filled('password')) {
             $secretario->password = bcrypt($request->input('password'));
         } else {
             $secretario->password = $passwordAnterior;
         }
-    
+
         $secretario->save();
-    
+
         $secretarios = Secretario::all();
         return redirect()->route('admin.show_secretarios', ['secretarios' => $secretarios]);
     }
@@ -161,12 +176,12 @@ class AdminController extends Controller
     }
 
     public function show_solicitudes(){
-        $secretario_paciente = SecretarioPaciente::all(); 
+        $secretario_paciente = SecretarioPaciente::all();
         return view('admin.show_solicitudes', ['secretario_paciente' => $secretario_paciente]);
     }
 
     public function edit_datos_criticos_paciente(string $solicitud){
-        $solicitud = SecretarioPaciente::find($solicitud);    
+        $solicitud = SecretarioPaciente::find($solicitud);
         return view('admin.edit_datos_criticos_paciente', ['solicitud' => $solicitud]);
     }
 }
