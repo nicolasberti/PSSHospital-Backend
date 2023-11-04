@@ -28,16 +28,34 @@
                 <tr>
                     <th>Horario</th>
                     <th>Estado</th>
-                    <th>Acción</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($horariosDisponibles as $horario)
                     <tr>
-                        <td>{{ $horario['horario'] }}</td>
-                        <td>Disponible</td>
+                        <td>{{ $horario->horario_inicio }} - {{ $horario->horario_fin }}</td>
                         <td>
-                            <button class="btn btn-success">Solicitar Cita</button>
+                            @php
+                            $ocupado = false;
+                            foreach ($citasEnHorario as $cita) {
+                                if (Carbon\Carbon::parse($cita->horarioInicio)->format('H:i') == Carbon\Carbon::parse($horario->horario_inicio)->format('H:i')) {
+                                    $ocupado = true;
+                                    break;
+                                }
+                            }
+                            @endphp
+
+                            @if ($ocupado)
+                                Ocupado
+                            @else
+                                Disponible
+                            @endif
+                        </td>
+                        <td>
+                            @if (!$ocupado)
+                                <button class="btn btn-success">Solicitar Cita</button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

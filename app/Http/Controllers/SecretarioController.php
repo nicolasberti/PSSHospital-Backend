@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Paciente;
 use App\Models\Medico;
+use App\Models\HorarioDeAtencion;
+use App\Models\PacienteMedico;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SecretarioController extends Controller
 {
@@ -33,12 +36,12 @@ class SecretarioController extends Controller
     
         //$fechasDisponibles = $medico->obtenerFechasDisponibles(30);
         $fechasDisponibles = [
-            '01/11/23',
-            '02/11/23',
-            '03/11/23',
-            '04/11/23',
-            '05/11/23',
-            // Agrega más fechas disponibles según sea necesario
+            '01/11/2023',
+            '02/11/2023',
+            '03/11/2023',
+            '04/11/2023',
+            '05/11/2023',
+            '06/11/2023',
         ];
 
         return view('secretario.new_cita_fecha_medico', compact('fechasDisponibles', 'medico'));
@@ -48,26 +51,18 @@ class SecretarioController extends Controller
         $medicoId = $request->input('medico_id');
         $medico = Medico::find($medicoId);
         $fechaSeleccionada = $request->input('fecha');
+    
+        $fecha = Carbon::createFromFormat('d/m/Y', $fechaSeleccionada)->format('Y-m-d');
 
-        $horariosDisponibles = [
-            [
-                'horario' => '08:00 AM - 09:00 AM',
-            ],
-            [
-                'horario' => '09:15 AM - 10:15 AM',
-            ],
-            [
-                'horario' => '10:30 AM - 11:30 AM',
-            ],
-            [
-                'horario' => '11:45 AM - 12:45 PM',
-            ],
-            [
-                'horario' => '14:00 AM - 16:00 PM',
-            ],
-        ];
+        $numeroDiaSemana = Carbon::parse($fecha)->dayOfWeek;
+    
+        $horariosDisponibles = HorarioDeAtencion::where('dias', $numeroDiaSemana)->get();
         
-        return view('secretario.new_cita_horarios_medico', compact('medico', 'horariosDisponibles', 'fechaSeleccionada'));
-    }
+        $citasEnHorario = PacienteMedico::where('fecha', $fecha)
+            ->whereIn('horarioInicio', $horariosDisponibles->pluck('horario_inicio'))
+            ->get();
 
+        return view('secretario.new_cita_horarios_medico', compact('medico', 'horariosDisponibles', 'fechaSeleccionada', 'citasEnHorario'));
+    }
+    
 }
