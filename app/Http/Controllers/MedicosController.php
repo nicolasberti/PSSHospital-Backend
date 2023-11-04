@@ -37,9 +37,11 @@ class MedicosController extends Controller
         $medico->lastName = $request->input('LastName');
         $medico->email = $request->input('Email');
         $medico->phone = $request->input('Phone');
-        $medico->state = "Activo";
+        $medico->estado = "Habilitado";
         $medico->especialidad = $request->input('Specialty');
-
+        $medico->provincia = $request->input('Province');
+        $medico->ciudad  = $request->input('City');
+        $medico->horarios_atencion = 1;
 
         $medico->save();
 

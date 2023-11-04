@@ -28,7 +28,7 @@
             </div>
             <div class="col mb-3">
                 <label for="DNI" class="form-label">DNI (*)</label>
-                <input type="number" class="form-control" id="DNIInput" name="DNI" oninput="actualizarCampo(this.value)" required min="1">
+                <input type="number" class="form-control" id="DNIInput" name="DNI" oninput="actualizarCampo(this.value)" pattern="[0-9]{8}" min="1" required>
             </div>
             <div class="col mb-3">
                 <label for="Email" class="form-label">Email (*)</label>
@@ -48,7 +48,7 @@
             </div>
             <div class="col mb-3">
                 <label for="LastName" class="form-label">Fecha de nacimiento (*)</label>
-                <input type="text" class="form-control" id="DateOfBirthInput" name="DateOfBirth" required>
+                <input type="date" class="form-control" id="DateOfBirthInput" name="DateOfBirth" required >
             </div>
             <div class="col mb-3">
                 <label for="Address" class="form-label">Dirección (*)</label>
@@ -119,5 +119,12 @@
         $('#CityInput').html(options);
     });
 });
+
+    var today = new Date();
+    var yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    var yesterdayFormatted = yesterday.toISOString().split('T')[0];
+
+    document.getElementById('DateOfBirthInput').setAttribute('max', yesterdayFormatted);
 </script>
 @endsection
