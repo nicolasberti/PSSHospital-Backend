@@ -12,39 +12,12 @@ class DiaSemanaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('diasemanas')->insert([
-            'name' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('diasemanas')->insert([
-            'name' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('diasemanas')->insert([
-            'name' => 2,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('diasemanas')->insert([
-            'name' => 3,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('diasemanas')->insert([
-            'name' => 4,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('diasemanas')->insert([
-            'name' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);DB::table('diasemanas')->insert([
-            'name' => 6,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        DB::table('dias_semana')->insert(['dia' => 'Lunes']);
+        DB::table('dias_semana')->insert(['dia' => 'Martes']);
+        DB::table('dias_semana')->insert(['dia' => 'Miércoles']);
+        DB::table('dias_semana')->insert(['dia' => 'Jueves']);
+        DB::table('dias_semana')->insert(['dia' => 'Viernes']);
+        DB::table('dias_semana')->insert(['dia' => 'Sábado']);
+        DB::table('dias_semana')->insert(['dia' => 'Domingo']);
     }
 }

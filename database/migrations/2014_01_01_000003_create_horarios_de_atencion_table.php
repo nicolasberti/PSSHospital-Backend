@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('obrasocial_paciente', function (Blueprint $table) {
+        Schema::create('horarios_de_atencion', function (Blueprint $table) {
             $table->id();
-            $table->string("state");
+            $table->time('horario_inicio');
+            $table->time('horario_fin');
+            $table->time('duracion');
             $table->timestamps();
-            $table->foreignId('paciente_id')->constrained();
-            $table->foreignId('obra_socials_id')->constrained();
+            $table->bigInteger('dias')->unsigned();
+            $table->foreign('dias')->references('id')->on('dias_semana');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('obrasocial_paciente');
+        Schema::dropIfExists('horarios_de_atencion');
     }
 };

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Medico extends Model
 {
@@ -19,20 +20,32 @@ class Medico extends Model
         'password',
     ];
 
-    public function horarioAtencion()
-    {
-        return $this->hasMany(HorarioAtencion::class);
-    }
 
-    public function diasDeAtencion()
-    {
-        $diasDeAtencion = $this->horarioAtencion()
-            ->with('diasemanas') // Asegura que la relación diaSemana se cargue
-            ->get()
-            ->pluck('diasemanas.name') // Pluck en la colección resultante
-            ->unique()
-            ->toArray();
-
-        return $diasDeAtencion;
+    public function horarios_atencion() {
+        return $this->hasMany(HorarioDeAtencion::class, 'horarios_atencion');
+    }    
+    
+    public function obtenerFechasDisponibles($diasHaciaElFuturo){
+        $fechasDisponibles = [];
+    
+        $horarios = $this->horarios_atencion; // Asumiendo que tienes una relación en el modelo Medico
+    
+        foreach ($horarios as $horario) {
+            // Agrega la lógica para generar fechas disponibles según los horarios
+            // Puedes utilizar la función Carbon para trabajar con fechas
+            $fechaInicio = Carbon::now();
+            $fechaFin = Carbon::now()->addDays($diasHaciaElFuturo);
+            
+            while ($fechaInicio->lessThan($fechaFin)) {
+                if ($fechaInicio->dayOfWeek == $horario->dias) {
+                    $fechasDisponibles[] = $fechaInicio->format('Y-m-d');
+                }
+                
+                $fechaInicio->addDay();
+            }
+        }
+    
+        return $fechasDisponibles;
     }
+    
 }
