@@ -51,14 +51,14 @@
                 <input type="text" class="form-control" id="DateOfBirthInput" name="DateOfBirth" required>
             </div>
             <div class="col mb-3">
-                <label for="Specialty" class="form-label">Dirección (*)</label>
-                <input type="text" class="form-control" id="SpecialtyInput" name="Specialty" required>
+                <label for="Address" class="form-label">Dirección (*)</label>
+                <input type="text" class="form-control" id="AddressInput" name="Address" required>
             </div>
             <div class="col mb-3">
-                <label for="City" class="form-label">Ciudad (*)</label>
-                <select class="form-select" id="CityInput" name='City' required>
-                    @foreach ($localidades as $localidad)
-                        <option value={{ $localidad->localidad }}>{{ $localidad->localidad }}</option>
+                <label for="Specialty" class="form-label">Especialidad (*)</label>
+                <select class="form-select" id="SpecialtyInput" name='Specialty' required>
+                    @foreach ($especialidades as $especialidad)
+                        <option value={{ $especialidad->nombre }}>{{ $especialidad->nombre }}</option>
                     @endforeach
                 </select>
             </div>
@@ -70,6 +70,16 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col mb-3">
+                <label for="City" class="form-label">Ciudad (*)</label>
+                <select class="form-select" id="CityInput" name='City' required>
+                    @foreach ($localidades as $localidad)
+                        @if ($localidad->provincia_id == 1)
+                            <option value={{ $localidad->localidad }}>{{ $localidad->localidad }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
             @error('message')
                 <div class="col mb-3">
                     <div class="alert alert-danger" role="alert">
@@ -77,7 +87,6 @@
                     </div>
                 </div>
             @enderror
-            <div class="col mb-3"></div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/admin/" id="cancel" name="cancel" class="btn btn-danger">Cancelar</a>
         </div>
