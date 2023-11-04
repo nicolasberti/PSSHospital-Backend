@@ -36,6 +36,7 @@
                 <th scope="col">DNI</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
+                <th scope="col">Estado</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
@@ -45,8 +46,13 @@
                     <th scope="row">>{{$secretario->DNI}}</th>
                     <th scope="row">{{$secretario->name}}</th>
                     <th scope="row">{{$secretario->lastname}}</th>
+                    <th scope="row">{{$secretario->state}}</th>
                     <th scope="row">
-                    <a href="{{ route('admin.baja_secretario', ['secretario' => $secretario->id]) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');" class="btn btn-success mr-2">Eliminar</a>
+                    @if ($secretario->estado == "Disponible")
+                        <a href="{{ route('admin.baja_secretario', ['secretario' => $secretario->id]) }}" onclick="return confirm('¿Estás seguro de que deseas dar de baja a este secretario?');" class="btn btn-success mr-2">Dar de baja</a>
+                    @else
+                        <a href="{{ route('admin.alta_secretario', ['secretario' => $secretario->id]) }}" onclick="return confirm('¿Estás seguro de que deseas dar de alta a este secretario?');" class="btn btn-success mr-2">Dar de alta</a>
+                    @endif
                     </th>
                 </tr>
                 @endforeach

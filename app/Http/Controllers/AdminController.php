@@ -52,6 +52,11 @@ class AdminController extends Controller
         return view('admin.show_horarios_medico', compact('medicos'));
     }
 
+    public function edit_horario_medico() {
+        $medicos = Medico::all();
+        return view('admin.edit_horario_medico', compact('medicos'));
+    }
+
     public function create_new_secretario(Request $request){
         $validatedData = $request->validate([
             'DNI' => 'required|numeric|unique:secretarios,DNI|digits:8',
@@ -170,6 +175,14 @@ class AdminController extends Controller
     public function baja_secretario(string $id){
         $secretario = Secretario::find($id);
         $secretario->state = 'Inhabilitado';
+
+        $secretario->save();
+        return view('admin.index');
+    }
+
+    public function alta_secretario(string $id){
+        $secretario = Secretario::find($id);
+        $secretario->state = 'Disponible';
 
         $secretario->save();
         return view('admin.index');

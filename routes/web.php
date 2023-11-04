@@ -38,7 +38,7 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
 
 Route::get('/admin', AdminController::class . '@index')->name('admin.index');
 Route::get('/medico', MedicosController::class . '@index')->name('medico.index');
-
+Route::get('/medico/citas', MedicosController::class . '@index_citas')->name('medico.index_citas');
 
 Route::get('/paciente/{username}', PacienteController::class . '@index')->name('paciente.index');
 Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos')->name('mis-datos-paciente');
@@ -55,6 +55,7 @@ Route::get('/admin/secretarios/edit/{secretario}', AdminController::class.'@edit
 Route::post('admin/edit/{secretario}', AdminController::class. '@update_secretario')->name('update_secretario');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja_secretario')->name('admin.baja_secretario');
+Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@alta_secretario')->name('admin.alta_secretario');
 Route::post('admin/create/secretario', AdminController::class. '@create_new_secretario')->name('create_new_secretario');
 
 Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
@@ -73,6 +74,10 @@ Route::get('/secretario/pacientes/{id}/edit', PacienteController::class .'@edit'
 Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')->name('secretario.update_paciente');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
+
+Route::get('/admin/medicos/horarios', AdminController::class .'@index_horarios_medicos')->name('admin.index_horarios_medicos');
+Route::get('/admin/medicos/horarios/1/show', AdminController::class .'@show_horarios_medico')->name('admin.show_horarios_medico');
+Route::get('/admin/medicos/horarios/1/edit', AdminController::class .'@edit_horario_medico')->name('admin.edit_horario_medico');
 
 Route::get('/', function () {
     return view('home');

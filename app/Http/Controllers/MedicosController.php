@@ -13,6 +13,10 @@ class MedicosController extends Controller
         return view('medico.index');
     }
 
+    public function index_citas(){
+        return view('medico.index_citas');
+    }
+
     public function list() {
 
         $medicos = Medico::all();

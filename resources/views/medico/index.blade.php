@@ -33,9 +33,11 @@
             <div class="card-body">
                 <div class="mt-4">
                     <div class="container">
-                    <div class="row">
-                        <div class="col"><button type="button" class="btn btn-primary">Gestionar mis citas</button></div>
-                    </div>
+                        <div class="row">
+                            <div class="col">
+                                <a href="/medico/citas" class="btn btn-primary">Gestionar mis citas</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
