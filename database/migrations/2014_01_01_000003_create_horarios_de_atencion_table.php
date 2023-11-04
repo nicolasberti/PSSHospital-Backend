@@ -17,8 +17,6 @@ return new class extends Migration
             $table->time('horario_fin');
             $table->integer('duracion');
             $table->timestamps();
-            $table->bigInteger('dias')->unsigned();
-            $table->foreign('dias')->references('id')->on('dias_semana');
         });
     }
 

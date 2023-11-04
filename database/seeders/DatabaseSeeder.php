@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ProvinciasTableSeeder::class,
             DiaSemanaSeeder::class,
             HorarioDeAtencionSeeder::class,
+            HorarioDeAtencionDiaSemanaSeeder::class,
             AdminSeeder::class,
             EspecialidadSeeder::class,
             MedicoSeeder::class,
