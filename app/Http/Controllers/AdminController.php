@@ -58,9 +58,14 @@ class AdminController extends Controller
         return view('admin.show_horarios_medico', compact('medico','horarios', 'dias'));
     }
 
-    public function edit_horario_medico() {
-        $medicos = Medico::all();
-        return view('admin.edit_horario_medico', compact('medicos'));
+    public function edit_horarios_medico($id) {
+        $medico = Medico::find($id);
+        $horarios = HorarioDeAtencion::where('id',$medico->horarios_atencion)->first();
+        $id_dias = HorarioDeAtencionDiaSemana::where('id_horario_de_atencion', $medico->horarios_atencion)->get();
+        $id_dias = $id_dias->pluck('id_dias_semana');
+        $dias = DiaSemana::whereIn('id', $id_dias)->get();
+        $dias_semana = DiaSemana::all();
+        return view('admin.edit_horarios_medico', compact('medico','horarios', 'dias', 'dias_semana'));
     }
 
     public function create_new_secretario(Request $request){

@@ -93,4 +93,27 @@ class MedicosController extends Controller
             ->with('success','Médico editado exitosamente')
             ->with('alert','success');
     }
+
+    public function update_horarios_medico(Request $request, $id) {
+        $medico = Medico::find($id);
+        $horarios = HorarioDeAtencion::find($medico->horarios_atencion);
+        $horarios_atencion_dia_semana = HorarioDeAtencionDiaSemana::where('id_horario_de_atencion', $medico->horarios_atencion)->get();
+        HorarioDeAtencionDiaSemana::where('id_horario_de_atencion', $horarios->id)->delete();
+
+        $horarios->horario_inicio = $request->input('horario_inicio');
+        $horarios->horario_fin = $request->input('horario_fin');
+        $horarios->duracion = $request->input('duracion');
+        $horarios->update();
+
+        foreach ($request->dias as $diaSemana) {
+            $horarios_atencion_dia_semana = new HorarioDeAtencionDiaSemana();
+            $horarios_atencion_dia_semana->id_horario_de_atencion = $horarios->id;
+            $horarios_atencion_dia_semana->id_dias_semana = DiaSemana::where('dia',$diaSemana)->first()->id;
+            $horarios_atencion_dia_semana->save();
+        }
+
+        return redirect('/admin')
+            ->with('success','Horario editado exitosamente')
+            ->with('alert','success');
+    }
 }
