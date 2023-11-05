@@ -17,7 +17,7 @@
             <h3 class="d-inline-block mr-3">Nombre: {{$medico->name}} {{$medico->lastName}}</h3>
             <h3 class="d-inline-block">DNI:{{$medico->DNI}}</h3>
         </div>
-    <form method="POST" action="/admin/medicos/horarios/{{$medico->id}}/">
+    <form method="POST" action="/admin/medicos/horarios/{{$medico->id}}/" id="horarioMedicoForm">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -61,4 +61,35 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Assuming you have a form with id "horarioMedicoForm" and checkboxes with class "form-check-input"
+
+        // Add an event listener to the form submit event
+        document.getElementById("horarioMedicoForm").addEventListener("submit", function(event) {
+        // Get all the checkboxes with class "form-check-input"
+        var checkboxes = document.querySelectorAll(".form-check-input");
+
+        // Check if at least one checkbox is checked
+        var isChecked = Array.prototype.slice.call(checkboxes).some(function(checkbox) {
+            return checkbox.checked;
+        });
+
+        // If no checkbox is checked, prevent the form submission
+        if (!isChecked) {
+            event.preventDefault();
+            alert("Seleccione al menos un día de la semana");
+        }
+        });
+
+        document.getElementById("horarioMedicoForm").addEventListener("submit", function(event) {
+            var horarioInicio = document.getElementsByName("horario_inicio")[0].value;
+            var horarioFin = document.getElementsByName("horario_fin")[0].value;
+
+            if (horarioInicio >= horarioFin) {
+                event.preventDefault();
+                alert("El horario de inicio debe ser anterior al horario de fin");
+            }
+        });
+    </script>
 @endsection
