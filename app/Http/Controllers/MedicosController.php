@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Medico;
 use App\Models\Especialidad;
+use App\Models\HorarioDeAtencion;
+use App\Models\DiaSemana;
+use App\Models\HOrarioDeAtencionDiaSemana;
 
 class MedicosController extends Controller
 {
@@ -45,7 +48,21 @@ class MedicosController extends Controller
         $medico->especialidad = $request->input('Specialty');
         $medico->provincia = $request->input('Province');
         $medico->ciudad  = $request->input('City');
-        $medico->horarios_atencion = 1;
+
+        $horarios = new HorarioDeAtencion();
+        $horarios->horario_inicio = "08:00:00";
+        $horarios->horario_fin = "12:00:00";
+        $horarios->duracion = "30";
+
+        $horarios->save();
+        $medico->horarios_atencion = $horarios->id;
+
+        foreach (DiaSemana::all() as $diaSemana) {
+            $horarios_atencion_dia_semana = new HorarioDeAtencionDiaSemana();
+            $horarios_atencion_dia_semana->id_horario_de_atencion = $horarios->id;
+            $horarios_atencion_dia_semana->id_dias_semana = $diaSemana->id;
+            $horarios_atencion_dia_semana->save();
+        }
 
         $medico->save();
 
