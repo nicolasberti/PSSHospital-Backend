@@ -9,7 +9,9 @@ use App\Models\Medico;
 use App\Models\Especialidad;
 use App\Models\Localidad;
 use App\Models\Provincia;
-
+use App\Models\HorarioDeAtencion;
+use App\Models\DiaSemana;
+use App\Models\HorarioDeAtencionDiaSemana;
 
 class AdminController extends Controller
 {
@@ -47,9 +49,13 @@ class AdminController extends Controller
         return view('admin.create_medico',  compact('especialidades', 'localidades', 'provincias'));
     }
 
-    public function show_horarios_medico() {
-        $medicos = Medico::all();
-        return view('admin.show_horarios_medico', compact('medicos'));
+    public function show_horarios_medico($id) {
+        $medico = Medico::find($id);
+        $horarios = HorarioDeAtencion::where('id',$medico->horarios_atencion)->first();
+        $id_dias = HorarioDeAtencionDiaSemana::where('id_horario_de_atencion', $medico->horarios_atencion)->get();
+        $id_dias = $id_dias->pluck('id_dias_semana');
+        $dias = DiaSemana::whereIn('id', $id_dias)->get();
+        return view('admin.show_horarios_medico', compact('medico','horarios', 'dias'));
     }
 
     public function edit_horario_medico() {
