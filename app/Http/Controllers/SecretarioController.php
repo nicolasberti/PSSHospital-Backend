@@ -82,6 +82,7 @@ class SecretarioController extends Controller
             ],
         ];
 
+        $citasMedicoBD = PacienteMedico::where('medico_id', $medicoId)->get();
        /* while ($horarioInicio->lt($horarioFin)) {
             $cita = [
                 'horario_inicio' => $horarioInicio->format('H:i:s'),
@@ -90,7 +91,7 @@ class SecretarioController extends Controller
             $citas[] = $cita;
         }*/
 
-        return view('secretario.new_cita_horarios_medico', compact('medico', 'horario', 'fechaSeleccionada', 'citas'));
+        return view('secretario.new_cita_horarios_medico', compact('medico', 'horario', 'fechaSeleccionada', 'citas', 'citasMedicoBD'));
     }
 
     public function cancel_cita(Request $request){

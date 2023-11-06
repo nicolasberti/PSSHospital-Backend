@@ -30,41 +30,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($horariosDisponibles as $horario)
-            <tr>
-                <td>{{ $horario->horario_inicio }} - {{ $horario->horario_fin }}</td>
-                <td>
-                    @php
-                    $ocupado = false;
-                    foreach ($citasEnHorario as $cita) {
-                        if (Carbon\Carbon::parse($cita->horarioInicio)->format('H:i') == Carbon\Carbon::parse($horario->horario_inicio)->format('H:i')) {
-                            $ocupado = true;
-                            break;
-                        }
-                    }
-                    @endphp
-
-                    @if ($ocupado)
-                    Ocupado
-                    @else
-                    Disponible
-                    @endif
-                </td>
-                <td>
-                    @if (!$ocupado)
-                    <input type="hidden" name="fecha" value="{{ $fechaSeleccionada }}">
-                    <input type="hidden" name="horarioInicio" value="{{ $horario->horario_inicio }}">
-                    <input type="hidden" name="horarioFin" value="{{ $horario->horario_fin }}">
-                    <input type="hidden" name="duracion" value="{{ $horario->duracion }}">
-                    <input type="hidden" name="medico_id" value="{{ $medico->id }}">
-                    <button type="submit" name="horario_id" value="{{ $horario->id }}"
-                        class="btn btn-success">Solicitar Cita</button>
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+        
     </table>
 </div>
 
