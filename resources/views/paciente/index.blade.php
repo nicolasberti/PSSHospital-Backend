@@ -9,7 +9,7 @@
           <a href="/paciente/mis-datos/{{$username}}">Mis datos</a>
         </div>
         <div class="card-body">  
-            <p>Mis fichas médicas</p>
+            <a href="/paciente/mis_fichas/{{$paciente->id}}">Mis fichas médicas</a>
         </div>
         <div class="card-body">  
             <a href="/paciente/mis_citas/{{$paciente->id}}">Mis citas</p>

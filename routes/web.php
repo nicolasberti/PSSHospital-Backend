@@ -47,6 +47,8 @@ Route::post('/paciente/create_cita/{id}/medico', PacienteController::class . '@c
 Route::post('/paciente/create_cita/{id}/medico/date', PacienteController::class . '@cita_medico_date')->name('paciente.newcita_medico_date');
 
 Route::get('/paciente/mis_citas/{id}', PacienteController::class . '@mis_citas')->name('paciente.mis_citas');
+Route::get('/paciente/mis_fichas/{id}', PacienteController::class . '@mis_fichas')->name('paciente.mis_fichas');
+Route::post('/paciente/cancelar/{id_cita}/{id_paciente}', PacienteController::class . '@cancelar_cita')->name('cita.cancelar');
 
 Route::get('/admin/pacientes/editar', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
 

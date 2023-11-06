@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\Medico;
+use App\Models\PacienteMedico;
 
 class PacienteController extends Controller
 {
@@ -118,6 +119,20 @@ class PacienteController extends Controller
         return view('paciente.mis_citas', ['username' => $paciente->username, 'paciente' => $paciente, 'citas' => $citas]);
     }
 
+    public function mis_fichas($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        return view('paciente.fichas_medicas', ['username' => $paciente->username, 'paciente' => $paciente, 'citas' => $citas]);
+    }
+
+    public function cancelar_cita($id_cita, $id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        $cita = PacienteMedico::find($id_cita);
+        $cita->state = 'Cancelada';
+        $cita->save();
+        return redirect()->route('paciente.mis_citas', ['id' => $id_paciente]);
+    }
     
     public function cita_medico_date(Request $request){
         $paciente = Paciente::find($request->input('id_paciente'));
