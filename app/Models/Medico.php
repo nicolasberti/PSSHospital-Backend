@@ -24,6 +24,11 @@ class Medico extends Model
     public function horarios_atencion() {
         return $this->hasMany(HorarioDeAtencion::class, 'horarios_atencion');
     }    
+
+    public function citas()
+    {
+        return $this->hasMany(PacienteMedico::class, 'medico_id');
+    }
     
     public function obtenerFechasDisponibles($diasHaciaElFuturo){
         $fechasDisponibles = [];

@@ -112,6 +112,12 @@ class PacienteController extends Controller
         return view('paciente.new_cita_medico', ['paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
     }
 
+    public function mis_citas($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        return view('paciente.mis_citas', ['username' => $paciente->username, 'paciente' => $paciente, 'citas' => $citas]);
+    }
+
     
     public function cita_medico_date(Request $request){
         $paciente = Paciente::find($request->input('id_paciente'));
