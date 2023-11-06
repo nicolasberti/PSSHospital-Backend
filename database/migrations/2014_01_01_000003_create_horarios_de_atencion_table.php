@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('horario_inicio');
             $table->time('horario_fin');
-            $table->integer('duracion');
+            $table->time('duracion');
             $table->timestamps();
         });
     }
