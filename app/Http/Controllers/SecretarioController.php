@@ -107,10 +107,10 @@ class SecretarioController extends Controller
         $dni = $request->input('dni');
         $paciente = Paciente::where('DNI', $dni)->first();
 
-        //aca hay q pasar las citas del paciente
-
         if($paciente){
-            return view('secretario.show_citas_paciente', compact('paciente'));
+            $citasPendientes = $paciente->citas()->where('state', 'Pendiente')->get();
+
+            return view('secretario.show_citas_paciente', compact('paciente', 'citasPendientes'));
         }
         else{
             return redirect('/secretario/cancel_cita')

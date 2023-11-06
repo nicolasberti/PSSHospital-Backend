@@ -27,10 +27,22 @@
                 <th>Hora</th>
                 <th>Estado</th>
                 <th></th>
-                <th></th>
             </tr>
         </thead>
-        
+        <tbody>
+            @foreach ($citasPendientes as $cita)
+            <tr>
+                <td>{{$cita->medico->name}} {{$cita->medico->lastName}}</td>
+                <td>{{ $cita->fecha }}</td>
+                <td>{{ $cita->horarioInicio }} - {{ $cita->horarioFin }}</td>
+                <td>{{ $cita->state}}</td>
+                <td>
+                <button type="submit" name="cancel_cita"
+                    class="btn btn-success">Cancelar</button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
 </div>
 
