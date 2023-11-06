@@ -13,8 +13,8 @@ class PacienteMedicoSeeder extends Seeder
             [
                 'fecha' => '2023-11-06',
                 'horarioInicio' => '08:00:00',
-                'horarioFin' => '08:59:00',
-                'duracion' => '00:59:00',
+                'horarioFin' => '08:30:00',
+                'duracion' => '00:30:00',
                 'state' => 'Pendiente',
                 'diagnostico' => 'Diagnóstico del paciente 1',
                 'paciente_id' => 1, // ID de un paciente existente

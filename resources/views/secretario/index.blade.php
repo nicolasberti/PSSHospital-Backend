@@ -46,8 +46,9 @@
                     <button type="submit" class="btn btn-primary">Agregar cita</button>
                     </form>
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Cancelar cita</button>
+                <div class="col"><form method="GET" action="{{route('secretario.cancel_cita')}}">
+                    <button type="submit" class="btn btn-primary">Cancelar cita</button>
+                    </form>
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-primary">Consultar cita</button>
@@ -57,6 +58,13 @@
     </div>
 </div>
 
+@if(session('alert') == 'success')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        alert("{{ session('success') }}");
+    });
+</script>
+@endif
 
 @endsection
 

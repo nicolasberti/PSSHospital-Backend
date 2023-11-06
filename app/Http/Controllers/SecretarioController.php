@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Paciente;
 use App\Models\Medico;
 use App\Models\HorarioDeAtencion;
+use App\Models\HorarioDeAtencionDiaSemana;
 use App\Models\PacienteMedico;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class SecretarioController extends Controller
 {
@@ -56,13 +58,64 @@ class SecretarioController extends Controller
 
         $numeroDiaSemana = Carbon::parse($fecha)->dayOfWeek;
     
-        $horariosDisponibles = HorarioDeAtencion::where('dias', $numeroDiaSemana)->get();
+        $horario_atencion_dia = HorarioDeAtencionDiaSemana::where('id_dias_semana', $numeroDiaSemana)->first();
+        $horario_id = $horario_atencion_dia->id_horario_de_atencion;
+        $horario = HorarioDeAtencion::find($horario_id)->first();
         
-        $citasEnHorario = PacienteMedico::where('fecha', $fecha)
-            ->whereIn('horarioInicio', $horariosDisponibles->pluck('horario_inicio'))
-            ->get();
+        $horarioInicio = Carbon::parse($horario->horario_inicio);
+        $horarioFin = Carbon::parse($horario->horario_fin);
+        $duracion = CarbonInterval::minutes($horario->duracion);
+       // $citas = [];
 
-        return view('secretario.new_cita_horarios_medico', compact('medico', 'horariosDisponibles', 'fechaSeleccionada', 'citasEnHorario'));
+        $citas = [
+            [
+                'horario_inicio' => '08:00:00',
+                'horario_fin' => '08:30:00',
+            ],
+            [
+                'horario_inicio' => '08:30:00',
+                'horario_fin' => '09:00:00',
+            ],
+            [
+                'horario_inicio' => '09:00:00',
+                'horario_fin' => '09:30:00',
+            ],
+        ];
+
+       /* while ($horarioInicio->lt($horarioFin)) {
+            $cita = [
+                'horario_inicio' => $horarioInicio->format('H:i:s'),
+                'horario_fin' => $horarioInicio->add($duracion)->format('H:i:s'),
+            ];
+            $citas[] = $cita;
+        }*/
+
+        return view('secretario.new_cita_horarios_medico', compact('medico', 'horario', 'fechaSeleccionada', 'citas'));
+    }
+
+    public function cancel_cita(Request $request){
+        return view('secretario.cancel_cita');
+    }
+
+    public function cancel_cita_paciente(Request $request){
+        $request->validate([
+            'dni' => 'required|digits:8',
+        ]); 
+
+        
+        $dni = $request->input('dni');
+        $paciente = Paciente::where('DNI', $dni)->first();
+
+        //aca hay q pasar las citas del paciente
+
+        if($paciente){
+            return view('secretario.show_citas_paciente', compact('paciente'));
+        }
+        else{
+            return redirect('/secretario/cancel_cita')
+            ->with('success', 'Ingrese un DNI válido.')
+            ->with('alert', 'success');
+        }
     }
     
 }

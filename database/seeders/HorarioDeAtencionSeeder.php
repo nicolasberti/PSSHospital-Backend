@@ -20,12 +20,12 @@ class HorarioDeAtencionSeeder extends Seeder
             [
                 'horario_inicio' => '08:00:00',
                 'horario_fin' => '16:00:00',
-                'duracion' => 30,
+                'duracion' => '00:30:00',
             ],
             [
                 'horario_inicio' => '09:00:00',
                 'horario_fin' => '17:00:00',
-                'duracion' => 45,
+                'duracion' => '01:00:00',
             ],
             // Agrega más registros según sea necesario.
         ];

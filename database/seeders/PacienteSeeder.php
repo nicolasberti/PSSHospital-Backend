@@ -14,7 +14,7 @@ class PacienteSeeder extends Seeder
     public function run(): void
     {
         DB::table('pacientes')->insert([
-            'DNI' => '123456789',
+            'DNI' => '12345678',
             'username' => 'paciente1',
             'password' => '1234',
             'DOB' => '1990-01-01',

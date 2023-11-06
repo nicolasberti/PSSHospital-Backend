@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretarioController;
+use App\Http\Controllers\PacienteMedicoController;
 
 use App\Http\Controllers\SessionsController;
 
@@ -73,9 +74,12 @@ Route::get('/secretario/pacientes/{id}/edit', PacienteController::class .'@edit'
 Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')->name('secretario.update_paciente');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
-Route::get('/secretario/pacientes/new_cita', SecretarioController::class .'@new_cita')->name('secretario.new_cita');
-Route::post('/secretario/pacientes/new_cita/medico', SecretarioController::class .'@new_cita_fecha_medico')->name('secretario.new_cita_fecha_medico');
-Route::post('/secretario/pacientes/new_cita/medico/horarios', SecretarioController::class .'@new_cita_horarios_medico')->name('secretario.new_cita_horarios_medico');
+Route::get('/secretario/new_cita', SecretarioController::class .'@new_cita')->name('secretario.new_cita');
+Route::post('/secretario/new_cita/medico', SecretarioController::class .'@new_cita_fecha_medico')->name('secretario.new_cita_fecha_medico');
+Route::post('/secretario/new_cita/medico/horarios', SecretarioController::class .'@new_cita_horarios_medico')->name('secretario.new_cita_horarios_medico');
+Route::post('/secretario/new_cita/medico/create', PacienteMedicoController::class .'@create_cita')->name('secretario.new_cita_create');
+Route::get('/secretario/cancel_cita/ingresar_dni', SecretarioController::class .'@cancel_cita')->name('secretario.cancel_cita');
+Route::post('/secretario/cancel_cita/paciente', [SecretarioController::class, 'cancel_cita_paciente'])->name('secretario.cancel_cita_paciente');
 
 Route::get('/', function () {
     return view('home');
