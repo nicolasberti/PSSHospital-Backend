@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DiaSemana extends Model
+class HorarioDeAtencionDiaSemana extends Model
 {
     use HasFactory;
-    protected $table = 'dias_semana';
+    protected $table = 'horarios_de_atencion_dias_semana';
 }

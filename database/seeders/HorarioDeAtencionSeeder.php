@@ -19,21 +19,13 @@ class HorarioDeAtencionSeeder extends Seeder
         $horarios = [
             [
                 'horario_inicio' => '08:00:00',
-                'horario_fin' => '08:59:00',
-                'duracion' => '00:59:00', 
-                'dias' => 1, // ID de un día existente en 'dias_semana'
+                'horario_fin' => '16:00:00',
+                'duracion' => 30,
             ],
             [
                 'horario_inicio' => '09:00:00',
-                'horario_fin' => '09:59:00',
-                'duracion' => '00:59:00',
-                'dias' => 1, // ID de un día existente en 'dias_semana'
-            ],
-            [
-                'horario_inicio' => '09:00:00',
-                'horario_fin' => '09:59:00',
-                'duracion' => '00:59:00',
-                'dias' => 2, // ID de otro día existente en 'dias_semana'
+                'horario_fin' => '17:00:00',
+                'duracion' => 45,
             ],
             // Agrega más registros según sea necesario.
         ];
