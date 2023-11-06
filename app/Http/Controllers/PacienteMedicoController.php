@@ -54,5 +54,21 @@ class PacienteMedicoController extends Controller
             ->with('alert', 'success');
         }
     }
+
+    public function destroy_cita(string $id){
+        $cita = PacienteMedico::find($id);
+
+        if ($cita) {
+            $cita->delete();
+
+            return redirect('/secretario')
+            ->with('success', 'La cita ha sido cancelada exitosamente.')
+            ->with('alert', 'success');
+        }
+
+        return redirect('/secretario/cancel_cita/ingresar_dni')
+        ->with('error', 'No se encontró la cita, intentelo de nuevo.')
+        ->with('alert', 'success');
+    }
 }
     

@@ -118,5 +118,5 @@ class SecretarioController extends Controller
             ->with('alert', 'success');
         }
     }
-    
+
 }

@@ -37,8 +37,8 @@
                 <td>{{ $cita->horarioInicio }} - {{ $cita->horarioFin }}</td>
                 <td>{{ $cita->state}}</td>
                 <td>
-                <button type="submit" name="cancel_cita"
-                    class="btn btn-success">Cancelar</button>
+                <a href="{{ route('secretario.confirm_cancel_cita', ['id' => $cita->id]) }}" 
+                    onclick="return confirm('¿Seguro que desea cancelar la cita?');" class="btn btn-danger mr-2">Cancelar</a>
                 </td>
             </tr>
             @endforeach

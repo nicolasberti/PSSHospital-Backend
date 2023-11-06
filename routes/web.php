@@ -80,6 +80,7 @@ Route::post('/secretario/new_cita/medico/horarios', SecretarioController::class 
 Route::post('/secretario/new_cita/medico/create', PacienteMedicoController::class .'@create_cita')->name('secretario.new_cita_create');
 Route::get('/secretario/cancel_cita/ingresar_dni', SecretarioController::class .'@cancel_cita')->name('secretario.cancel_cita');
 Route::post('/secretario/cancel_cita/paciente', [SecretarioController::class, 'cancel_cita_paciente'])->name('secretario.cancel_cita_paciente');
+Route::get('/secretario/cancel_cita/cita/{id}', [PacienteMedicoController::class, 'destroy_cita'])->name('secretario.confirm_cancel_cita');
 
 Route::get('/', function () {
     return view('home');
