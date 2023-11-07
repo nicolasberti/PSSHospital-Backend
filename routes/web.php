@@ -81,6 +81,10 @@ Route::post('/secretario/new_cita/medico/create', PacienteMedicoController::clas
 Route::get('/secretario/cancel_cita/ingresar_dni', SecretarioController::class .'@cancel_cita')->name('secretario.cancel_cita');
 Route::post('/secretario/cancel_cita/paciente', [SecretarioController::class, 'cancel_cita_paciente'])->name('secretario.cancel_cita_paciente');
 Route::get('/secretario/cancel_cita/cita/{id}', [PacienteMedicoController::class, 'destroy_cita'])->name('secretario.confirm_cancel_cita');
+Route::get('/secretario/perfil', [SecretarioController::class, 'show'])->name('secretario.show_secretario');
+Route::get('/secretario/solicitar_edicion', [SecretarioController::class, 'show_pacientes_solicitudes'])->name('secretario.solicitar_edicion');
+Route::get('/secretario/solicitar_edicion/{paciente}', [SecretarioController::class, 'show_solicitud_edicion_paciente'])->name('secretario.solicitar_edicion_paciente');
+Route::post('/secretario/solicitar_edicion/enviar_justificacion', [SecretarioController::class, 'create_solicitud_edicion_paciente'])->name('secretario.create_solicitud_edicion');
 
 Route::get('/', function () {
     return view('home');

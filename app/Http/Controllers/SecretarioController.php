@@ -8,19 +8,64 @@ use App\Models\Medico;
 use App\Models\HorarioDeAtencion;
 use App\Models\HorarioDeAtencionDiaSemana;
 use App\Models\PacienteMedico;
+use App\Models\SolicitudEdicion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+//use Illuminate\Support\Facades\Auth;
 
 class SecretarioController extends Controller
 {
     public function index() {
         return view('secretario.index');
     }
+    public function show() {
+        //$secretario = Auth::user();
+        return view('secretario.show_secretario');
+    }
 
     public function show_pacientes(){
         $pacientes = Paciente::all();
         return view('secretario.show_pacientes', compact('pacientes'));
+    }
+
+    public function show_pacientes_solicitudes(){
+        $pacientes = Paciente::all();
+        return view('secretario.show_pacientes_solicitudes', compact('pacientes'));
+    }
+
+    public function show_solicitud_edicion_paciente($pacienteId){
+        $paciente = Paciente::find($pacienteId);
+        
+        return view('secretario.show_solicitud_edicion_paciente', compact('paciente'));
+    }
+    
+
+    public function create_solicitud_edicion_paciente(Request $request){
+
+        $request->validate([
+            'justificacion' => 'required|string',
+            'paciente_id' => 'required|integer', 
+        ]);
+    
+        $solicitud = new SolicitudEdicion();
+        $solicitud->text = $request->input('justificacion');
+        $solicitud->state = 'Pendiente';
+        $solicitud->paciente_id = $request->input('paciente_id');
+
+        //aca deberia obtenerse el secretario logueado y a partir de ahi obtener su id
+        $solicitud->secretario_id = '1';
+
+        $solicitud->save();
+
+        $pacientes = Paciente::all();
+
+        //return view('secretario.show_pacientes_solicitudes', compact('pacientes'))
+        $request->session()->put('pacientes', $pacientes);
+        
+        return redirect('/secretario/solicitar_edicion')
+        ->with('success', 'Su solicitud se registro correctamente.')
+        ->with('alert', 'success');
     }
 
     public function create_pacientes(){
