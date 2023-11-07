@@ -11,13 +11,10 @@
 @endsection
 
 @section('contenido')
-     <form action="{{ route('admin.select_horario_atencion_agregar_cita', '1') }}" method="GET">
-        <select name="medico_id">
-            @foreach($medicos as $medico)
-                <option value="{{ $medico->id }}">{{ $medico->name }}</option>
-            @endforeach
-        </select>
-        <button type="submit">Seleccionar</button>
-    </form>
-
+    <h1>Seleccione un horario de atención para el médico {{ $medico->name }}</h1>
+    <ul>
+        @foreach($horariosDisponibles as $horario)
+            <li>{{ $horario }}</li>
+        @endforeach
+    </ul>
 @endsection
