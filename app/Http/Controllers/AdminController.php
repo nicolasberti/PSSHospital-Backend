@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Secretario;
 use App\Models\SecretarioPaciente;
 use App\Models\Medico;
+use App\Models\Paciente;
+use App\Models\PacienteMedico;
 use App\Models\Especialidad;
 use App\Models\Localidad;
 use App\Models\Provincia;
@@ -239,7 +241,6 @@ class AdminController extends Controller
     }
 
     public function select_fecha_atencion_agregar_cita(string $id){
-        echo($id);
         $medico = Medico::find($id);
         //$fechasDisponibles = $medico->obtenerFechasDisponibles(30); 
         //return view('admin.select_horario_atencion_agregar_cita', ['fechasDisponibles' => $fechasDisponibles]);
@@ -251,8 +252,17 @@ class AdminController extends Controller
 
     public function show_paciente_citas(string $dni){
         //hace cosas
-        echo($dni);
-        return view('admin.show_citas_paciente');
+        $paciente = Paciente::where('DNI', $dni)->first();
+
+        if ($paciente) {
+            echo($paciente->id);
+            $id = $paciente->id;
+            $citas = PacienteMedico::where('id_paciente', $id)->get();
+            return view('admin.show_citas_paciente', ['citas' => $citas]);
+        } else {
+            echo("personanoencontrada");
+        }
+        
     }
 
     public function select_paciente_cancelar_citas(){
