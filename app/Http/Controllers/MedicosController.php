@@ -8,7 +8,9 @@ use App\Models\Medico;
 use App\Models\Especialidad;
 use App\Models\HorarioDeAtencion;
 use App\Models\DiaSemana;
-use App\Models\HOrarioDeAtencionDiaSemana;
+use App\Models\HorarioDeAtencionDiaSemana;
+use App\Models\PacienteMedico;
+use App\Models\Paciente;
 
 class MedicosController extends Controller
 {
@@ -16,8 +18,24 @@ class MedicosController extends Controller
         return view('medico.index');
     }
 
-    public function index_citas(){
-        return view('medico.index_citas');
+    public function index_citas($id){
+
+        $citas = Paciente::join('paciente_medico', 'pacientes.id', '=', 'paciente_medico.id_paciente')
+        ->where('paciente_medico.id_medico', $id)
+        ->where('paciente_medico.state', 'pendiente')
+        ->select('pacientes.*', 'paciente_medico.*')
+        ->get();
+
+        return view('medico.index_citas', compact('citas'));
+    }
+
+    public function cancelar_cita($id_medico, $id){
+        $cita = PacienteMedico::find($id);
+        $cita->state = 'Cancelada';
+        $cita->update();
+        return redirect('/medico')
+            ->with('success','Cita cancelada exitosamente')
+            ->with('alert','success');
     }
 
     public function list() {

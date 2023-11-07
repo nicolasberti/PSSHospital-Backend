@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('sidebar')
-        <div class="card-body">  
+        <div class="card-body">
             <img style="width: 100px; height: 100px;" src="https://cdn-icons-png.flaticon.com/512/560/560199.png" alt="Imagen de perfil" class="img-fluid rounded-circle">
             <p>Nombre médico</p>
         </div>
@@ -35,12 +35,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <a href="/medico/citas" class="btn btn-primary">Gestionar mis citas</a>
+                                <a href="/medico/1/citas" class="btn btn-primary">Gestionar mis citas</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
 @endsection

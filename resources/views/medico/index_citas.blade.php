@@ -15,22 +15,41 @@
     <div class="card shadow my-3 px-3">
         <div class="col mb-3" style="max-height: 400px; overflow-y: auto;">
             <!-- Aquí empieza el contenido scrollable -->
-            @for ($i = 0; $i < 10; $i++)
+            @if ($citas == null)
                 <div class="card my-3">
                     <div class="card-body d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Paciente</h5>
-                            <p class="card-text">Fecha</p>
-                            <p class="card-text">Hora</p>
-                            <p class="card-text">Fecha</p>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-sm px-3 py-2">Cancelar</button>
+                            <h5 class="card-title">No tiene citas pendientes</h5>
+                        </form>
                     </div>
                 </div>
-            @endfor
-            <!-- Puedes agregar más cards según sea necesario -->
-            <!-- Aquí termina el contenido scrollable -->
+            @else
+                @foreach ($citas as $cita)
+                    <div class="card my-3">
+                        <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <h5 class="card-title">Paciente: {{ $cita->name }} {{ $cita->lastname}}</h5>
+                                <p class="card-text">Fecha: {{ date('d/m/Y', strtotime($cita->fecha)) }}</p>
+                                <p class="card-text">Hora: {{ date('H:i', strtotime($cita->horarioInicio)) }}</p>
+                            </div>
+                            <form id="cancelar-cita-{{ $cita->id }}" action="/medico/{{$cita->id_medico}}/citas/{{$cita->id}}/cancelar" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-success btn-sm px-3 py-2" onclick="confirmCancel({{ $cita->id }})">Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
-        <button type="submit" class="btn btn-primary">Volver</button>
+        <a href="/medico" class="btn btn-primary">Volver</a>
     </div>
+
+    <script>
+        function confirmCancel(citaId) {
+            if (confirm("¿Seguro que desea cancelar la cita?")) {
+                document.getElementById('cancelar-cita-' +citaId).submit();
+            }
+        }
+    </script>
 @endsection
