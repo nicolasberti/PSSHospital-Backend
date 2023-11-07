@@ -12,10 +12,15 @@
 
 @section('contenido')
     <h1>Mis citas pendientes</h1>
+    @if(session('success'))
+        <div class="alert alert-{{ session('alert') }}" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card shadow my-3 px-3">
         <div class="col mb-3" style="max-height: 400px; overflow-y: auto;">
             <!-- Aquí empieza el contenido scrollable -->
-            @if ($citas == null)
+            @if ($citas->count() == 0)
                 <div class="card my-3">
                     <div class="card-body d-flex justify-content-between">
                         <div>
@@ -35,7 +40,7 @@
                             <form id="cancelar-cita-{{ $cita->id }}" action="/medico/{{$cita->id_medico}}/citas/{{$cita->id}}/cancelar" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" class="btn btn-success btn-sm px-3 py-2" onclick="confirmCancel({{ $cita->id }})">Cancelar</button>
+                                <button class="btn btn-success btn-sm px-3 py-2" onclick="confirmCancel(event, {{ $cita->id }})">Cancelar</button>
                             </form>
                         </div>
                     </div>
@@ -46,9 +51,10 @@
     </div>
 
     <script>
-        function confirmCancel(citaId) {
+        function confirmCancel(event, citaId) {
+            event.preventDefault();
             if (confirm("¿Seguro que desea cancelar la cita?")) {
-                document.getElementById('cancelar-cita-' +citaId).submit();
+                document.getElementById('cancelar-cita-' + citaId).submit();
             }
         }
     </script>

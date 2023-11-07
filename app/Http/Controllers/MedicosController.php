@@ -33,9 +33,10 @@ class MedicosController extends Controller
         $cita = PacienteMedico::find($id);
         $cita->state = 'Cancelada';
         $cita->update();
-        return redirect('/medico')
-            ->with('success','Cita cancelada exitosamente')
-            ->with('alert','success');
+
+        return redirect('/medico/'.$id_medico.'/citas')
+            ->with('success', 'Cita cancelada exitosamente')  // Modifica el mensaje según tus necesidades
+            ->with('alert', 'success');
     }
 
     public function list() {
