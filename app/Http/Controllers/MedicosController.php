@@ -11,6 +11,7 @@ use App\Models\DiaSemana;
 use App\Models\HOrarioDeAtencionDiaSemana;
 use App\Models\PacienteMedico;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Paciente;
 
 class MedicosController extends Controller
 {
@@ -126,5 +127,30 @@ class MedicosController extends Controller
         return redirect('/admin')
             ->with('success','Horario editado exitosamente')
             ->with('alert','success');
+    public function consultar_ficha_medica(){
+        return view('medico.consultar_ficha_paciente');
+    }
+
+    public function consultar_ficha_paciente(Request $request){
+        $request->validate([
+            'dni' => [
+                'required',
+                'regex:/^\d{8}$/',
+            ],
+        ]); 
+
+        $dni = $request->input('dni');
+        $paciente = Paciente::where('DNI', $dni)->first();
+
+        if($paciente){
+            $fichas = $paciente->citas()->where('medico_id', '1')->get(); //modificar para obtener el id del medico logueado
+
+            return view('medico.show_fichas_paciente', compact('paciente', 'fichas'));
+        }
+        else{
+            return redirect('/medico/consultar_ficha_medica')
+            ->with('success', 'Ingrese un DNI válido.')
+            ->with('alert', 'success');
+        }
     }
 }

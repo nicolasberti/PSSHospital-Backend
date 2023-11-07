@@ -33,8 +33,8 @@ class PacienteMedicoSeeder extends Seeder
                 'diagnostico' => 'diagnostico ' . $i,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'id_paciente' => $pacienteId,
-                'id_medico' => $medicoId,
+                'paciente_id' => $pacienteId,
+                'medico_id' => $medicoId,
             ]);
         }
     }

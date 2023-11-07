@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretarioController;
-
+use App\Http\Controllers\PacienteMedicoController;
 use App\Http\Controllers\SessionsController;
 
 
@@ -46,6 +46,7 @@ Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos
 Route::get('/paciente/create_cita/{id}', PacienteController::class . '@cita')->name('paciente.newcita');
 Route::post('/paciente/create_cita/{id}/medico', PacienteController::class . '@cita_medico')->name('paciente.newcita_medico');
 Route::post('/paciente/create_cita/{id}/medico/date', PacienteController::class . '@cita_medico_date')->name('paciente.newcita_medico_date');
+Route::post('/paciente/solicitar_cita/', PacienteController::class . '@solicitar_cita')->name('paciente.solicitar_cita');
 
 Route::get('/paciente/mis_citas/{id}', PacienteController::class . '@mis_citas')->name('paciente.mis_citas');
 Route::get('/paciente/mis_fichas/{id}', PacienteController::class . '@mis_fichas')->name('paciente.mis_fichas');
@@ -81,9 +82,21 @@ Route::get('/secretario/pacientes/{id}/edit', PacienteController::class .'@edit'
 Route::put('/secretario/pacientes/{id}/', PacienteController::class .'@update')->name('secretario.update_paciente');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('/secretario/baja_pacientes/{paciente}', PacienteController::class. '@destroy')->name('secretario.baja_paciente');
-Route::get('/secretario/pacientes/new_cita', SecretarioController::class .'@new_cita')->name('secretario.new_cita');
-Route::post('/secretario/pacientes/new_cita/medico', SecretarioController::class .'@new_cita_fecha_medico')->name('secretario.new_cita_fecha_medico');
-Route::post('/secretario/pacientes/new_cita/medico/horarios', SecretarioController::class .'@new_cita_horarios_medico')->name('secretario.new_cita_horarios_medico');
+Route::get('/secretario/new_cita', SecretarioController::class .'@new_cita')->name('secretario.new_cita');
+Route::post('/secretario/new_cita/medico', SecretarioController::class .'@new_cita_fecha_medico')->name('secretario.new_cita_fecha_medico');
+Route::post('/secretario/new_cita/medico/horarios', SecretarioController::class .'@new_cita_horarios_medico')->name('secretario.new_cita_horarios_medico');
+Route::post('/secretario/new_cita/medico/create', PacienteMedicoController::class .'@create_cita')->name('secretario.new_cita_create');
+Route::get('/secretario/cancel_cita/ingresar_dni', SecretarioController::class .'@cancel_cita')->name('secretario.cancel_cita');
+Route::post('/secretario/cancel_cita/paciente', [SecretarioController::class, 'cancel_cita_paciente'])->name('secretario.cancel_cita_paciente');
+Route::get('/secretario/cancel_cita/cita/{id}', [PacienteMedicoController::class, 'destroy_cita'])->name('secretario.confirm_cancel_cita');
+Route::get('/secretario/perfil', [SecretarioController::class, 'show'])->name('secretario.show_secretario');
+Route::get('/secretario/solicitar_edicion', [SecretarioController::class, 'show_pacientes_solicitudes'])->name('secretario.solicitar_edicion');
+Route::get('/secretario/solicitar_edicion/{paciente}', [SecretarioController::class, 'show_solicitud_edicion_paciente'])->name('secretario.solicitar_edicion_paciente');
+Route::post('/secretario/solicitar_edicion/enviar_justificacion', [SecretarioController::class, 'create_solicitud_edicion_paciente'])->name('secretario.create_solicitud_edicion');
+
+
+Route::get('/medico/consultar_ficha_medica', MedicosController::class .'@consultar_ficha_medica')->name('medico.consultar_ficha_medica');
+Route::post('/medico/consultar_ficha_medica/paciente', MedicosController::class .'@consultar_ficha_paciente')->name('medico.consultar_ficha_medica_paciente');
 
 Route::get('/admin/medicos/horarios', AdminController::class .'@index_horarios_medicos')->name('admin.index_horarios_medicos');
 Route::get('/admin/medicos/horarios/{id}/show', AdminController::class .'@show_horarios_medico')->name('admin.show_horarios_medico');

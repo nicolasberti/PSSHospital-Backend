@@ -4,6 +4,8 @@
         <div class="card-body">  
             <img style="width: 100px; height: 100px;" src="https://cdn-icons-png.flaticon.com/512/560/560199.png" alt="Imagen de perfil" class="img-fluid rounded-circle">
             <p>Nombre médico</p>
+            <br>
+            <a href="/medico" >Mis Datos</a>
         </div>
         <div class="logout-button">
             <a href="#" class="btn btn-danger">Salir</a>
@@ -18,7 +20,10 @@
                 <div class="mt-2">
                     <div class="container">
                         <div class="row">
-                            <div class="col"><button type="button" class="btn btn-primary">Consultar fichas médicas</button></div>
+                            <div class="col"><form method="GET" action="{{route('medico.consultar_ficha_medica')}}">
+                                <button type="submit" class="btn btn-primary">Consultar fichas médicas</button>
+                                </form>                        
+                            </div>
                             <div class="col"><button type="button" class="btn btn-primary">Agregar visita a ficha médica</button></div>
                         </div>
                     </div>

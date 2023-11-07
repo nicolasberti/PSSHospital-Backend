@@ -22,7 +22,7 @@ class Medico extends Model
 
 
     public function horarios_atencion() {
-        return $this->hasMany(HorarioDeAtencion::class, 'horarios_atencion');
+        return $this->hasMany(HorarioDeAtencion::class, 'horarios_atencion'); //relacion un medico a muchos horarios de atención
     }    
 
     public function citas()
@@ -30,27 +30,5 @@ class Medico extends Model
         return $this->hasMany(PacienteMedico::class, 'medico_id');
     }
     
-    public function obtenerFechasDisponibles($diasHaciaElFuturo){
-        $fechasDisponibles = [];
-    
-        $horarios = $this->horarios_atencion; // Asumiendo que tienes una relación en el modelo Medico
-    
-        foreach ($horarios as $horario) {
-            // Agrega la lógica para generar fechas disponibles según los horarios
-            // Puedes utilizar la función Carbon para trabajar con fechas
-            $fechaInicio = Carbon::now();
-            $fechaFin = Carbon::now()->addDays($diasHaciaElFuturo);
-            
-            while ($fechaInicio->lessThan($fechaFin)) {
-                if ($fechaInicio->dayOfWeek == $horario->dias) {
-                    $fechasDisponibles[] = $fechaInicio->format('Y-m-d');
-                }
-                
-                $fechaInicio->addDay();
-            }
-        }
-    
-        return $fechasDisponibles;
-    }
     
 }

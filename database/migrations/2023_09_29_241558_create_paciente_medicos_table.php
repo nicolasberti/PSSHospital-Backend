@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreignId('id_paciente')->references('id')->on('pacientes');
-            $table->foreignId('id_medico')->references('id')->on('medicos');
+            $table->foreignId('paciente_id')->references('id')->on('pacientes');
+            $table->foreignId('medico_id')->references('id')->on('medicos');
         });
     }
 
@@ -36,3 +36,4 @@ return new class extends Migration
     }
     
 };
+        

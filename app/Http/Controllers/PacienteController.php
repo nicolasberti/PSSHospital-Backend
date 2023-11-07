@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\DiaSemana;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\Medico;
 use App\Models\PacienteMedico;
+use Illuminate\Support\Carbon;
 
 class PacienteController extends Controller
 {
@@ -137,9 +140,93 @@ class PacienteController extends Controller
     public function cita_medico_date(Request $request){
         $paciente = Paciente::find($request->input('id_paciente'));
         $medico = Medico::find($request->input('id_medico'));
-        $dia = $request->cita;
+        $dia = $request->cita; //yyyy-mm-dd
+        $citasMedico = $medico->citas;
+        $citasEnElMismoDia = [];
+
+        // Crea una instancia de Carbon a partir de la fecha
+        $fecha = Carbon::parse($dia);
+
+        // Configura el idioma en español
+        $fecha->locale('es');
+
+        // Obtén el nombre del día de la semana en español
+        $nombreDia = $fecha->formatLocalized('%A');
+
+        // Capitaliza la primera letra del nombre del día
+        $nombreDia = ucfirst($nombreDia);
+        $nombreDiaEsp = "";
+        // $nombreDia contendrá el nombre del día en español con la primera letra en mayúscula, por ejemplo, "Lunes" para lunes
+        switch ($nombreDia) {
+            case "Monday":
+                $nombreDiaEsp = "Lunes";
+                break;
+            case "Tuesday":
+                $nombreDiaEsp = "Martes";
+                break;
+            case "Wednesday":
+                $nombreDiaEsp = "Miércoles";
+                break;
+            case "Thursday":
+                $nombreDiaEsp = "Jueves";
+                break;
+            case "Friday":
+                $nombreDiaEsp = "Viernes";
+                break;
+            case "Saturday":
+                $nombreDiaEsp = "Sábado";
+                break;
+            case "Sunday":
+                $nombreDiaEsp = "Domingo";
+                break;
+        }
+
+        /*
+        $instanciaDia = DiaSemana::where('dia', $nombreDiaEsp)->first();//hasta aca anda
         
-        return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
+        $horario_atencion_diasemana = $instanciaDia->horarioAtencion; 
+        $horario_atencion = $horario_atencion_diasemana->horarioAtencion; //aca se rompe
+
+        $inicio = $horario_atencion->horario_inicio;
+        $fin = $horario_atencion->horario_fin;
+        $duracion = $horario_atencion->duracion;
+
+        //$inicioSegundos = TIME_TO_SEC($inicio);
+        //$finSegundos = TIME_TO_SEC($fin);
+        //$duracionSegundos = TIME_TO_SEC($duracion);
+       // foreach ($citasMedico as $cita) {
+            // Supongamos que la fecha de la cita está en un campo llamado 'fecha' en el formato 'yyyy-mm-dd'
+         //   if ($cita->fecha === $dia) {
+           //     $citasEnElMismoDia[] = $cita;
+            //}
+        //}
+        //falta buscar para el medico los horarios disponibles y pasar esos horarios.
+        
+        $citas_disponibles = [];
+        $horario_actual = $inicio;
+        while($horario_actual < $fin) {
+            $citas_disponibles[] = $horario_actual;
+            $horario_actual += $duracion;
+        }*/
+
+    return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico,  /*'citas_disponibles' => $citas_disponibles, 'instanciaDia'=>$instanciaDia*/]);
+    }
+
+    public function solicitar_cita(Request $request){
+        $cita = new PacienteMedico();
+        $cita->fecha = $request->fecha;
+        $cita->horarioInicio = $request->horarioInicio;
+        $cita->horarioFin = $request->horarioFin;
+        $cita->duracion = $request->duracion;
+        $cita->state = "Pendiente";
+        $cita->diagnostico = "";
+        $cita->paciente_id = $request->paciente_id;
+        $cita->medico_id = $request->medico_id;
+        $cita->save();
+
+        return  redirect()->route('paciente.mis_citas', ['id' => $cita->paciente_id])
+        ->with('success','La cita fue solicitada correctamente')
+        ->with('alert','success');
     }
 
     public function destroy(string $id){
