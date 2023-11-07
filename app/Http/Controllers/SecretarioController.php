@@ -80,18 +80,8 @@ class SecretarioController extends Controller
     public function new_cita_fecha_medico(Request $request){
         $medicoId = $request->input('medico_id');
         $medico = Medico::find($medicoId);
-    
-        //$fechasDisponibles = $medico->obtenerFechasDisponibles(30);
-        $fechasDisponibles = [
-            '01/11/2023',
-            '02/11/2023',
-            '03/11/2023',
-            '04/11/2023',
-            '05/11/2023',
-            '06/11/2023',
-        ];
 
-        return view('secretario.new_cita_fecha_medico', compact('fechasDisponibles', 'medico'));
+        return view('secretario.new_cita_fecha_medico', compact('medico'));
     }
 
     public function new_cita_horarios_medico(Request $request){
@@ -99,7 +89,7 @@ class SecretarioController extends Controller
         $medico = Medico::find($medicoId);
         $fechaSeleccionada = $request->input('fecha');
     
-        $fecha = Carbon::createFromFormat('d/m/Y', $fechaSeleccionada)->format('Y-m-d');
+        $fecha = Carbon::createFromFormat('Y-m-d', $fechaSeleccionada)->format('Y-m-d');
 
         $numeroDiaSemana = Carbon::parse($fecha)->dayOfWeek;
     
