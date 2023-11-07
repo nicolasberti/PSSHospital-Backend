@@ -25,6 +25,7 @@
                         <table class="table">
                             <tbody>
                                 <div class="card shadow">
+                                    {{$instanciaDia->dia}}
                                         <tr>
                                             <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
                                             <td scope="row" style="text-align: center;">Disponible </td> 

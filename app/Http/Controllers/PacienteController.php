@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\DiaSemana;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\Medico;
 use App\Models\PacienteMedico;
+use Illuminate\Support\Carbon;
 
 class PacienteController extends Controller
 {
@@ -141,16 +144,72 @@ class PacienteController extends Controller
         $citasMedico = $medico->citas;
         $citasEnElMismoDia = [];
 
-        foreach ($citasMedico as $cita) {
-            // Supongamos que la fecha de la cita está en un campo llamado 'fecha' en el formato 'yyyy-mm-dd'
-            if ($cita->fecha === $dia) {
-                $citasEnElMismoDia[] = $cita;
-            }
+        // Crea una instancia de Carbon a partir de la fecha
+        $fecha = Carbon::parse($dia);
+
+        // Configura el idioma en español
+        $fecha->locale('es');
+
+        // Obtén el nombre del día de la semana en español
+        $nombreDia = $fecha->formatLocalized('%A');
+
+        // Capitaliza la primera letra del nombre del día
+        $nombreDia = ucfirst($nombreDia);
+        $nombreDiaEsp = "";
+        // $nombreDia contendrá el nombre del día en español con la primera letra en mayúscula, por ejemplo, "Lunes" para lunes
+        switch ($nombreDia) {
+            case "Monday":
+                $nombreDiaEsp = "Lunes";
+                break;
+            case "Tuesday":
+                $nombreDiaEsp = "Martes";
+                break;
+            case "Wednesday":
+                $nombreDiaEsp = "Miércoles";
+                break;
+            case "Thursday":
+                $nombreDiaEsp = "Jueves";
+                break;
+            case "Friday":
+                $nombreDiaEsp = "Viernes";
+                break;
+            case "Saturday":
+                $nombreDiaEsp = "Sábado";
+                break;
+            case "Sunday":
+                $nombreDiaEsp = "Domingo";
+                break;
         }
-        //buscar para el medico los horarios disponibles y pasar esos horarios.
-        $horario_atencion = $medico->horarios_atencion;
+
+
+        $instanciaDia = DiaSemana::where('dia', $nombreDiaEsp)->first();//hasta aca anda
         
-        return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
+        $horario_atencion_diasemana = $instanciaDia->horarioAtencion; 
+        $horario_atencion = $horario_atencion_diasemana->horarioAtencion;
+
+        $inicio = $horario_atencion->horario_inicio;
+        $fin = $horario_atencion->horario_fin;
+        $duracion = $horario_atencion->duracion;
+
+        //$inicioSegundos = TIME_TO_SEC($inicio);
+        //$finSegundos = TIME_TO_SEC($fin);
+        //$duracionSegundos = TIME_TO_SEC($duracion);
+       // foreach ($citasMedico as $cita) {
+            // Supongamos que la fecha de la cita está en un campo llamado 'fecha' en el formato 'yyyy-mm-dd'
+         //   if ($cita->fecha === $dia) {
+           //     $citasEnElMismoDia[] = $cita;
+            //}
+        //}
+        //falta buscar para el medico los horarios disponibles y pasar esos horarios.
+        
+        $citas_disponibles = [];
+        $horario_actual = $inicio;
+        while($horario_actual < $fin) {
+            $citas_disponibles[] = $horario_actual;
+            $horario_actual += $duracion;
+        }
+
+    return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico,  'citas_disponibles' => $citas_disponibles, 'instanciaDia'=>$instanciaDia]);
     }
 
     public function destroy(string $id){
