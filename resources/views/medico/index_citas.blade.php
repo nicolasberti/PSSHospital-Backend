@@ -30,7 +30,7 @@
                     <?php $paciente = \App\Models\Paciente::find($cita->id_paciente); ?>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Paciente: {{ $paciente->name }} {{ $paciente->lastName }}</h5>
+                            <h5 class="card-title">Paciente: {{ $paciente->name }} {{ $paciente->lastname }}</h5>
                             <p class="card-text">Fecha: {{ $cita->fecha }}</p>
                             <p class="card-text">Hora: {{ $cita->horarioInicio }}</p>
                             <p class="card-text">Estado: {{ $cita->state }}</p>

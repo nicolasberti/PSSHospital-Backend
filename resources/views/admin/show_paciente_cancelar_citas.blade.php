@@ -29,7 +29,7 @@
                     <?php $medico = \App\Models\Medico::find($cita->id_medico); ?>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Medico: {{ $medico->name }} {{ $medico->lastName }}</h5>
+                            <h5 class="card-title">Medico: {{ $medico->name }} {{ $medico->lastname }}</h5>
                             <p class="card-text">Fecha: {{ $cita->fecha }}</p>
                             <p class="card-text">Hora: {{ $cita->horarioInicio }}</p>
                             <p class="card-text">Estado: {{ $cita->state }}</p>
