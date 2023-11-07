@@ -22,12 +22,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreignId('paciente_id')->constrained();
-            $table->foreignId('medico_id')->constrained();
-
-            //$table->foreign('id_paciente')->references('id_paciente')->on('pacientes');
-            //$table->foreign('id_medico')->references('id_medico')->on('medicos');
-
+            $table->foreignId('id_paciente')->references('id')->on('pacientes');
+            $table->foreignId('id_medico')->references('id')->on('medicos');
         });
     }
 
