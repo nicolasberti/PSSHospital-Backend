@@ -11,13 +11,25 @@
 @endsection
 
 @section('contenido')
-     <form action="{{ route('admin.select_horario_atencion_agregar_cita', '1') }}" method="GET">
-        <select name="medico_id">
-            @foreach($medicos as $medico)
-                <option value="{{ $medico->id }}">{{ $medico->name }}</option>
-            @endforeach
-        </select>
-        <button type="submit">Seleccionar</button>
-    </form>
+<form method="GET" action="{{ route('admin.select_fecha_atencion_agregar_cita', ['id' => $medicos[0]->id]) }}" id="selectMedicoForm">
+    <select name="medico_id" id="medico_id">
+        @foreach($medicos as $medico)
+            <option value="{{ $medico->id }}">{{ $medico->name }} {{ $medico->lastName }}</option>
+        @endforeach
+    </select>
+    <button type="submit">Seleccionar</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#medico_id').change(function() {
+            var selectedMedicoId = $(this).val();
+            var currentUrl = "{{ route('admin.select_fecha_atencion_agregar_cita', ['id' => ':id']) }}";
+            var newUrl = currentUrl.replace(':id', selectedMedicoId);
+            $('#selectMedicoForm').attr('action', newUrl);
+        });
+    });
+</script>
 
 @endsection

@@ -11,9 +11,8 @@
 @endsection
 
 @section('contenido')
-    <h1>Seleccione un horario de atención para el médico {{ $medico->name }}</h1>
     <ul>
-        @foreach($horariosDisponibles as $horario)
+        @foreach($fechasDisponibles as $horario)
             <li>{{ $horario }}</li>
         @endforeach
     </ul>
