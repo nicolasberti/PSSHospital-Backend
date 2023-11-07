@@ -19,56 +19,79 @@
         
 
         <div class="px-4 py-3">  
+            <!-- Errores generales -->
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             Nombre de usuario
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="username" placeholder="{{$secretario->username}}" disabled>
                 <label for="floatingInput">{{$secretario->username}}</label>
             </div>
-            Contraseña
+            Contraseña (*)
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="{{$secretario->password}}" name="password">
                 <label for="floatingPassword">********</label>
             </div>
-            DNI
+            DNI(*)
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="DNI" placeholder="{{$secretario->DNI}}">
                 <label for="floatingInput">{{$secretario->DNI}}</label>
             </div>
-            Nombre
+            Nombre(*)
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="name" placeholder="{{$secretario->name}}">
                 <label for="floatingInput">{{$secretario->name}}</label>
             </div>
-            Apellido
+            Apellido(*)
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="lastname" placeholder="{{$secretario->lastname}}">
                 <label for="floatingInput">{{$secretario->lastname}}</label>
             </div>
-            Email
+            Email(*)
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="email" placeholder="{{$secretario->email}}">
                 <label for="floatingInput">{{$secretario->email}}</label>
             </div>
-            Celular
+            Celular(*)
             <div class="form-floating mb-3">
                 <input class="form-control" id="floatingInput" name="phone" placeholder="{{$secretario->phone}}">
                 <label for="floatingInput">{{$secretario->phone}}</label>
             </div>
-            Fecha de cumpleaños
+            Fecha de cumpleaños(*)
             <div class="form-floating mb-3">                
                 <input class="form-date" type="date" id="start" name="birthday" min="1900-01-01" max="2023-10-10">
             </div>
-            Dirección
+            Dirección(*)
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="adress" placeholder="{{$secretario->adress}}">
-                <label for="floatingInput">{{$secretario->adress}}</label>
+                <input class="form-control" id="floatingInput" name="address" placeholder="{{$secretario->address}}">
+                <label for="floatingInput">{{$secretario->address}}</label>
             </div>
-            Ciudad
+            Provincia(*)
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" name="city" placeholder="{{$secretario->city}}">
-                <label for="floatingInput">{{$secretario->city}}</label>
+                <select class="form-select" id="provincia" name="provincia">
+                    @foreach($provincias as $provincia)
+                        <option value="Habilitado">{{$provincia->provincia}}</option>
+                    @endforeach
+                </select>
+                <label for="floatingInput">Provincia</label>
             </div>
-            Estado
+            Ciudad(*)
+            <div class="form-floating mb-3">
+                <select class="form-select" id="Ciudad" name="city">
+                    @foreach($localidades as $localidad)
+                        <option value="Habilitado">{{$localidad->localidad}}</option>
+                    @endforeach
+                </select>
+                <label for="floatingInput">Ciudad</label>
+            </div>
+            Estado(*)
             <div class="form-floating mb-3">
                 <select class="form-select" id="estado" name="state">
                     <option value="Habilitado">Habilitado</option>
