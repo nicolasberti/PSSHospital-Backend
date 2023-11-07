@@ -12,7 +12,7 @@
 
 @section('contenido')
 @if(count($citas) > 0)
-    <?php $paciente = \App\Models\Medico::find($citas[0]->id_paciente); ?>
+    <?php $paciente = \App\Models\Paciente::find($citas[0]->id_paciente); ?>
     <h3 class="card-title">Citas de {{ $paciente->name }} {{ $paciente->lastName }}</h3>
     <style>
     .card-body {
@@ -44,7 +44,7 @@
 <script>
     function confirmarCancelacion(url) {
         if (confirm('¿Estás seguro de que deseas cancelar esta cita?')) {
-            window.location.href = "{{ route('admin.cancelarCita', ['id' => $cita->id]) }}";
+            window.location.href = url;
         }
     }
 </script>

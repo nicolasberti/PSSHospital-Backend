@@ -271,10 +271,10 @@ class AdminController extends Controller
 
 
     public function show_paciente_cancelar_citas(string $dni){
-        //hace cosas
         $paciente = Paciente::where('DNI', $dni)->first();
 
         if ($paciente) {
+            echo($paciente->id);
             $id = $paciente->id;
             $citas = PacienteMedico::where('id_paciente', $id)->get();
             return view('admin.show_paciente_cancelar_citas', ['citas' => $citas]);
