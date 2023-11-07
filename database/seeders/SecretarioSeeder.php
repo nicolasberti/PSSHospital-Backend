@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class SecretarioSeeder extends Seeder
 {
@@ -13,40 +14,26 @@ class SecretarioSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         for ($i = 1; $i <= 10; $i++) {
             DB::table('secretarios')->insert([
                 'username' => 'secretario' . $i,
                 'password' => '1234',
-                'DNI' => $this->generateRandomDNI(),
-                'name' => 'Nombre' . $i,
-                'lastname' => 'Apellido' . $i,
-                'email' => 'secretario' . $i . '@example.com',
-                'phone' => $this->generateRandomPhoneNumber(),
-                'dateOfBirth' => $this->generateRandomDate(),
-                'address' => 'Dirección' . $i,
-                'ciudad' => 'Ciudad' . $i,
-                'provincia' => 'Provincia' . $i,
+                'DNI' => $faker->unique()->randomNumber(8),
+                'name' => $faker->firstName,
+                'lastname' => $faker->lastName,
+                'email' => $faker->unique()->safeEmail,
+                'phone' => $faker->randomNumber(8),
+                'dateOfBirth' => $faker->date,
+                'address' => $faker->address,
+                'ciudad' => 'BAHIA BLANCA',
+                'provincia' => 'Buenos Aires',
                 'estado' => 'Disponible',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
-    }
-
-    private function generateRandomDNI() {
-        $dni = '';
-        for ($i = 0; $i < 8; $i++) {
-            $dni .= mt_rand(0, 9);
-        }
-        return $dni;
-    }
-
-    private function generateRandomPhoneNumber() {
-        $phoneNumber = '';
-        for ($i = 0; $i < 10; $i++) {
-            $phoneNumber .= mt_rand(0, 9);
-        }
-        return $phoneNumber;
     }
 
     private function generateRandomDate() {

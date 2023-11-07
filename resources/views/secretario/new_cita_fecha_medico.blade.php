@@ -21,12 +21,8 @@
                     <form method="POST" action="{{ route('secretario.new_cita_horarios_medico') }}">
                         @csrf
                         <input type="hidden" name="medico_id" value="{{ $medico->id }}">
-                        <div class="form-floating mb-3">
-                            <select class="form-select" id="fecha" name="fecha">
-                                @foreach ($fechasDisponibles as $fecha)
-                                    <option value="{{ $fecha }}">{{ $fecha }}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-floating mb-3">                
+                            <input class="form-date" type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('+30 days')) }}">
                         </div>
                         <input type="submit" value="Continuar" class="btn btn-primary my-2">
                     </form>

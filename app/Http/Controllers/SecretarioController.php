@@ -6,19 +6,66 @@ use App\Http\Controllers\Controller;
 use App\Models\Paciente;
 use App\Models\Medico;
 use App\Models\HorarioDeAtencion;
+use App\Models\HorarioDeAtencionDiaSemana;
 use App\Models\PacienteMedico;
+use App\Models\SolicitudEdicion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
+//use Illuminate\Support\Facades\Auth;
 
 class SecretarioController extends Controller
 {
     public function index() {
         return view('secretario.index');
     }
+    public function show() {
+        //$secretario = Auth::user();
+        return view('secretario.show_secretario');
+    }
 
     public function show_pacientes(){
         $pacientes = Paciente::all();
         return view('secretario.show_pacientes', compact('pacientes'));
+    }
+
+    public function show_pacientes_solicitudes(){
+        $pacientes = Paciente::all();
+        return view('secretario.show_pacientes_solicitudes', compact('pacientes'));
+    }
+
+    public function show_solicitud_edicion_paciente($pacienteId){
+        $paciente = Paciente::find($pacienteId);
+        
+        return view('secretario.show_solicitud_edicion_paciente', compact('paciente'));
+    }
+    
+
+    public function create_solicitud_edicion_paciente(Request $request){
+
+        $request->validate([
+            'justificacion' => 'required|string',
+            'paciente_id' => 'required|integer', 
+        ]);
+    
+        $solicitud = new SolicitudEdicion();
+        $solicitud->text = $request->input('justificacion');
+        $solicitud->state = 'Pendiente';
+        $solicitud->paciente_id = $request->input('paciente_id');
+
+        //aca deberia obtenerse el secretario logueado y a partir de ahi obtener su id
+        $solicitud->secretario_id = '1';
+
+        $solicitud->save();
+
+        $pacientes = Paciente::all();
+
+        //return view('secretario.show_pacientes_solicitudes', compact('pacientes'))
+        $request->session()->put('pacientes', $pacientes);
+        
+        return redirect('/secretario/solicitar_edicion')
+        ->with('success', 'Su solicitud se registro correctamente.')
+        ->with('alert', 'success');
     }
 
     public function create_pacientes(){
@@ -33,18 +80,8 @@ class SecretarioController extends Controller
     public function new_cita_fecha_medico(Request $request){
         $medicoId = $request->input('medico_id');
         $medico = Medico::find($medicoId);
-    
-        //$fechasDisponibles = $medico->obtenerFechasDisponibles(30);
-        $fechasDisponibles = [
-            '01/11/2023',
-            '02/11/2023',
-            '03/11/2023',
-            '04/11/2023',
-            '05/11/2023',
-            '06/11/2023',
-        ];
 
-        return view('secretario.new_cita_fecha_medico', compact('fechasDisponibles', 'medico'));
+        return view('secretario.new_cita_fecha_medico', compact('medico'));
     }
 
     public function new_cita_horarios_medico(Request $request){
@@ -52,17 +89,69 @@ class SecretarioController extends Controller
         $medico = Medico::find($medicoId);
         $fechaSeleccionada = $request->input('fecha');
     
-        $fecha = Carbon::createFromFormat('d/m/Y', $fechaSeleccionada)->format('Y-m-d');
+        $fecha = Carbon::createFromFormat('Y-m-d', $fechaSeleccionada)->format('Y-m-d');
 
         $numeroDiaSemana = Carbon::parse($fecha)->dayOfWeek;
     
-        $horariosDisponibles = HorarioDeAtencion::where('dias', $numeroDiaSemana)->get();
+        $horario_atencion_dia = HorarioDeAtencionDiaSemana::where('id_dias_semana', $numeroDiaSemana)->first();
+        $horario_id = $horario_atencion_dia->id_horario_de_atencion;
+        $horario = HorarioDeAtencion::find($horario_id)->first();
         
-        $citasEnHorario = PacienteMedico::where('fecha', $fecha)
-            ->whereIn('horarioInicio', $horariosDisponibles->pluck('horario_inicio'))
-            ->get();
+        $horarioInicio = Carbon::parse($horario->horario_inicio);
+        $horarioFin = Carbon::parse($horario->horario_fin);
+        $duracion = CarbonInterval::minutes($horario->duracion);
+       // $citas = [];
 
-        return view('secretario.new_cita_horarios_medico', compact('medico', 'horariosDisponibles', 'fechaSeleccionada', 'citasEnHorario'));
+        $citas = [
+            [
+                'horario_inicio' => '08:00:00',
+                'horario_fin' => '08:30:00',
+            ],
+            [
+                'horario_inicio' => '08:30:00',
+                'horario_fin' => '09:00:00',
+            ],
+            [
+                'horario_inicio' => '09:00:00',
+                'horario_fin' => '09:30:00',
+            ],
+        ];
+
+        $citasMedicoBD = PacienteMedico::where('medico_id', $medicoId)->get();
+       /* while ($horarioInicio->lt($horarioFin)) {
+            $cita = [
+                'horario_inicio' => $horarioInicio->format('H:i:s'),
+                'horario_fin' => $horarioInicio->add($duracion)->format('H:i:s'),
+            ];
+            $citas[] = $cita;
+        }*/
+
+        return view('secretario.new_cita_horarios_medico', compact('medico', 'horario', 'fechaSeleccionada', 'citas', 'citasMedicoBD'));
     }
-    
+
+    public function cancel_cita(Request $request){
+        return view('secretario.cancel_cita');
+    }
+
+    public function cancel_cita_paciente(Request $request){
+        $request->validate([
+            'dni' => 'required|digits:8',
+        ]); 
+
+        
+        $dni = $request->input('dni');
+        $paciente = Paciente::where('DNI', $dni)->first();
+
+        if($paciente){
+            $citasPendientes = $paciente->citas()->where('state', 'Pendiente')->get();
+
+            return view('secretario.show_citas_paciente', compact('paciente', 'citasPendientes'));
+        }
+        else{
+            return redirect('/secretario/cancel_cita')
+            ->with('success', 'Ingrese un DNI válido.')
+            ->with('alert', 'success');
+        }
+    }
+
 }

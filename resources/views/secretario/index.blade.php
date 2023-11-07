@@ -4,8 +4,8 @@
     <div class="card-body">
         <img style="width: 100px; height: 100px;" src="https://cdn-icons-png.flaticon.com/512/1430/1430453.png" alt="Imagen de perfil" class="img-fluid rounded-circle">
         <p>Nombre del Secretario</p>
-        <div class="card-body">
-            <p>Mis datos</p>
+        <div>
+            <a href="/secretario/perfil" >Mis Datos</a>
         </div>
     </div>
     <div class="logout-button">
@@ -29,9 +29,10 @@
         <button type="submit" class="btn btn-primary">Dar de Baja Paciente</button>
         </form>
     </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary">Solicitar Edición</button>
-        </div>
+    <div class="col"><form method="GET" action="{{route('secretario.solicitar_edicion')}}">
+        <button type="submit" class="btn btn-primary">Solicitar Edición</button>
+        </form>
+    </div>
     </div>
 </div>
 
@@ -46,8 +47,9 @@
                     <button type="submit" class="btn btn-primary">Agregar cita</button>
                     </form>
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Cancelar cita</button>
+                <div class="col"><form method="GET" action="{{route('secretario.cancel_cita')}}">
+                    <button type="submit" class="btn btn-primary">Cancelar cita</button>
+                    </form>
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-primary">Consultar cita</button>
@@ -57,6 +59,13 @@
     </div>
 </div>
 
+@if(session('alert') == 'success')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        alert("{{ session('success') }}");
+    });
+</script>
+@endif
 
 @endsection
 
