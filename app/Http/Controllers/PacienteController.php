@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use App\Models\Medico;
+use App\Models\PacienteMedico;
 
 class PacienteController extends Controller
 {
@@ -80,6 +82,64 @@ class PacienteController extends Controller
         return redirect('/secretario/pacientes')
             ->with('success','Paciente editado exitosamente')
             ->with('alert','success');
+    }
+
+    public function cita($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $medicos = Medico::orderBy('name', 'asc')->get();
+        return view('paciente.new_cita', ['username' => $paciente, 'paciente' => $paciente, 'medicos' => $medicos]);
+    }
+
+    public function cita_medico(Request $request){
+        $paciente = Paciente::find($request->input('id'));
+        $medico = Medico::find($request->input('medico_id'));
+        $fechaInicio = now();
+        $fechaFin = now()->addDays(30);
+
+        //$diasDeAtencion = $medico->diasDeAtencion->pluck('diaSemana')->toArray();
+        /*
+        $fechasHabilitadas = [];
+        $currentDate = $fechaInicio;
+
+        while ($currentDate <= $fechaFin) {
+            $currentDay = $currentDate->dayOfWeek; // Obtén el número del día de la semana (0 para domingo, 1 para lunes, 2 para martes, etc.)
+
+            if (in_array($currentDay, $diasDeAtencion)) {
+                $fechasHabilitadas[] = $currentDate->toDateString();
+            }
+            $currentDate->addDay();
+        }
+*/
+        return view('paciente.new_cita_medico', ['paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
+    }
+
+    public function mis_citas($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        return view('paciente.mis_citas', ['username' => $paciente->username, 'paciente' => $paciente, 'citas' => $citas]);
+    }
+
+    public function mis_fichas($id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        return view('paciente.fichas_medicas', ['username' => $paciente->username, 'paciente' => $paciente, 'citas' => $citas]);
+    }
+
+    public function cancelar_cita($id_cita, $id_paciente){
+        $paciente = Paciente::find($id_paciente);
+        $citas = $paciente->citas;
+        $cita = PacienteMedico::find($id_cita);
+        $cita->state = 'Cancelada';
+        $cita->save();
+        return redirect()->route('paciente.mis_citas', ['id' => $id_paciente]);
+    }
+    
+    public function cita_medico_date(Request $request){
+        $paciente = Paciente::find($request->input('id_paciente'));
+        $medico = Medico::find($request->input('id_medico'));
+        $dia = $request->cita;
+        
+        return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
     }
 
     public function destroy(string $id){

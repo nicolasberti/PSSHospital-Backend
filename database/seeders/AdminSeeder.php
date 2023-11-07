@@ -15,16 +15,54 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        $password = '1234';
 
+        // Agregar el primer administrador
         DB::table('admins')->insert([
             'username' => 'admin1',
-            'password' => '1234',
+            'password' => $password,
             'DNI' => $faker->unique()->randomNumber(8),
             'name' => $faker->firstName,
             'lastName' => $faker->lastName,
             'email' => $faker->unique()->safeEmail,
             'phone' => $faker->randomNumber(8),
-            'estado' => 'Activo',
+            'estado' => 'Habilitado',
+            'dateOfBirth' => $faker->date,
+            'address' => $faker->address,
+            'ciudad' => 'BAHIA BLANCA',
+            'provincia' => 'Buenos Aires',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Agregar el segundo administrador
+        DB::table('admins')->insert([
+            'username' => 'admin2',
+            'password' => $password,
+            'DNI' => $faker->unique()->randomNumber(8),
+            'name' => $faker->firstName,
+            'lastName' => $faker->lastName,
+            'email' => $faker->unique()->safeEmail,
+            'phone' => $faker->randomNumber(8),
+            'estado' => 'Habilitado',
+            'dateOfBirth' => $faker->date,
+            'address' => $faker->address,
+            'ciudad' => 'BAHIA BLANCA',
+            'provincia' => 'Buenos Aires',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Agregar el tercer administrador
+        DB::table('admins')->insert([
+            'username' => 'admin3',
+            'password' => $password,
+            'DNI' => $faker->unique()->randomNumber(8),
+            'name' => $faker->firstName,
+            'lastName' => $faker->lastName,
+            'email' => $faker->unique()->safeEmail,
+            'phone' => $faker->randomNumber(8),
+            'estado' => 'Habilitado',
             'dateOfBirth' => $faker->date,
             'address' => $faker->address,
             'ciudad' => 'BAHIA BLANCA',

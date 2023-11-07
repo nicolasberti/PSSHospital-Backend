@@ -31,4 +31,9 @@ class Paciente extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function citas()
+    {
+        return $this->hasMany(PacienteMedico::class, 'paciente_id');
+    }
 }
