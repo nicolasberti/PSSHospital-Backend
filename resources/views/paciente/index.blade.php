@@ -9,13 +9,13 @@
           <a href="/paciente/mis-datos/{{$username}}">Mis datos</a>
         </div>
         <div class="card-body">  
-            <p>Mis fichas médicas</p>
+            <a href="/paciente/mis_fichas/{{$paciente->id}}">Mis fichas médicas</a>
         </div>
         <div class="card-body">  
-            <p>Mis citas</p>
+            <a href="/paciente/mis_citas/{{$paciente->id}}">Mis citas</p>
         </div>
         <div class="card-body">  
-            <p>Solicitar cita</p>
+            <a href="/paciente/create_cita/{{$paciente->id}}">Solicitar cita</a>
         </div>
         <div class="logout-button">
             <a href="/login" class="btn btn-danger">Salir</a>

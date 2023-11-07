@@ -42,8 +42,9 @@
     <div class="card-body">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Agregar cita</button>
+                <div class="col"><form method="GET" action="{{route('secretario.new_cita')}}">
+                    <button type="submit" class="btn btn-primary">Agregar cita</button>
+                    </form>
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-primary">Cancelar cita</button>
