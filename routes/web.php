@@ -94,6 +94,8 @@ Route::get('/admin/citas/consultar_citas_paciente', AdminController::class .'@se
 Route::get('/admin/citas/consultar_citas_paciente/{dni}', [AdminController::class, 'show_paciente_citas'])->name('admin.show_paciente_citas');
 Route::get('/admin/citas/cancelar_citas_paciente', AdminController::class .'@select_paciente_cancelar_citas')->name('admin.select_paciente_cancelar_citas');
 Route::get('/admin/citas/cancelar_citas_paciente/{dni}', [AdminController::class, 'show_paciente_cancelar_citas'])->name('admin.show_paciente_cancelar_citas');
+Route::get('/admin/citas/cancelar_citas_paciente/cita/{id}', [AdminController::class, 'cancelarCita'])->name('admin.cancelarCita');
+
 
 
 Route::get('/', function () {

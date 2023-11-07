@@ -284,5 +284,15 @@ class AdminController extends Controller
         }
     }
 
+    public function cancelarCita(string $id){
+        $cita = PacienteMedico::find($id);
+        $cita->state = 'cancelada';
+        $cita->save();
+        $paciente = Paciente::find($cita->id_paciente); 
+        $dni = $paciente->DNI;
+        echo($cita);
+        echo($dni);
+        return redirect()->route('admin.show_paciente_cancelar_citas', ['dni' => $dni]);
+    }
 
 }

@@ -22,8 +22,9 @@
     }
     </style>
     <div class="container">
-        <div class="row">
-            @foreach($citas as $cita)
+    <div class="row">
+        @foreach($citas as $cita)
+            @if($cita->state == 'pendiente')
                 <div class="col-12">
                     <?php $medico = \App\Models\Medico::find($cita->id_medico); ?>
                     <div class="card">
@@ -32,14 +33,21 @@
                             <p class="card-text">Fecha: {{ $cita->fecha }}</p>
                             <p class="card-text">Hora: {{ $cita->horarioInicio }}</p>
                             <p class="card-text">Estado: {{ $cita->state }}</p>
-                            <a href="" class="btn btn-danger">Cancelar cita</a>
+                            <a href="#" onclick="confirmarCancelacion('{{ route('admin.cancelarCita', ['id' => $cita->id]) }}')" class="btn btn-danger">Cancelar cita</a>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            @endif
+        @endforeach
     </div>
-
+</div>
+<script>
+    function confirmarCancelacion(url) {
+        if (confirm('¿Estás seguro de que deseas cancelar esta cita?')) {
+            window.location.href = "{{ route('admin.cancelarCita', ['id' => $cita->id]) }}";
+        }
+    }
+</script>
 </div>
 @else
     <h3>No hay citas disponibles.</h3>
