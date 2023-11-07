@@ -16,22 +16,24 @@ class MedicoSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        DB::table('medicos')->insert([
-            'username' => 'medico1',
-            'password' => '1234',
-            'DNI' => $faker->unique()->randomNumber(8),
-            'name' => $faker->firstName,
-            'lastName' => $faker->lastName,
-            'email' => $faker->unique()->safeEmail,
-            'phone' => $faker->randomNumber(8),
-            'estado' => 'Activo',
-            'ciudad' => 'BAHIA BLANCA',
-            'provincia' => 'Buenos Aires',
-            'especialidad' => "Pediatra",
-            'horarios_atencion' => '1',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        for ($i = 1; $i <= 10; $i++) {
+            DB::table('medicos')->insert([
+                'username' => 'medico' . ($i),
+                'password' => '1234',
+                'DNI' => $faker->unique()->randomNumber(8),
+                'name' => $faker->firstName,
+                'lastName' => $faker->lastName,
+                'email' => $faker->unique()->safeEmail,
+                'phone' => $faker->randomNumber(8),
+                'estado' => 'Activo',
+                'ciudad' => 'BAHIA BLANCA',
+                'provincia' => 'Buenos Aires',
+                'especialidad' => "Pediatra",
+                'horarios_atencion' => ($i),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
 
