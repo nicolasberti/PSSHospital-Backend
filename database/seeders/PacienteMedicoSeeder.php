@@ -29,7 +29,7 @@ class PacienteMedicoSeeder extends Seeder
                 'horarioInicio' => date('H:i:s'),
                 'horarioFin' => date('H:i:s'),
                 'duracion' => '00:30:00',
-                'state' => 'pendiente',
+                'state' => 'Realizada',
                 'diagnostico' => 'diagnostico ' . $i,
                 'created_at' => now(),
                 'updated_at' => now(),
