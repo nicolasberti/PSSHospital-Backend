@@ -275,7 +275,6 @@ class AdminController extends Controller
         $paciente = Paciente::where('DNI', $dni)->first();
 
         if ($paciente) {
-            echo($paciente->id);
             $id = $paciente->id;
             $citas = PacienteMedico::where('id_paciente', $id)->get();
             return view('admin.show_paciente_cancelar_citas', ['citas' => $citas]);
@@ -290,8 +289,6 @@ class AdminController extends Controller
         $cita->save();
         $paciente = Paciente::find($cita->id_paciente); 
         $dni = $paciente->DNI;
-        echo($cita);
-        echo($dni);
         return redirect()->route('admin.show_paciente_cancelar_citas', ['dni' => $dni]);
     }
 

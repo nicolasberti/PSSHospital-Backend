@@ -10,27 +10,47 @@
     </div>
 @endsection
 
+
 @section('contenido')
-    <h1>Mis citas pendientes</h1>
-    <div class="card shadow my-3 px-3">
-        <div class="col mb-3" style="max-height: 400px; overflow-y: auto;">
-            <!-- Aquí empieza el contenido scrollable -->
-            @for ($i = 0; $i < 10; $i++)
-                <div class="card my-3">
-                    <div class="card-body d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title">Paciente</h5>
-                            <p class="card-text">Fecha</p>
-                            <p class="card-text">Hora</p>
-                            <p class="card-text">Fecha</p>
+@if(count($citas) > 0)
+    <?php $medico = \App\Models\Medico::find($citas[0]->id_medico); ?>
+    <h3 class="card-title">Mis Citas: {{ $medico->name }} {{ $medico->lastName }}</h3>
+    <style>
+    .card-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    </style>
+    <div class="container">
+    <div class="row">
+        @foreach($citas as $cita)
+            @if($cita->state == 'pendiente')
+                <div class="col-12">
+                    <?php $paciente = \App\Models\Paciente::find($cita->id_paciente); ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Paciente: {{ $paciente->name }} {{ $paciente->lastName }}</h5>
+                            <p class="card-text">Fecha: {{ $cita->fecha }}</p>
+                            <p class="card-text">Hora: {{ $cita->horarioInicio }}</p>
+                            <p class="card-text">Estado: {{ $cita->state }}</p>
+                            <a href="#" onclick="confirmarCancelacion('{{ route('medico.cancelarCita', ['id' => $cita->id]) }}')" class="btn btn-danger">Cancelar cita</a>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm px-3 py-2">Cancelar</button>
                     </div>
                 </div>
-            @endfor
-            <!-- Puedes agregar más cards según sea necesario -->
-            <!-- Aquí termina el contenido scrollable -->
-        </div>
-        <button type="submit" class="btn btn-primary">Volver</button>
+            @endif
+        @endforeach
     </div>
+</div>
+<script>
+    function confirmarCancelacion(url) {
+        if (confirm('¿Estás seguro de que deseas cancelar esta cita?')) {
+            window.location.href = "{{ route('medico.cancelarCita', ['id' => $cita->id]) }}";
+        }
+    }
+</script>
+</div>
+@else
+    <h3>No hay citas disponibles.</h3>
+@endif
 @endsection

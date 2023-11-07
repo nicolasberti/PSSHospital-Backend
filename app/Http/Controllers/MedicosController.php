@@ -9,6 +9,8 @@ use App\Models\Especialidad;
 use App\Models\HorarioDeAtencion;
 use App\Models\DiaSemana;
 use App\Models\HOrarioDeAtencionDiaSemana;
+use App\Models\PacienteMedico;
+use Illuminate\Support\Facades\Auth;
 
 class MedicosController extends Controller
 {
@@ -16,8 +18,17 @@ class MedicosController extends Controller
         return view('medico.index');
     }
 
-    public function index_citas(){
-        return view('medico.index_citas');
+    public function index_citas(string $id){
+        $citas = PacienteMedico::where('id_medico', $id)->get();
+        return view('medico.index_citas', ['citas' => $citas]);
+    }
+
+    public function cancelarCita(string $id){
+        $cita = PacienteMedico::find($id);
+        $cita->state = 'cancelada';
+        $cita->save();
+        $medico = Medico::find($cita->id_medico); 
+        return redirect()->route('medico.index_citas', ['id' => $medico->id]);
     }
 
     public function list() {

@@ -35,7 +35,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <a href="/medico/citas" class="btn btn-primary">Gestionar mis citas</a>
+                                <a href="{{ route('medico.index_citas', ['id' => 1]) }}"  class="btn btn-primary">Gestionar mis citas</a>
                             </div>
                         </div>
                     </div>
