@@ -22,7 +22,7 @@ class SecretarioSeeder extends Seeder
                 'password' => '1234',
                 'DNI' => $faker->unique()->randomNumber(8),
                 'name' => $faker->firstName,
-                'lastName' => $faker->lastName,
+                'lastname' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'phone' => $faker->randomNumber(8),
                 'dateOfBirth' => $faker->date,
