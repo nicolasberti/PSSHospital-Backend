@@ -38,7 +38,8 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
 
 Route::get('/admin', AdminController::class . '@index')->name('admin.index');
 Route::get('/medico', MedicosController::class . '@index')->name('medico.index');
-
+Route::get('/medico/citas/{id}', [MedicosController::class, 'index_citas'])->name('medico.index_citas');
+Route::get('/medico/citas/cancelar/{id}', [MedicosController::class, 'cancelarCita'])->name('medico.cancelarCita');
 
 Route::get('/paciente/{username}', PacienteController::class . '@index')->name('paciente.index');
 Route::get('/paciente/mis-datos/{username}', PacienteController::class . '@datos')->name('mis-datos-paciente');
@@ -61,10 +62,12 @@ Route::get('/admin/secretarios/edit/{secretario}', AdminController::class.'@edit
 Route::post('admin/edit/{secretario}', AdminController::class. '@update_secretario')->name('update_secretario');
 Route::get('/admin/baja_secretarios', AdminController::class .'@show_baja_secretarios')->name('admin.show_baja_secretarios');
 Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@baja_secretario')->name('admin.baja_secretario');
+Route::get('admin/baja_secretarios/{secretario}', AdminController::class. '@alta_secretario')->name('admin.alta_secretario');
 Route::post('admin/create/secretario', AdminController::class. '@create_new_secretario')->name('create_new_secretario');
 
 Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
 Route::get('/admin/editar-datos-criticos-paciente/{solicitud}', AdminController::class.'@edit_datos_criticos_paciente')->name('admin.edit_datos_criticos_paciente');
+Route::get('/admin/guardar-datos-criticos-paciente/{$id}', AdminController::class .'@update_datos_criticos_paciente')->name('admin.update_datos_criticos_paciente');
 
 Route::get('/admin/medicos/create', AdminController::class .'@create_medico')->name('admin.create_medico');
 Route::post('/admin', [MedicosController::class, 'store']);
@@ -94,6 +97,21 @@ Route::post('/secretario/solicitar_edicion/enviar_justificacion', [SecretarioCon
 
 Route::get('/medico/consultar_ficha_medica', MedicosController::class .'@consultar_ficha_medica')->name('medico.consultar_ficha_medica');
 Route::post('/medico/consultar_ficha_medica/paciente', MedicosController::class .'@consultar_ficha_paciente')->name('medico.consultar_ficha_medica_paciente');
+
+Route::get('/admin/medicos/horarios', AdminController::class .'@index_horarios_medicos')->name('admin.index_horarios_medicos');
+Route::get('/admin/medicos/horarios/{id}/show', AdminController::class .'@show_horarios_medico')->name('admin.show_horarios_medico');
+Route::get('/admin/medicos/horarios/{id}/edit', AdminController::class .'@edit_horarios_medico')->name('admin.edit_horarios_medico');
+Route::put('/admin/medicos/horarios/{id}/', MedicosController::class .'@update_horarios_medico')->name('admin.update_horarios_medico');
+
+Route::get('/admin/citas/agregar_cita/select_medico', AdminController::class .'@select_medico_agregar_cita')->name('admin.select_medico_agregar_cita');
+Route::get('/admin/citas/agregar_cita/select_fecha/{id}', [AdminController::class, 'select_fecha_atencion_agregar_cita'])->name('admin.select_fecha_atencion_agregar_cita');
+Route::get('/admin/citas/consultar_citas_paciente', AdminController::class .'@select_paciente_consultar_citas')->name('admin.select_paciente_consultar_citas');
+Route::get('/admin/citas/consultar_citas_paciente/{dni}', [AdminController::class, 'show_paciente_citas'])->name('admin.show_paciente_citas');
+Route::get('/admin/citas/cancelar_citas_paciente', AdminController::class .'@select_paciente_cancelar_citas')->name('admin.select_paciente_cancelar_citas');
+Route::get('/admin/citas/cancelar_citas_paciente/{dni}', [AdminController::class, 'show_paciente_cancelar_citas'])->name('admin.show_paciente_cancelar_citas');
+Route::get('/admin/citas/cancelar_citas_paciente/cita/{id}', [AdminController::class, 'cancelarCita'])->name('admin.cancelarCita');
+
+
 
 Route::get('/', function () {
     return view('home');

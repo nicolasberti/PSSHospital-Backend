@@ -11,23 +11,17 @@ use App\Models\Paciente;
 
 class SecretarioPacienteSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 6; $i++) {
-            //$secretarios = Secretario::inRandomOrder()->first(); // Obtén un secretario existente de forma aleatoria
-            //$pacientes = Paciente::inRandomOrder()->first(); // Obtén un paciente existente de forma aleatoria
-
+        for ($i = 0; $i < 15; $i++) {
             DB::table('secretario_paciente')->insert([
-                'secretario_id' => '1',//$secretarios->id,
-                'paciente_id' => '1',// $pacientes->id,
+                'secretario_id' => $faker->numberBetween(1, 10), // Reemplaza el rango con el rango apropiado de tus secretarios
+                'paciente_id' => $faker->numberBetween(1, 20), // Reemplaza el rango con el rango apropiado de tus pacientes
                 'descripcion' => $faker->sentence,
                 'estado' => $faker->randomElement(['pendiente', 'realizada', 'rechazada']),
-        ]);
-    }
+            ]);
+        }
     }
 }

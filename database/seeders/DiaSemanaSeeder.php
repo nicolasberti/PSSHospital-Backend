@@ -14,10 +14,10 @@ class DiaSemanaSeeder extends Seeder
     {
         DB::table('dias_semana')->insert(['dia' => 'Lunes']);
         DB::table('dias_semana')->insert(['dia' => 'Martes']);
-        DB::table('dias_semana')->insert(['dia' => 'Miércoles']);
+        DB::table('dias_semana')->insert(['dia' => 'Miercoles']);
         DB::table('dias_semana')->insert(['dia' => 'Jueves']);
         DB::table('dias_semana')->insert(['dia' => 'Viernes']);
-        DB::table('dias_semana')->insert(['dia' => 'Sábado']);
+        DB::table('dias_semana')->insert(['dia' => 'Sabado']);
         DB::table('dias_semana')->insert(['dia' => 'Domingo']);
     }
 }
