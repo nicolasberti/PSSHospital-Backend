@@ -11,5 +11,19 @@
 @endsection
 
 @section('contenido')
+<form id="searchForm" method="GET" action="{{ route('admin.show_paciente_citas', ['dni' => '__DNI__']) }}">
+    @csrf
+    <input type="text" id="dni" name="dni" placeholder="Ingrese el DNI">
+    <button type="button" onclick="submitForm()">Buscar</button>
+</form>
 
+<script>
+    function submitForm() {
+        var dni = document.getElementById('dni').value;
+        var formAction = document.getElementById('searchForm').action;
+        formAction = formAction.replace('__DNI__', dni);
+        document.getElementById('searchForm').action = formAction;
+        document.getElementById('searchForm').submit();
+    }
+</script>
 @endsection

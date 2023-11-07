@@ -241,12 +241,18 @@ class AdminController extends Controller
     public function select_fecha_atencion_agregar_cita(string $id){
         echo($id);
         $medico = Medico::find($id);
-        $fechasDisponibles = $medico->obtenerFechasDisponibles(30); 
+        //$fechasDisponibles = $medico->obtenerFechasDisponibles(30); 
         //return view('admin.select_horario_atencion_agregar_cita', ['fechasDisponibles' => $fechasDisponibles]);
     }
 
     public function select_paciente_consultar_citas(){
         return view('admin.select_paciente_consultar_citas');
+    }
+
+    public function show_paciente_citas(string $dni){
+        //hace cosas
+        echo($dni);
+        return view('admin.show_citas_paciente');
     }
 
     public function select_paciente_cancelar_citas(){
