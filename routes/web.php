@@ -6,7 +6,6 @@ use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretarioController;
 use App\Http\Controllers\PacienteMedicoController;
-
 use App\Http\Controllers\SessionsController;
 
 
@@ -90,6 +89,10 @@ Route::get('/secretario/perfil', [SecretarioController::class, 'show'])->name('s
 Route::get('/secretario/solicitar_edicion', [SecretarioController::class, 'show_pacientes_solicitudes'])->name('secretario.solicitar_edicion');
 Route::get('/secretario/solicitar_edicion/{paciente}', [SecretarioController::class, 'show_solicitud_edicion_paciente'])->name('secretario.solicitar_edicion_paciente');
 Route::post('/secretario/solicitar_edicion/enviar_justificacion', [SecretarioController::class, 'create_solicitud_edicion_paciente'])->name('secretario.create_solicitud_edicion');
+
+
+Route::get('/medico/consultar_ficha_medica', MedicosController::class .'@consultar_ficha_medica')->name('medico.consultar_ficha_medica');
+Route::post('/medico/consultar_ficha_medica/paciente', MedicosController::class .'@consultar_ficha_paciente')->name('medico.consultar_ficha_medica_paciente');
 
 Route::get('/', function () {
     return view('home');
