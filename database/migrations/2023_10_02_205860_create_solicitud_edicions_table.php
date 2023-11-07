@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('text');
             $table->string("state");
             $table->timestamps();
+
+            $table->foreignId('paciente_id')->constrained();
+            $table->foreignId('secretario_id')->constrained();
         });
     }
 
