@@ -66,6 +66,7 @@ Route::post('admin/create/secretario', AdminController::class. '@create_new_secr
 
 Route::get('/admin/solicitudes', AdminController::class .'@show_solicitudes')->name('admin.show_solicitudes');
 Route::get('/admin/editar-datos-criticos-paciente/{solicitud}', AdminController::class.'@edit_datos_criticos_paciente')->name('admin.edit_datos_criticos_paciente');
+Route::get('/admin/guardar-datos-criticos-paciente/{$id}', AdminController::class .'@update_datos_criticos_paciente')->name('admin.update_datos_criticos_paciente');
 
 Route::get('/admin/medicos/create', AdminController::class .'@create_medico')->name('admin.create_medico');
 Route::post('/admin', [MedicosController::class, 'store']);

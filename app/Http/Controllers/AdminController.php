@@ -235,6 +235,10 @@ class AdminController extends Controller
         return view('admin.edit_datos_criticos_paciente', ['solicitud' => $solicitud]);
     }
 
+    public function update_datos_criticos_paciente() {
+        echo("en construccion");
+    }
+
     public function select_medico_agregar_cita(){
         $medicos = Medico::all(); // Suponiendo que tienes un modelo 'Medico' definido
         return view('admin.select_medico_agregar_cita', ['medicos' => $medicos]);
