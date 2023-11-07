@@ -181,7 +181,7 @@ class PacienteController extends Controller
                 break;
         }
 
-
+        /*
         $instanciaDia = DiaSemana::where('dia', $nombreDiaEsp)->first();//hasta aca anda
         
         $horario_atencion_diasemana = $instanciaDia->horarioAtencion; 
@@ -207,9 +207,9 @@ class PacienteController extends Controller
         while($horario_actual < $fin) {
             $citas_disponibles[] = $horario_actual;
             $horario_actual += $duracion;
-        }
+        }*/
 
-    return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico,  /*'citas_disponibles' => $citas_disponibles, */'instanciaDia'=>$instanciaDia]);
+    return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico,  /*'citas_disponibles' => $citas_disponibles, 'instanciaDia'=>$instanciaDia*/]);
     }
 
     public function solicitar_cita(Request $request){
@@ -224,7 +224,7 @@ class PacienteController extends Controller
         $cita->medico_id = $request->medico_id;
         $cita->save();
 
-        return redirect('/paciente/{$paciente->username}')
+        return  redirect()->route('paciente.mis_citas', ['id' => $cita->paciente_id])
         ->with('success','La cita fue solicitada correctamente')
         ->with('alert','success');
     }

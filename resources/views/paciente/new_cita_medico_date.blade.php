@@ -26,28 +26,78 @@
                             <tbody>
                                 <div class="card shadow">
                                         <tr>
-                                            <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
-                                            <td scope="row" style="text-align: center;">Disponible </td> 
-                                            <td scope="row" style="text-align: center;"><button type="button" class="btn btn-success">Solicitar</button></td>
+                                            <form method="POST" action="{{ route('paciente.solicitar_cita') }}">
+                                            @csrf
+                                            
+                                                <td scope="row" style="text-align: center;"> 09:00 - 09:29 </td> 
+                                                <td scope="row" style="text-align: center;">Disponible </td> 
+                                                <input type="hidden" name="fecha" value="{{ $dia }}">
+                                                <input type="hidden" name="horarioInicio" value="{{ date('H:i', strtotime('09:00:00')) }}">
+                                                <input type="hidden" name="horarioFin" value="{{ date('H:i', strtotime('09:29:00')) }}">
+                                                <input type="hidden" name="duracion" value="{{ date('H:i', strtotime('00:29:00')) }}">
+                                                <input type="hidden" name="medico_id" value="{{ $medico->id }}">
+                                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                <td scope="row" style="text-align: center;"><button type="submit" class="btn btn-success">Solicitar</button></td>
+                                            </form>
                                         <tr>
-                                            <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
-                                            <td scope="row" style="text-align: center;">Disponible </td> 
-                                            <td scope="row" style="text-align: center;"><button type="button" class="btn btn-success">Solicitar</button></td>
+                                            <form method="POST" action="{{ route('paciente.solicitar_cita') }}">
+                                                @csrf
+                                            
+                                                <td scope="row" style="text-align: center;"> 09:30 - 09:59 </td> 
+                                                <td scope="row" style="text-align: center;">Disponible </td> 
+                                                <input type="hidden" name="fecha" value="{{ $dia }}">
+                                                <input type="hidden" name="horarioInicio" value="{{ date('H:i', strtotime('09:30:00')) }}">
+                                                <input type="hidden" name="horarioFin" value="{{ date('H:i', strtotime('09:59:00')) }}">
+                                                <input type="hidden" name="duracion" value="{{ date('H:i', strtotime('00:29:00')) }}">
+                                                <input type="hidden" name="medico_id" value="{{ $medico->id }}">
+                                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                <td scope="row" style="text-align: center;"><button type="submit" class="btn btn-success">Solicitar</button></td>
+                                            </form>
                                         </tr>
                                         <tr>
-                                            <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
-                                            <td scope="row" style="text-align: center;">Disponible </td> 
-                                            <td scope="row" style="text-align: center;"><button type="button" class="btn btn-success">Solicitar</button></td>
+                                            <form method="POST" action="{{ route('paciente.solicitar_cita') }}">
+                                                @csrf
+                                            
+                                                <td scope="row" style="text-align: center;"> 10:00 - 10:29 </td> 
+                                                <td scope="row" style="text-align: center;">Disponible </td> 
+                                                <input type="hidden" name="fecha" value="{{ $dia }}">
+                                                <input type="hidden" name="horarioInicio" value="{{ date('H:i', strtotime('10:00:00')) }}">
+                                                <input type="hidden" name="horarioFin" value="{{ date('H:i', strtotime('10:29:00')) }}">
+                                                <input type="hidden" name="duracion" value="{{ date('H:i', strtotime('00:29:00')) }}">
+                                                <input type="hidden" name="medico_id" value="{{ $medico->id }}">
+                                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                <td scope="row" style="text-align: center;"><button type="submit" class="btn btn-success">Solicitar</button></td>
+                                            </form>
                                         </tr>
                                         <tr>
-                                            <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
-                                            <td scope="row" style="text-align: center;">Disponible </td> 
-                                            <td scope="row" style="text-align: center;"><button type="button" class="btn btn-success">Solicitar</button></td>
+                                            <form method="POST" action="{{ route('paciente.solicitar_cita') }}">
+                                                @csrf
+                                            
+                                                <td scope="row" style="text-align: center;"> 10:30 - 10:59 </td> 
+                                                <td scope="row" style="text-align: center;">Disponible </td> 
+                                                <input type="hidden" name="fecha" value="{{ $dia }}">
+                                                <input type="hidden" name="horarioInicio" value="{{ date('H:i', strtotime('10:30:00')) }}">
+                                                <input type="hidden" name="horarioFin" value="{{ date('H:i', strtotime('10:59:00')) }}">
+                                                <input type="hidden" name="duracion" value="{{ date('H:i', strtotime('00:29:00')) }}">
+                                                <input type="hidden" name="medico_id" value="{{ $medico->id }}">
+                                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                <td scope="row" style="text-align: center;"><button type="submit" class="btn btn-success">Solicitar</button></td>
+                                            </form>
                                         </tr>
                                         <tr>
-                                            <td scope="row" style="text-align: center;"> 09:00 - 09:30 </td> 
-                                            <td scope="row" style="text-align: center;">Disponible </td> 
-                                            <td scope="row" style="text-align: center;"><button type="button" class="btn btn-success">Solicitar</button></td>
+                                            <form method="POST" action="{{ route('paciente.solicitar_cita') }}">
+                                                @csrf
+                                            
+                                                <td scope="row" style="text-align: center;"> 11:00 - 11:29 </td> 
+                                                <td scope="row" style="text-align: center;">Disponible </td> 
+                                                <input type="hidden" name="fecha" value="{{ $dia }}">
+                                                <input type="hidden" name="horarioInicio" value="{{ date('H:i', strtotime('11:00:00')) }}">
+                                                <input type="hidden" name="horarioFin" value="{{ date('H:i', strtotime('11:29:00')) }}">
+                                                <input type="hidden" name="duracion" value="{{ date('H:i', strtotime('00:29:00')) }}">
+                                                <input type="hidden" name="medico_id" value="{{ $medico->id }}">
+                                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                <td scope="row" style="text-align: center;"><button type="submit" class="btn btn-success">Solicitar</button></td>
+                                            </form>
                                         </tr>
                                 </div>  
                             </tbody>
