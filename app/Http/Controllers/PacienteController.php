@@ -137,7 +137,18 @@ class PacienteController extends Controller
     public function cita_medico_date(Request $request){
         $paciente = Paciente::find($request->input('id_paciente'));
         $medico = Medico::find($request->input('id_medico'));
-        $dia = $request->cita;
+        $dia = $request->cita; //yyyy-mm-dd
+        $citasMedico = $medico->citas;
+        $citasEnElMismoDia = [];
+
+        foreach ($citasMedico as $cita) {
+            // Supongamos que la fecha de la cita está en un campo llamado 'fecha' en el formato 'yyyy-mm-dd'
+            if ($cita->fecha === $dia) {
+                $citasEnElMismoDia[] = $cita;
+            }
+        }
+        //buscar para el medico los horarios disponibles y pasar esos horarios.
+        $horario_atencion = $medico->horarios_atencion;
         
         return view('paciente.new_cita_medico_date', ['dia' => $dia, 'paciente' => $paciente, 'username' => $paciente->username, 'medico' => $medico]);
     }
