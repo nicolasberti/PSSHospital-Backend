@@ -127,6 +127,7 @@ class MedicosController extends Controller
         return redirect('/admin')
             ->with('success','Horario editado exitosamente')
             ->with('alert','success');
+    }
     public function consultar_ficha_medica(){
         return view('medico.consultar_ficha_paciente');
     }
