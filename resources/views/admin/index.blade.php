@@ -58,9 +58,15 @@
             <h1>Citas</h1>
             <div class="container">
             <div class="row">
-                <div class="col"><a class="btn btn-primary" href="#" role="button">Agregar cita</a></div>
-                <div class="col"><a type="button" href="#" class="btn btn-primary">Cancelar cita</a></div>
-                <div class="col"><a type="button" class="btn btn-primary">Consultar cita</a></div>
+                <div class="col">
+                    <a class="btn btn-primary" href="{{ route('admin.select_medico_agregar_cita') }}" role="button">Agregar cita</a>
+                </div>
+                <div class="col">
+                    <a type="button" href="{{ route('admin.select_paciente_cancelar_citas') }}" class="btn btn-primary">Cancelar cita</a>
+                </div>
+                <div class="col">
+                    <a type="button" href="{{ route('admin.select_paciente_consultar_citas') }}" class="btn btn-primary">Consultar cita</a>
+                </div>
             </div>
             </div>
         </div>

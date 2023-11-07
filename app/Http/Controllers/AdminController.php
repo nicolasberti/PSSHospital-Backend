@@ -208,4 +208,24 @@ class AdminController extends Controller
         $solicitud = SecretarioPaciente::find($solicitud);
         return view('admin.edit_datos_criticos_paciente', ['solicitud' => $solicitud]);
     }
+
+    public function select_medico_agregar_cita(){
+        $medicos = Medico::all('name');
+        return view('admin.select_medico_agregar_cita', ['medicos' => $medicos]);
+    }
+
+    public function select_paciente_consultar_citas(){
+        return view('admin.select_paciente_consultar_citas');
+    }
+
+    public function select_paciente_cancelar_citas(){
+        return view('admin.select_paciente_cancelar_citas');
+    }
+
+
+    public function show_lista_citas_paciente(){//string $id como parametro
+        return view('admin.show_lista_citas_paciente');
+    }
+
+
 }

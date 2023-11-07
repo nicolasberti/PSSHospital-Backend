@@ -80,6 +80,11 @@ Route::get('/admin/medicos/horarios/{id}/show', AdminController::class .'@show_h
 Route::get('/admin/medicos/horarios/{id}/edit', AdminController::class .'@edit_horarios_medico')->name('admin.edit_horarios_medico');
 Route::put('/admin/medicos/horarios/{id}/', MedicosController::class .'@update_horarios_medico')->name('admin.update_horarios_medico');
 
+Route::get('/admin/citas/agregar_cita', AdminController::class .'@select_medico_agregar_cita')->name('admin.select_medico_agregar_cita');
+Route::get('/admin/citas/consultar_citas_paciente', AdminController::class .'@select_paciente_consultar_citas')->name('admin.select_paciente_consultar_citas');
+Route::get('/admin/citas/cancelar_citas_paciente', AdminController::class .'@select_paciente_cancelar_citas')->name('admin.select_paciente_cancelar_citas');
+Route::get('/admin/citas/consultar_citas_paciente/{paciente}', AdminController::class .'@show_lista_citas_paciente')->name('admin.show_lista_citas_paciente');
+
 Route::get('/', function () {
     return view('home');
 });
