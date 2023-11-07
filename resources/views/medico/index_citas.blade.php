@@ -45,7 +45,7 @@
 <script>
     function confirmarCancelacion(url) {
         if (confirm('¿Estás seguro de que deseas cancelar esta cita?')) {
-            window.location.href = "{{ route('medico.cancelarCita', ['id' => $cita->id]) }}";
+            window.location.href = url;
         }
     }
 </script>
